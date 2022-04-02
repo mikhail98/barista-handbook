@@ -1,0 +1,67 @@
+plugins {
+    id 'com.android.application'
+    id 'org.jetbrains.kotlin.android'
+}
+
+apply from: "dependencies.gradle"
+apply from: "version.gradle"
+
+android {
+    compileSdkVersion sdk.compileSdkVersion
+    buildToolsVersion sdk.buildToolsVersion
+
+    defaultConfig {
+        applicationId sdk.applicationId
+        minSdkVersion sdk.minSdkVersion
+        targetSdkVersion sdk.targetSdkVersion
+        versionCode appVersion.versionCode
+        versionName appVersion.versionName
+
+        archivesBaseName = "Barista's Handbook ${appVersion.versionName}"
+        resConfigs "en", "ru"
+    }
+
+    lintOptions {
+        checkReleaseBuilds false
+        abortOnError false
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled true
+            shrinkResources true
+
+            debuggable false
+            jniDebuggable false
+            zipAlignEnabled true
+            crunchPngs false
+
+            proguardFiles 'proguard-rules.pro'
+        }
+        debug {
+            proguardFiles 'proguard-rules.pro'
+        }
+    }
+
+    compileOptions {
+        sourceCompatibility sdk.javaVersion
+        targetCompatibility sdk.javaVersion
+    }
+
+    kotlinOptions {
+        jvmTarget = sdk.jvmTargetVersion
+    }
+
+    buildFeatures {
+        viewBinding true
+    }
+}
+
+dependencies {
+    implementation library.appCompat
+    implementation library.materialComponents
+    implementation library.koin
+    implementation library.viewModel
+    implementation library.gson
+    implementation library.encryptedPrefs
+}

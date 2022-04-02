@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.eratart.baristashandbook">
+
+    <application
+        android:name=".app.BhApp"
+        android:allowBackup="true"
+        android:label="@string/app_name"
+        android:supportsRtl="true"
+        android:theme="@style/AppTheme">
+
+        <activity
+            android:name=".presentation.artinstructions.view.ArtInstructionsActivity"
+            android:theme="@style/BaseActivityTheme" />
+
+        <activity
+            android:name=".presentation.dishdetails.view.DishDetailsActivity"
+            android:theme="@style/BaseActivityTheme" />
+
+        <activity
+            android:name=".presentation.disheslist.view.DishesListActivity"
+            android:theme="@style/BaseActivityTheme" />
+
+        <activity
+            android:name=".presentation.favorites.view.FavoritesActivity"
+            android:theme="@style/BaseActivityTheme" />
+
+        <activity
+            android:name=".presentation.itemdetails.view.ItemDetailsActivity"
+            android:theme="@style/BaseActivityTheme" />
+
+        <activity
+            android:name=".presentation.itemslist.view.ItemsListActivity"
+            android:theme="@style/BaseActivityTheme" />
+
+        <activity
+            android:name=".presentation.mainmenu.view.MainActivity"
+            android:theme="@style/BaseActivityTheme" />
+
+        <activity
+            android:name=".presentation.news.view.NewsActivity"
+            android:theme="@style/BaseActivityTheme" />
+
+        <activity
+            android:name=".presentation.onboarding.view.OnboardingActivity"
+            android:theme="@style/BaseActivityTheme" />
+
+        <activity
+            android:name=".presentation.settings.view.SettingsActivity"
+            android:theme="@style/BaseActivityTheme" />
+
+        <activity
+            android:name=".presentation.splash.view.SplashActivity"
+            android:exported="true"
+            android:theme="@style/SplashTheme">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+    </application>
+</manifest>

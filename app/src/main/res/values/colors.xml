@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <!-- Base colors -->
+    <color name="blacked">#000000</color>
+    <color name="eminem">#ffffff</color>
+    <color name="transparent">#00000000</color>
+
+    <!-- UI Colors -->
+    <color name="accent">#ff2d55</color>
+    <color name="bg_overlay">#bb000000</color>
+    <color name="action_bar">#131314</color>
+
+</resources>
