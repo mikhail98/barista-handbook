@@ -20,7 +20,7 @@ ext.sdk = [
         majorVersion     : 0,
         minorVersion     : 0,
         patchVersion     : 1,
-        minSdkVersion    : 24,
+        minSdkVersion    : 27,
         compileSdkVersion: 32,
         targetSdkVersion : 32,
         buildToolsVersion: "32.0.0",
