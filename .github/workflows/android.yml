@@ -103,3 +103,12 @@ jobs:
             Links:
             Pull request: https://github.com/${{ github.repository }}/pull/${{ steps.bh-pr-number.outputs.pr }}
             Artifacts: https://github.com/${{ github.repository }}/actions/runs/${{ github.run_id }}
+
+      - name: Attempt to get urls
+        id: artifacts
+        run: |
+          echo "::set-output name=urls::$(curl -u admin:${{ secrets.GITHUB_TOKEN }} https://api.github.com/repos/${{ github.repository }}/runs/${{ github.run_number }}/artifacts |jq '.artifacts[].url')"
+
+      - name: confirm release tag
+        run: |
+          echo ${{ steps.artifacts.outputs.urls }}
