@@ -85,7 +85,7 @@ jobs:
           message: >
             Barista Handbook Build SUCCESS. Run: ${{ github.run_number }}.
 
-      - name: artifact-lik
+      - name: artifact-link
         uses: appleboy/telegram-action@v0.1.1
         with:
           token: 5218142328:AAF8xJCg7DR2dQqRkGXq-exYugcJCBI4cw8
@@ -96,7 +96,7 @@ jobs:
       - id: suka
         uses: MichaelMelena/list-artifacts@v1
         with:
-          GITHUB_TOKEN: ${{secrest.GITHUB_TOKEN}}
+          GITHUB_TOKEN: ${{secrets.GITHUB_TOKEN}}
 
 
       - name: links-to-telegram
