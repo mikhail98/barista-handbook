@@ -25,6 +25,6 @@ task clean(type: Delete) {
 }
 
 ext {
-    javaVersion = JavaVersion.VERSION_1_8
+    javaVersion = JavaVersion.VERSION_11
     jvmTargetVersion = javaVersion.toString()
 }
