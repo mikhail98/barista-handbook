@@ -22,7 +22,7 @@ jobs:
           to: -600920147
           message: >
             Barista Handbook Build STARTED
-            PR: https://github.com/mikhail98/barista-handbook/pull/${{ steps.bh-pr-number.outputs.pr }}
+            \nPR: https://github.com/mikhail98/barista-handbook/pull/${{ steps.bh-pr-number.outputs.pr }}
 
       - uses: actions/checkout@v2
 
