@@ -9,6 +9,7 @@ import com.eratart.baristashandbook.core.ext.postDelayed
 import com.eratart.baristashandbook.domain.model.Item
 import com.eratart.baristashandbook.presentation.splash.viewmodel.SplashViewModel
 import org.koin.androidx.viewmodel.ext.android.viewModel
+import java.lang.RuntimeException
 
 @SuppressLint("CustomSplashScreen")
 class SplashActivity : BaseActivity<SplashViewModel, ViewBinding>() {

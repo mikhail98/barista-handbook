@@ -6,7 +6,8 @@ ext.ver = [
         gsonVersion              : "2.9.0",
         encryptedPrefsVersion    : "1.1.0-alpha03",
         csvVersion               : "4.6",
-        glideVersion             : "4.13.0"
+        glideVersion             : "4.13.0",
+        firebaseBomVersion       : "29.2.1"
 ]
 
 ext.library = [
@@ -18,7 +19,10 @@ ext.library = [
         encryptedPrefs          : "androidx.security:security-crypto:$ver.encryptedPrefsVersion",
         csvReader               : "com.opencsv:opencsv:$ver.csvVersion",
         glide                   : "com.github.bumptech.glide:glide:$ver.glideVersion",
-        glideAnnotationProcessor: "com.github.bumptech.glide:compiler:$ver.glideVersion"
+        glideAnnotationProcessor: "com.github.bumptech.glide:compiler:$ver.glideVersion",
+        firebaseBom             : "com.google.firebase:firebase-bom:$ver.firebaseBomVersion",
+        firebaseAnalyticsKtx    : "com.google.firebase:firebase-analytics-ktx",
+        firebaseCrashlyticsKtx  : "com.google.firebase:firebase-crashlytics-ktx"
 ]
 
 ext.sdk = [

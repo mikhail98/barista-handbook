@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "499347095486",
+    "project_id": "barista-s-handbook",
+    "storage_bucket": "barista-s-handbook.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:499347095486:android:fac01e8bff4d407bb843ef",
+        "android_client_info": {
+          "package_name": "com.eratart.baristashandbook"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "499347095486-4ctb1t62kijfbmu5f0b1eflk4leti01i.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyC6YAJ0_13rJiS1tuKzpra4NkfvQlGUqWo"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "499347095486-4ctb1t62kijfbmu5f0b1eflk4leti01i.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

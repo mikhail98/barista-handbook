@@ -16,14 +16,13 @@ class ItemsMapper : ICsvMapper<Item> {
         val newList = mutableListOf<Item>()
         inputList.drop(IntConstants.ONE).forEach { drink ->
             if (drink.size == MIN_LINE_SIZE) {
+                val photos = drink[3].split(StringConstants.NEW_LINE).map { path ->
+                    ICsvMapper.getImageUrl(path)
+                }
+                val ingredients = drink[4].split(StringConstants.NEW_LINE)
+                val portionsAmount = drink[6].toIntOrNull() ?: IntConstants.ONE
                 val item = Item(
-                    drink[0],
-                    drink[1],
-                    drink[2],
-                    drink[3].split(StringConstants.NEW_LINE),
-                    drink[4].split(StringConstants.NEW_LINE),
-                    drink[5],
-                    drink[6].toIntOrNull() ?: IntConstants.ONE
+                    drink[0], drink[1], drink[2], photos, ingredients, drink[5], portionsAmount
                 )
                 newList.add(item)
             }
