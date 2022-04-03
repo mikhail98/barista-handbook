@@ -4,16 +4,21 @@ ext.ver = [
         koinVersion              : "3.1.5",
         viewModelVersion         : "2.2.0",
         gsonVersion              : "2.9.0",
-        encryptedPrefsVersion    : "1.1.0-alpha03"
+        encryptedPrefsVersion    : "1.1.0-alpha03",
+        csvVersion               : "4.6",
+        glideVersion             : "4.13.0"
 ]
 
 ext.library = [
-        appCompat         : "androidx.appcompat:appcompat:$ver.appCompatVersion",
-        materialComponents: "com.google.android.material:material:$ver.materialComponentsVersion",
-        koin              : "io.insert-koin:koin-android:$ver.koinVersion",
-        viewModel         : "androidx.lifecycle:lifecycle-extensions:$ver.viewModelVersion",
-        gson              : "com.google.code.gson:gson:$ver.gsonVersion",
-        encryptedPrefs    : "androidx.security:security-crypto:$ver.encryptedPrefsVersion"
+        appCompat               : "androidx.appcompat:appcompat:$ver.appCompatVersion",
+        materialComponents      : "com.google.android.material:material:$ver.materialComponentsVersion",
+        koin                    : "io.insert-koin:koin-android:$ver.koinVersion",
+        viewModel               : "androidx.lifecycle:lifecycle-extensions:$ver.viewModelVersion",
+        gson                    : "com.google.code.gson:gson:$ver.gsonVersion",
+        encryptedPrefs          : "androidx.security:security-crypto:$ver.encryptedPrefsVersion",
+        csvReader               : "com.opencsv:opencsv:$ver.csvVersion",
+        glide                   : "com.github.bumptech.glide:glide:$ver.glideVersion",
+        glideAnnotationProcessor: "com.github.bumptech.glide:compiler:$ver.glideVersion"
 ]
 
 ext.sdk = [

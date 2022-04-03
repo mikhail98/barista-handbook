@@ -20,8 +20,10 @@ android {
         versionCode appVersion.versionCode
         versionName appVersion.versionName
 
-        archivesBaseName = "Barista's Handbook ${appVersion.versionName}"
+        archivesBaseName = archives.archivesBaseName
         resConfigs "en", "ru"
+
+        buildConfigField("String", "ARCHIEVE_NAME", "\"$archives.archivesBaseName\"")
     }
 
     signingConfigs {
@@ -78,4 +80,8 @@ dependencies {
     implementation library.viewModel
     implementation library.gson
     implementation library.encryptedPrefs
+    implementation library.csvReader
+    implementation library.glide
+
+    annotationProcessor library.glideAnnotationProcessor
 }

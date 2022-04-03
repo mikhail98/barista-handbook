@@ -66,7 +66,7 @@ val appModule = module {
 
 val repoModule = module {
     single<IDishesRepo> { DishesRepo() }
-    single<IItemsRepo> { ItemsRepo() }
+    single<IItemsRepo> { ItemsRepo(get()) }
 }
 
 val cacheModule = module {
