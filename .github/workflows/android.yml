@@ -1,0 +1,73 @@
+name: Android CI
+
+on:
+  pull_request:
+    branches: [ 'master' ]
+  push:
+    branches: [ 'release' ]
+
+jobs:
+  build:
+
+    runs-on: ubuntu-20.04
+
+    steps:
+      - uses: kkak10/pr-number-action@v1.3
+        id: bh-pr-number
+
+      - name: build-start
+        uses: appleboy/telegram-action@v0.1.1
+        with:
+          token: 1745215664:AAEI20fIl4_UPqQexy12084EVbbBbknfeRo
+          to: -1001350056056
+          message: >
+            Barista Handbook Build STARTED
+
+      - uses: actions/checkout@v2
+
+      - uses: actions/setup-java@v1
+        with:
+          java-version: 1.8
+
+      - name: Cache Gradle packages
+        uses: actions/cache@v2
+        with:
+          path: |
+            ~/.gradle/caches
+            ~/.gradle/wrapper
+          key: ${{ runner.os }}-gradle-${{ hashFiles('**/*.gradle*', '**/gradle-wrapper.properties') }}
+          restore-keys: |
+            ${{ runner.os }}-gradle-
+
+      - name: tests
+        run: |
+          ./gradlew test
+
+      - name: Build
+        run: |
+          ./gradlew build
+
+      - name: Generate Artifacts
+        run: |
+          ./gradlew bundleRelease
+
+      - name: Upload Debug Apk
+        uses: actions/upload-artifact@v2.2.1
+        with:
+          name: Debug Apk
+          path: app/build/outputs/apk/debug
+
+      - name: Upload Release Apk
+        uses: actions/upload-artifact@v2.2.1
+        with:
+          name: Release Apk
+          path: app/build/outputs/apk/release
+
+      - name: build-finish
+        uses: appleboy/telegram-action@v0.1.1
+        with:
+          token: 1745215664:AAEI20fIl4_UPqQexy12084EVbbBbknfeRo
+          to: -1001350056056
+          message: >
+            Barista Handbook Build SUCCESS
+            Artifact: https://github.com/mikhail98/barista-handbook/pull/${{ steps.bh-pr-number.outputs.pr }}/checks
