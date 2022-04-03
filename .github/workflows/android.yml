@@ -97,8 +97,7 @@ jobs:
         uses: MichaelMelena/list-artifacts@v1
         with:
           GITHUB_TOKEN: ${{secrest.GITHUB_TOKEN}}
-        run: |
-          echo '${{ steps.result.outputs.artifacts }}'
+
 
       - name: links-to-telegram
         uses: appleboy/telegram-action@v0.1.1
@@ -106,4 +105,4 @@ jobs:
           token: 5218142328:AAF8xJCg7DR2dQqRkGXq-exYugcJCBI4cw8
           to: -600920147
           message: >
-            Artifact: ${{ steps.artifacts.outputs.urls }}
+            Artifact: ${{ steps.suka.outputs.artifacts }}
