@@ -93,14 +93,12 @@ jobs:
           message: >
             Artifacts: https://github.com/mikhail98/barista-handbook/actions/runs/${{ github.run_id }}
 
-      - name: Sleep for 10 seconds
-        run: sleep 10s
-        shell: bash
-
-      - name: Attempt to get urls
-        id: artifacts
+      - id: suka
+        uses: MichaelMelena/list-artifacts@v1
+        with:
+          GITHUB_TOKEN: ${{secrest.MY_PAT_TOKEN}}
         run: |
-          echo "::set-output name=urls::$(curl -u admin:${{ secrets.GITHUB_TOKEN }} https://api.github.com/repos/mikhail98/barista-handbook/actions/artifacts |jq '.artifacts[].url')"
+          echo '${{ steps.result.outputs.artifacts }}'
 
       - name: links-to-telegram
         uses: appleboy/telegram-action@v0.1.1
