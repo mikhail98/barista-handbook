@@ -104,16 +104,16 @@ jobs:
             Pull request: https://github.com/${{ github.repository }}/pull/${{ steps.bh-pr-number.outputs.pr }}
             Artifacts: https://github.com/${{ github.repository }}/actions/runs/${{ github.run_id }}
 
-      - name: sleep
-        uses: juliangruber/sleep-action@v1
-        with:
-          time: 30s
-
-      - name: receive-artifact-urls
-        id: artifacts
-        run: |
-          echo "::set-output name=urls::$(curl -u admin:${{ secrets.GITHUB_TOKEN }} https://api.github.com/repos/${{ github.repository }}/actions/artifacts |jq '.artifacts[].url')"
-
-      - name: telegram-message-artifact-urls
-        run: |
-          echo ${{ steps.artifacts.outputs.urls }}
+#      - name: sleep
+#        uses: juliangruber/sleep-action@v1
+#        with:
+#          time: 30s
+#
+#      - name: receive-artifact-urls
+#        id: artifacts
+#        run: |
+#          echo "::set-output name=urls::$(curl -u admin:${{ secrets.GITHUB_TOKEN }} https://api.github.com/repos/${{ github.repository }}/actions/artifacts |jq '.artifacts[].url')"
+#
+#      - name: telegram-message-artifact-urls
+#        run: |
+#          echo ${{ steps.artifacts.outputs.urls }}
