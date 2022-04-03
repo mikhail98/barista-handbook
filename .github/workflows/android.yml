@@ -93,12 +93,7 @@ jobs:
           message: >
             Artifacts: https://github.com/mikhail98/barista-handbook/actions/runs/${{ github.run_id }}
 
-      - name: checkartifactsid
-        run: |
-          URL="https://api.github.com/repos/mikhail98/barista-handbook/actions/artifacts"
-          curl -u admin:${{ secrets.GITHUB_TOKEN }} $URL |jq '.artifacts[].id'
-
       - name: checkartifactsid2
         run: |
-          URL="https://api.github.com/repos/mikhail98/barista-handbook/actions/artifacts"
-          curl -u admin:${{ secrets.GITHUB_TOKEN }} $URL |jq '.artifacts[].url'
+          response = $(curl -u admin:${{ secrets.GITHUB_TOKEN }} "https://api.github.com/repos/mikhail98/barista-handbook/actions/artifacts")
+          echo "response from curl= $response"
