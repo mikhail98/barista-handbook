@@ -22,6 +22,7 @@ jobs:
           to: -600920147
           message: >
             Barista Handbook Build STARTED
+            PR: https://github.com/mikhail98/barista-handbook/pull/${{ steps.bh-pr-number.outputs.pr }}
 
       - uses: actions/checkout@v2
 
@@ -38,10 +39,6 @@ jobs:
           key: ${{ runner.os }}-gradle-${{ hashFiles('**/*.gradle*', '**/gradle-wrapper.properties') }}
           restore-keys: |
             ${{ runner.os }}-gradle-
-
-      - name: tests
-        run: |
-          ./gradlew test
 
       - name: Build
         run: |
