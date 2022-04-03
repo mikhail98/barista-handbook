@@ -52,6 +52,15 @@ jobs:
         run: |
           ./gradlew build
 
+      - name: Send message if failed
+        if: ${{ failure() }}
+        uses: appleboy/telegram-action@v0.1.1
+        with:
+          token: 5218142328:AAF8xJCg7DR2dQqRkGXq-exYugcJCBI4cw8
+          to: -600920147
+          message: >
+            Barista Handbook Build FAILED. Attempt ${{ github.run_attempt }} of run № ${{ github.run_number }}.
+
       - name: Generate Artifacts
         run: |
           ./gradlew bundleRelease
