@@ -22,7 +22,13 @@ jobs:
           to: -600920147
           message: >
             Barista Handbook Build STARTED
-            <br>
+
+      - name: pr-lik
+        uses: appleboy/telegram-action@v0.1.1
+        with:
+          token: 5218142328:AAF8xJCg7DR2dQqRkGXq-exYugcJCBI4cw8
+          to: -600920147
+          message: >
             PR: https://github.com/mikhail98/barista-handbook/pull/${{ steps.bh-pr-number.outputs.pr }}
 
       - uses: actions/checkout@v2
@@ -69,4 +75,11 @@ jobs:
           to: -600920147
           message: >
             Barista Handbook Build SUCCESS
+
+      - name: artifact-lik
+        uses: appleboy/telegram-action@v0.1.1
+        with:
+          token: 5218142328:AAF8xJCg7DR2dQqRkGXq-exYugcJCBI4cw8
+          to: -600920147
+          message: >
             Artifact: https://github.com/mikhail98/barista-handbook/pull/${{ steps.bh-pr-number.outputs.pr }}/checks
