@@ -15,7 +15,7 @@ jobs:
       - uses: kkak10/pr-number-action@v1.3
         id: bh-pr-number
 
-      - name: build-start
+      - name: telegram-message-start
         uses: appleboy/telegram-action@v0.1.1
         with:
           token: 5218142328:AAF8xJCg7DR2dQqRkGXq-exYugcJCBI4cw8
@@ -38,7 +38,7 @@ jobs:
           java-version: '11'
           cache: 'gradle'
 
-      - name: Cache Gradle packages
+      - name: cache-gradle-packages
         uses: actions/cache@v2
         with:
           path: |
@@ -48,11 +48,11 @@ jobs:
           restore-keys: |
             ${{ runner.os }}-gradle-
 
-      - name: Build
+      - name: build
         run: |
           ./gradlew build
 
-      - name: Send message if failed
+      - name: telegram-message-failed
         if: ${{ failure() }}
         uses: appleboy/telegram-action@v0.1.1
         with:
@@ -68,29 +68,29 @@ jobs:
             Links:
             Pull request: https://github.com/${{ github.repository }}/pull/${{ steps.bh-pr-number.outputs.pr }}
 
-      - name: Generate Artifacts
+      - name: generate-artifacts
         run: |
           ./gradlew bundleRelease
 
-      - name: Upload Debug Apk
+      - name: upload-debug-apk
         uses: actions/upload-artifact@v2.2.1
         with:
           name: Debug Apk
           path: app/build/outputs/apk/debug
 
-      - name: Upload Release Apk
+      - name: upload-release-apk
         uses: actions/upload-artifact@v2.2.1
         with:
           name: Release Apk
           path: app/build/outputs/apk/release
 
-      - name: Upload Release Aab
+      - name: upload-release-aab
         uses: actions/upload-artifact@v2.2.1
         with:
           name: Release Aab
           path: app/build/outputs/bundle/release
 
-      - name: build-finish
+      - name: telegram-message-success
         uses: appleboy/telegram-action@v0.1.1
         with:
           token: 5218142328:AAF8xJCg7DR2dQqRkGXq-exYugcJCBI4cw8
@@ -103,12 +103,3 @@ jobs:
             Links:
             Pull request: https://github.com/${{ github.repository }}/pull/${{ steps.bh-pr-number.outputs.pr }}
             Artifacts: https://github.com/${{ github.repository }}/actions/runs/${{ github.run_id }}
-
-      - name: Attempt to get urls
-        id: artifacts
-        run: |
-          echo "::set-output name=urls::$(curl -u admin:${{ secrets.GITHUB_TOKEN }} https://api.github.com/repos/${{ github.repository }}/actions/artifacts |jq '.artifacts[].url')"
-
-      - name: confirm release tag
-        run: |
-          echo ${{ steps.artifacts.outputs.urls }}
