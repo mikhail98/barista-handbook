@@ -18,8 +18,8 @@ jobs:
       - name: build-start
         uses: appleboy/telegram-action@v0.1.1
         with:
-          token: 1745215664:AAEI20fIl4_UPqQexy12084EVbbBbknfeRo
-          to: -1001350056056
+          token: 5218142328:AAF8xJCg7DR2dQqRkGXq-exYugcJCBI4cw8
+          to: -600920147
           message: >
             Barista Handbook Build STARTED
 
@@ -66,8 +66,8 @@ jobs:
       - name: build-finish
         uses: appleboy/telegram-action@v0.1.1
         with:
-          token: 1745215664:AAEI20fIl4_UPqQexy12084EVbbBbknfeRo
-          to: -1001350056056
+          token: 5218142328:AAF8xJCg7DR2dQqRkGXq-exYugcJCBI4cw8
+          to: -600920147
           message: >
             Barista Handbook Build SUCCESS
             Artifact: https://github.com/mikhail98/barista-handbook/pull/${{ steps.bh-pr-number.outputs.pr }}/checks
