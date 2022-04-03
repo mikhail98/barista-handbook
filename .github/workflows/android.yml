@@ -84,6 +84,12 @@ jobs:
           name: Release Apk
           path: app/build/outputs/apk/release
 
+      - name: Upload Release Aab
+        uses: actions/upload-artifact@v2.2.1
+        with:
+          name: Release Aab
+          path: app/build/outputs/bundle/release
+
       - name: build-finish
         uses: appleboy/telegram-action@v0.1.1
         with:
