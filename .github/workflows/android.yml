@@ -21,15 +21,13 @@ jobs:
           token: 5218142328:AAF8xJCg7DR2dQqRkGXq-exYugcJCBI4cw8
           to: -600920147
           message: |
-            Build **Barista Handbook** STARTED. Run: ${{ github.run_number }}.
+            Build Barista Handbook STARTED. Run: ${{ github.run_number }}.
 
-            ${{ github.actor }} created commit:
-            Commit message: ${{ github.event.commits[0].message }}
+            Commit by ${{ github.actor }}
 
+            Links:
             Changes: https://github.com/${{ github.repository }}/commit/${{github.sha}}
-            Pull request: https://github.com/mikhail98/barista-handbook/pull/${{ steps.bh-pr-number.outputs.pr }}
-
-            Repository: ${{ github.repository }}
+            Pull request: https://github.com/${{ github.repository }}/pull/${{ steps.bh-pr-number.outputs.pr }}
 
       - uses: actions/checkout@v2
       - uses: actions/setup-java@v2
@@ -58,16 +56,13 @@ jobs:
         with:
           token: 5218142328:AAF8xJCg7DR2dQqRkGXq-exYugcJCBI4cw8
           to: -600920147
-          message: >
-            Build **Barista Handbook** FAILED. Run: ${{ github.run_number }}.
+          message: |
+            Build Barista Handbook FAILED. Run: ${{ github.run_number }}.
 
-            ${{ github.actor }} created commit:
-            Commit message: ${{ github.event.commits[0].message }}
+            Commit by ${{ github.actor }}
 
-            Changes: https://github.com/${{ github.repository }}/commit/${{github.sha}}
-            Pull request: https://github.com/mikhail98/barista-handbook/pull/${{ steps.bh-pr-number.outputs.pr }}
-
-            Repository: ${{ github.repository }}
+            Links:
+            Pull request: https://github.com/${{ github.repository }}/pull/${{ steps.bh-pr-number.outputs.pr }}
 
       - name: Generate Artifacts
         run: |
@@ -90,16 +85,9 @@ jobs:
         with:
           token: 5218142328:AAF8xJCg7DR2dQqRkGXq-exYugcJCBI4cw8
           to: -600920147
-          message: >
-            Build **Barista Handbook** SUCCESS. Run: ${{ github.run_number }}.
+          message: |
+            Build Barista Handbook SUCCESS. Run: ${{ github.run_number }}.
 
-            ${{ github.actor }} created commit:
-            Commit message: ${{ github.event.commits[0].message }}
-
-            Changes: https://github.com/${{ github.repository }}/commit/${{github.sha}}
-            Pull request: https://github.com/mikhail98/barista-handbook/pull/${{ steps.bh-pr-number.outputs.pr }}
-
-            Repository: ${{ github.repository }}
-
-
-            Artifacts: https://github.com/mikhail98/barista-handbook/actions/runs/${{ github.run_id }}
+            Links:
+            Pull request: https://github.com/${{ github.repository }}/pull/${{ steps.bh-pr-number.outputs.pr }}
+            Artifacts: https://github.com/${{ github.repository }}/actions/runs/${{ github.run_id }}
