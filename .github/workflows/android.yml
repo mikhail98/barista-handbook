@@ -96,7 +96,7 @@ jobs:
       - id: suka
         uses: MichaelMelena/list-artifacts@v1
         with:
-          GITHUB_TOKEN: ${{secrest.MY_PAT_TOKEN}}
+          GITHUB_TOKEN: ${{secrest.GITHUB_TOKEN}}
         run: |
           echo '${{ steps.result.outputs.artifacts }}'
 
