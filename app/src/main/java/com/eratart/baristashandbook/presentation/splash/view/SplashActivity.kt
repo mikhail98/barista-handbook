@@ -6,8 +6,10 @@ import com.eratart.baristashandbook.R
 import com.eratart.baristashandbook.baseui.activity.BaseActivity
 import com.eratart.baristashandbook.core.ext.observe
 import com.eratart.baristashandbook.core.ext.postDelayed
+import com.eratart.baristashandbook.domain.model.Item
 import com.eratart.baristashandbook.presentation.splash.viewmodel.SplashViewModel
 import org.koin.androidx.viewmodel.ext.android.viewModel
+import java.lang.RuntimeException
 
 @SuppressLint("CustomSplashScreen")
 class SplashActivity : BaseActivity<SplashViewModel, ViewBinding>() {
@@ -21,8 +23,14 @@ class SplashActivity : BaseActivity<SplashViewModel, ViewBinding>() {
     override fun initViewModel() {
         viewModel.apply {
             observe(showOnboarding, ::handleOnboardingShown)
+            observe(data, ::handleData)
             loadDataToCache()
         }
+    }
+
+    //REMOVE
+    private fun handleData(data: List<Item>) {
+        println("RE:: ${data.first().photos}")
     }
 
     private fun handleOnboardingShown(isShown: Boolean) {

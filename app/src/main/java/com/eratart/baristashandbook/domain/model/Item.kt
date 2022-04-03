@@ -6,6 +6,6 @@ data class Item(
     val description: String,
     val photos: List<String>,
     val ingredients: List<String>,
-    val dish: Dish,
+    val dish: String,
     val portionsAmount: Int
 )

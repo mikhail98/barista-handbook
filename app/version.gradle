@@ -4,3 +4,7 @@ ext.appVersion = [
         versionCode: sdk.majorVersion * 10000 + sdk.minorVersion * 1000 + sdk.patchVersion,
         versionName: "v${sdk.majorVersion}.${sdk.minorVersion}.${sdk.patchVersion}"
 ]
+
+ext.archives = [
+        archivesBaseName: "Barista's Handbook ${appVersion.versionName}"
+]

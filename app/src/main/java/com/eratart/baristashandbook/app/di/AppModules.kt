@@ -3,6 +3,7 @@ package com.eratart.baristashandbook.app.di
 import androidx.security.crypto.EncryptedSharedPreferences
 import androidx.security.crypto.MasterKey
 import com.eratart.baristashandbook.data.cache.AppCache
+import com.eratart.baristashandbook.data.firebase.FirebaseAnalyticsManager
 import com.eratart.baristashandbook.data.preferencnes.Preferences
 import com.eratart.baristashandbook.data.preferencnes.impl.AppPreferences
 import com.eratart.baristashandbook.data.preferencnes.impl.FavoritesPreferences
@@ -10,6 +11,7 @@ import com.eratart.baristashandbook.data.preferencnes.impl.OnboardingPreferences
 import com.eratart.baristashandbook.data.repository.DishesRepo
 import com.eratart.baristashandbook.data.repository.ItemsRepo
 import com.eratart.baristashandbook.domain.cache.IAppCache
+import com.eratart.baristashandbook.domain.firebase.IFirebaseAnalyticsManager
 import com.eratart.baristashandbook.domain.interactor.cache.AppCacheInteractor
 import com.eratart.baristashandbook.domain.interactor.cache.IAppCacheInteractor
 import com.eratart.baristashandbook.domain.interactor.favorites.FavoritesInteractor
@@ -32,6 +34,7 @@ import com.eratart.baristashandbook.presentation.settings.di.settingsModule
 import com.eratart.baristashandbook.presentation.splash.di.splashModule
 import com.eratart.baristashandbook.tools.navigator.GlobalNavigator
 import com.eratart.baristashandbook.tools.navigator.IGlobalNavigator
+import com.google.firebase.analytics.FirebaseAnalytics
 import org.koin.core.module.Module
 import org.koin.dsl.module
 
@@ -39,6 +42,7 @@ object AppModules {
     fun getModules(): List<Module> {
         val modulesList = mutableListOf<Module>()
         modulesList.add(appModule)
+        modulesList.add(analyticsModule)
 
         modulesList.add(repoModule)
         modulesList.add(preferencesModule)
@@ -64,9 +68,14 @@ val appModule = module {
     single<IGlobalNavigator> { GlobalNavigator() }
 }
 
+val analyticsModule = module {
+    single { FirebaseAnalytics.getInstance(get()) }
+    single<IFirebaseAnalyticsManager> { FirebaseAnalyticsManager(get()) }
+}
+
 val repoModule = module {
-    single<IDishesRepo> { DishesRepo() }
-    single<IItemsRepo> { ItemsRepo() }
+    single<IDishesRepo> { DishesRepo(get()) }
+    single<IItemsRepo> { ItemsRepo(get()) }
 }
 
 val cacheModule = module {
