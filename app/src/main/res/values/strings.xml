@@ -12,4 +12,10 @@
     <string name="onboarding_description_3">Subtitle 3. Mega feature, i can\'t imagine how you lived without this awesome handbook!</string>
     <string name="onboarding_description_4">Subtitle 4. Mega feature, i can\'t imagine how you lived without this awesome handbook!</string>
     <string name="onboarding_description_5">Subtitle 5. Mega feature, i can\'t imagine how you lived without this awesome handbook!</string>
+    
+    <string name="main_menu_news">News</string>
+    <string name="main_menu_dishes">Dishes</string>
+    <string name="main_menu_drinks">Drinks</string>
+    <string name="main_menu_latte_art">Latte-art</string>
+    <string name="main_menu_favorites">Favorites</string>
 </resources>

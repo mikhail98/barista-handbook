@@ -1,12 +1,17 @@
 package com.eratart.baristashandbook.core.ext
 
+import android.content.res.Resources
+import android.graphics.drawable.Drawable
 import android.os.Handler
 import android.os.Looper
 import android.view.View
+import android.widget.ImageView
 import android.widget.TextView
+import androidx.annotation.DrawableRes
 import androidx.annotation.StringRes
 import androidx.viewpager.widget.ViewPager
 import androidx.viewpager2.widget.ViewPager2
+import com.bumptech.glide.Glide
 import com.eratart.baristashandbook.baseui.view.viewpager.ViewPageScroller
 import com.eratart.baristashandbook.core.constants.FloatConstants
 import com.eratart.baristashandbook.core.ext.ViewExt.DURATION_DEFAULT_GONE
@@ -100,4 +105,38 @@ fun View.fadeInAnimation(duration: Long = 150, completion: (() -> Unit)? = null)
                 it()
             }
         }
+}
+
+fun Int.pxToDp(): Float {
+    return this.toFloat() / Resources.getSystem().displayMetrics.density
+}
+
+fun Float.pxToDp(): Float {
+    return this / Resources.getSystem().displayMetrics.density
+}
+
+fun Int.dpToPx(): Int {
+    return (this * Resources.getSystem().displayMetrics.density).toInt()
+}
+
+fun Float.dpToPx(): Float {
+    return this * Resources.getSystem().displayMetrics.density
+}
+
+fun ImageView.loadImageWithGlide(url: String) {
+    Glide.with(context)
+        .load(url)
+        .into(this)
+}
+
+fun ImageView.loadImageWithGlide(drawable: Drawable?) {
+    Glide.with(context)
+        .load(drawable)
+        .into(this)
+}
+
+fun ImageView.loadImageWithGlide(@DrawableRes drawableRes: Int) {
+    Glide.with(context)
+        .load(drawableRes)
+        .into(this)
 }

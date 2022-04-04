@@ -1,6 +1,7 @@
 package com.eratart.baristashandbook.presentation.splash.view
 
 import android.annotation.SuppressLint
+import android.view.View
 import androidx.viewbinding.ViewBinding
 import com.eratart.baristashandbook.R
 import com.eratart.baristashandbook.baseui.activity.BaseActivity
@@ -16,7 +17,7 @@ class SplashActivity : BaseActivity<SplashViewModel, ViewBinding>() {
     override val viewModel: SplashViewModel by viewModel()
 
     override fun initView() {
-        changeStatusBarColor(R.color.blacked)
+        window.decorView.systemUiVisibility = View.SYSTEM_UI_FLAG_FULLSCREEN
     }
 
     override fun initViewModel() {

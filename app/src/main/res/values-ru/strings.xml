@@ -10,4 +10,10 @@
     <string name="onboarding_description_3">Subtitle 3. Mega feature, i can\'t imagine how you lived without this awesome handbook!</string>
     <string name="onboarding_description_4">Subtitle 4. Mega feature, i can\'t imagine how you lived without this awesome handbook!</string>
     <string name="onboarding_description_5">Subtitle 5. Mega feature, i can\'t imagine how you lived without this awesome handbook!</string>
+
+    <string name="main_menu_news">Новости</string>
+    <string name="main_menu_dishes">Напитки</string>
+    <string name="main_menu_drinks">Посуда</string>
+    <string name="main_menu_latte_art">Латте-арт</string>
+    <string name="main_menu_favorites">Избранное</string>
 </resources>
