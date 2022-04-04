@@ -3,6 +3,7 @@ plugins {
     id 'org.jetbrains.kotlin.android'
     id 'com.google.gms.google-services'
     id 'com.google.firebase.crashlytics'
+    id 'kotlin-parcelize'
 }
 
 apply from: "dependencies.gradle"
@@ -88,6 +89,8 @@ dependencies {
     implementation platform(library.firebaseBom)
     implementation library.firebaseAnalyticsKtx
     implementation library.firebaseCrashlyticsKtx
+
+    implementation library.dotsIndicator
 
     annotationProcessor library.glideAnnotationProcessor
 }

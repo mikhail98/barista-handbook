@@ -7,7 +7,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
 import androidx.viewbinding.ViewBinding
 import com.eratart.baristashandbook.R
-import com.eratart.baristashandbook.baseui.view.DefaultFullscreenLoader
+import com.eratart.baristashandbook.baseui.view.relativelayout.DefaultFullscreenLoader
 import com.eratart.baristashandbook.baseui.viewmodel.BaseViewModel
 import com.eratart.baristashandbook.core.ext.gone
 import com.eratart.baristashandbook.core.ext.observe

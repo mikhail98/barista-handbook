@@ -24,6 +24,6 @@ class SplashViewModel(
     fun loadDataToCache() {
         appCacheInteractor.initCache()
         _data.value = appCacheInteractor.getItems()
-        _showOnboarding.postValue(onboardingPreferences.isOnboardingShown())
+        _showOnboarding.postValue(onboardingPreferences.isStartupOnboardingShown())
     }
 }

@@ -1,3 +1,15 @@
 <resources>
-    <string name="app_name">Barista\'s Handbook</string>
+    <string name="app_name" translatable="false">Barrista</string>
+
+    <string name="onboarding_title_1">Title 1. Mega feature</string>
+    <string name="onboarding_title_2">Title 2. Mega feature</string>
+    <string name="onboarding_title_3">Title 3. Mega feature</string>
+    <string name="onboarding_title_4">Title 4. Mega feature</string>
+    <string name="onboarding_title_5">Title 5. Mega feature</string>
+
+    <string name="onboarding_description_1">Subtitle 1. Mega feature, i can\'t imagine how you lived without this awesome handbook!</string>
+    <string name="onboarding_description_2">Subtitle 2. Mega feature, i can\'t imagine how you lived without this awesome handbook!</string>
+    <string name="onboarding_description_3">Subtitle 3. Mega feature, i can\'t imagine how you lived without this awesome handbook!</string>
+    <string name="onboarding_description_4">Subtitle 4. Mega feature, i can\'t imagine how you lived without this awesome handbook!</string>
+    <string name="onboarding_description_5">Subtitle 5. Mega feature, i can\'t imagine how you lived without this awesome handbook!</string>
 </resources>

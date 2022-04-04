@@ -7,7 +7,8 @@ ext.ver = [
         encryptedPrefsVersion    : "1.1.0-alpha03",
         csvVersion               : "4.6",
         glideVersion             : "4.13.0",
-        firebaseBomVersion       : "29.2.1"
+        firebaseBomVersion       : "29.2.1",
+        dotsIndicatorVersion     : "4.2"
 ]
 
 ext.library = [
@@ -22,7 +23,8 @@ ext.library = [
         glideAnnotationProcessor: "com.github.bumptech.glide:compiler:$ver.glideVersion",
         firebaseBom             : "com.google.firebase:firebase-bom:$ver.firebaseBomVersion",
         firebaseAnalyticsKtx    : "com.google.firebase:firebase-analytics-ktx",
-        firebaseCrashlyticsKtx  : "com.google.firebase:firebase-crashlytics-ktx"
+        firebaseCrashlyticsKtx  : "com.google.firebase:firebase-crashlytics-ktx",
+        dotsIndicator           : "com.tbuonomo:dotsindicator:$ver.dotsIndicatorVersion"
 ]
 
 ext.sdk = [

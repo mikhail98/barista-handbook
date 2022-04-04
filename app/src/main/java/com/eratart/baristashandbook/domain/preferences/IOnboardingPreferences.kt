@@ -3,10 +3,10 @@ package com.eratart.baristashandbook.domain.preferences
 interface IOnboardingPreferences {
 
     companion object {
-        const val ONBOARDING_SHOWN = "IOnboardingPreferences.ONBOARDING_SHOWN"
+        const val STARTUP_ONBOARDING_SHOWN = "IOnboardingPreferences.STARTUP_ONBOARDING_SHOWN"
     }
 
-    fun isOnboardingShown(): Boolean
-    fun saveOnboardingShown(isShown: Boolean)
+    fun isStartupOnboardingShown(): Boolean
+    fun saveStartupOnboardingShown(isShown: Boolean)
 
 }
