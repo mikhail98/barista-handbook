@@ -5,7 +5,7 @@ data class Item(
     val title: String,
     val description: String,
     val photos: List<String>,
-    val ingredients: List<String>,
+    val ingredients: List<Ingredient>,
     val dish: String,
     val portionsAmount: Int
 )

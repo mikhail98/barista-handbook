@@ -1,9 +1,6 @@
 package com.eratart.baristashandbook.domain.model
 
-data class Dish(
-    val id: String,
+data class Ingredient(
     val title: String,
-    val description: String,
-    val photos: List<String>,
     val volume: String
 )
