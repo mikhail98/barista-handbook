@@ -26,7 +26,7 @@ import com.eratart.baristashandbook.presentation.dishdetails.di.dishDetailsModul
 import com.eratart.baristashandbook.presentation.disheslist.di.dishesListModule
 import com.eratart.baristashandbook.presentation.favorites.di.favoritesModule
 import com.eratart.baristashandbook.presentation.itemdetails.di.itemDetailsModule
-import com.eratart.baristashandbook.presentation.itemslist.di.itemsListModule
+import com.eratart.baristashandbook.presentation.itemscategorieslist.di.itemsListModule
 import com.eratart.baristashandbook.presentation.mainmenu.di.mainMenuModule
 import com.eratart.baristashandbook.presentation.news.di.newsModule
 import com.eratart.baristashandbook.presentation.onboarding.di.onboardingModule

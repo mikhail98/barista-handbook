@@ -9,7 +9,7 @@ import com.eratart.baristashandbook.core.constants.IntConstants
 import com.eratart.baristashandbook.core.ext.replaceAllWith
 import java.util.*
 
-abstract class BaseRecyclerAdapter<VM : Any>(
+abstract class BaseRecyclerAdapter<VM>(
     private var viewModels: MutableList<VM>
 ) :
     RecyclerView.Adapter<BaseRecyclerViewHolder<VM, *>>() {

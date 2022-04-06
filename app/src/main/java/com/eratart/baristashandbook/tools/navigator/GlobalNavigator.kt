@@ -7,8 +7,8 @@ import com.eratart.baristashandbook.presentation.dishdetails.view.DishDetailsAct
 import com.eratart.baristashandbook.presentation.disheslist.view.DishesListActivity
 import com.eratart.baristashandbook.presentation.favorites.view.FavoritesActivity
 import com.eratart.baristashandbook.presentation.itemdetails.view.ItemDetailsActivity
-import com.eratart.baristashandbook.presentation.itemslist.view.ItemsListActivity
-import com.eratart.baristashandbook.presentation.mainmenu.view.MainActivity
+import com.eratart.baristashandbook.presentation.itemscategorieslist.view.ItemsCategoriesListActivity
+import com.eratart.baristashandbook.presentation.mainmenu.view.MainMenuActivity
 import com.eratart.baristashandbook.presentation.news.view.NewsActivity
 import com.eratart.baristashandbook.presentation.onboarding.view.OnboardingActivity
 import com.eratart.baristashandbook.presentation.settings.view.SettingsActivity
@@ -36,11 +36,11 @@ class GlobalNavigator : IGlobalNavigator {
     }
 
     override fun startItemsListActivity(activity: Activity) {
-        activity.startActivity(Intent(activity, ItemsListActivity::class.java))
+        activity.startActivity(Intent(activity, ItemsCategoriesListActivity::class.java))
     }
 
     override fun startMainMenuActivity(activity: Activity) {
-        activity.startActivity(Intent(activity, MainActivity::class.java))
+        activity.startActivity(Intent(activity, MainMenuActivity::class.java))
     }
 
     override fun startNewsActivity(activity: Activity) {

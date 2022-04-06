@@ -8,7 +8,6 @@ import android.view.View
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.annotation.DrawableRes
-import androidx.annotation.StringRes
 import androidx.viewpager.widget.ViewPager
 import androidx.viewpager2.widget.ViewPager2
 import com.bumptech.glide.Glide
@@ -138,5 +137,27 @@ fun ImageView.loadImageWithGlide(drawable: Drawable?) {
 fun ImageView.loadImageWithGlide(@DrawableRes drawableRes: Int) {
     Glide.with(context)
         .load(drawableRes)
+        .into(this)
+}
+
+
+fun ImageView.loadImageWithGlideCircle(url: String) {
+    Glide.with(context)
+        .load(url)
+        .circleCrop()
+        .into(this)
+}
+
+fun ImageView.loadImageWithGlideCircle(drawable: Drawable?) {
+    Glide.with(context)
+        .load(drawable)
+        .circleCrop()
+        .into(this)
+}
+
+fun ImageView.loadImageWithGlideCircle(@DrawableRes drawableRes: Int) {
+    Glide.with(context)
+        .load(drawableRes)
+        .circleCrop()
         .into(this)
 }

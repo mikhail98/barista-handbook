@@ -9,7 +9,7 @@ import com.eratart.baristashandbook.databinding.ActivityMainMenuBinding
 import com.eratart.baristashandbook.presentation.mainmenu.viewmodel.MainViewModel
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
-class MainActivity : BaseActivity<MainViewModel, ActivityMainMenuBinding>() {
+class MainMenuActivity : BaseActivity<MainViewModel, ActivityMainMenuBinding>() {
 
     override val viewModel: MainViewModel by viewModel()
     override val binding by lazy { ActivityMainMenuBinding.inflate(layoutInflater) }
@@ -42,7 +42,9 @@ class MainActivity : BaseActivity<MainViewModel, ActivityMainMenuBinding>() {
     private fun initClickListeners() {
         itemNews.setOnClickListener {}
         itemDishes.setOnClickListener {}
-        itemDrinks.setOnClickListener {}
+        itemDrinks.setOnClickListener {
+            globalNavigator.startItemsListActivity(this)
+        }
         itemLatteArt.setOnClickListener {}
         itemFavorites.setOnClickListener {}
         btnInfo.setOnClickListener { }

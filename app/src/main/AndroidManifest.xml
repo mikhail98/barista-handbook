@@ -32,11 +32,11 @@
             android:theme="@style/BaseActivityTheme" />
 
         <activity
-            android:name=".presentation.itemslist.view.ItemsListActivity"
+            android:name=".presentation.itemscategorieslist.view.ItemsCategoriesListActivity"
             android:theme="@style/BaseActivityTheme" />
 
         <activity
-            android:name=".presentation.mainmenu.view.MainActivity"
+            android:name=".presentation.mainmenu.view.MainMenuActivity"
             android:theme="@style/BaseActivityTheme" />
 
         <activity
