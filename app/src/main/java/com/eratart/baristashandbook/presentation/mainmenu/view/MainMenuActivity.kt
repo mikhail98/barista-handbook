@@ -43,7 +43,7 @@ class MainMenuActivity : BaseActivity<MainViewModel, ActivityMainMenuBinding>() 
         itemNews.setOnClickListener {}
         itemDishes.setOnClickListener {}
         itemDrinks.setOnClickListener {
-            globalNavigator.startItemsListActivity(this)
+            globalNavigator.startItemsCategoriesListActivity(this)
         }
         itemLatteArt.setOnClickListener {}
         itemFavorites.setOnClickListener {}

@@ -6,9 +6,9 @@ import com.eratart.baristashandbook.domain.model.Item
 
 object ItemsMock {
 
-    private fun getItem(pos: Int) = Item(
+    private fun getItem(pos: Int, categoryTitle: String) = Item(
         "latte",
-        "Латте $pos",
+        "Латте $categoryTitle $pos",
         "Латте описание $pos",
         listOf(ImageUrlUtil.getImageUrl(ImageUrlUtil.DRINKS, "latte", "Frame%201.jpg")),
         listOf(Ingredient("Пакетика травы", "2")),
@@ -16,10 +16,10 @@ object ItemsMock {
         1
     )
 
-    fun getItems(amount: Int): MutableList<Item> {
+    fun getItems(amount: Int, categoryTitle: String): MutableList<Item> {
         val items = mutableListOf<Item>()
         for (i in 0 until amount) {
-            items.add(getItem(i))
+            items.add(getItem(i, categoryTitle))
         }
         return items
     }

@@ -34,16 +34,16 @@ class AppBar(context: Context, attributeSet: AttributeSet? = null) :
     private val attributes by lazy {
         context.theme.obtainStyledAttributes(attributeSet, R.styleable.AppBar, 0, 0)
     }
-    var title: String? = null
-    var subtitle: String? = null
-    var searchHint: String? = null
-    var background: Int? = null
-    var tintColor: Int? = null
+    private var title: String? = null
+    private var subtitle: String? = null
+    private var searchHint: String? = null
+    private var background: Int? = null
+    private var tintColor: Int? = null
 
     var isSearchActive: Boolean = false
 
-    var isSearchBtnShown = false
-    var isMoreBtnShown = false
+    private var isSearchBtnShown = false
+    private var isMoreBtnShown = false
 
     private var onSearchClosed: (() -> Unit)? = null
     fun setOnSearchClosedListener(listener: () -> Unit) {

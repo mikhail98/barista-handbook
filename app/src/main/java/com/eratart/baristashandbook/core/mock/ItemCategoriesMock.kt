@@ -4,7 +4,11 @@ import com.eratart.baristashandbook.domain.model.ItemCategory
 
 object ItemCategoriesMock {
 
-    private fun getCategory(pos: Int) = ItemCategory("category$pos", "Черный кофе - $pos", pos)
+    private fun getCategory(pos: Int): ItemCategory {
+        val title = "Черный кофе - $pos"
+        val drinks = ItemsMock.getItems(7, title)
+        return ItemCategory("category$pos", title, drinks.size, drinks)
+    }
 
     fun getCategories(amount: Int): MutableList<ItemCategory> {
         val categories = mutableListOf<ItemCategory>()

@@ -1,6 +1,7 @@
 package com.eratart.baristashandbook.tools.navigator
 
 import android.app.Activity
+import com.eratart.baristashandbook.domain.model.Item
 
 interface IGlobalNavigator {
 
@@ -14,7 +15,9 @@ interface IGlobalNavigator {
 
     fun startItemDetailsActivity(activity: Activity)
 
-    fun startItemsListActivity(activity: Activity)
+    fun startItemsCategoriesListActivity(activity: Activity)
+
+    fun startItemsListActivity(activity: Activity, subtitle: String, items: List<Item>)
 
     fun startMainMenuActivity(activity: Activity)
 

@@ -2,14 +2,13 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.eratart.baristashandbook">
 
-    <uses-permission android:name="android.permission.INTERNET"/>
+    <uses-permission android:name="android.permission.INTERNET" />
 
     <application
         android:name=".app.BhApp"
         android:allowBackup="true"
         android:label="@string/app_name"
-        android:supportsRtl="true"
-        android:theme="@style/AppTheme">
+        android:supportsRtl="true">
 
         <activity
             android:name=".presentation.artinstructions.view.ArtInstructionsActivity"
@@ -36,6 +35,10 @@
             android:theme="@style/BaseActivityTheme" />
 
         <activity
+            android:name=".presentation.itemslist.view.ItemsListActivity"
+            android:theme="@style/BaseActivityTheme" />
+
+        <activity
             android:name=".presentation.mainmenu.view.MainMenuActivity"
             android:theme="@style/BaseActivityTheme" />
 
@@ -52,12 +55,11 @@
             android:theme="@style/BaseActivityTheme" />
 
         <activity
-            android:name=".presentation.splash.view.SplashActivity"
+            android:name=".presentation.routing.view.RoutingActivity"
             android:exported="true"
-            android:theme="@style/SplashTheme">
+            android:theme="@style/Theme.App.Starting">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>

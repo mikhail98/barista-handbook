@@ -1,23 +1,34 @@
-package com.eratart.baristashandbook.presentation.splash.view
+package com.eratart.baristashandbook.presentation.routing.view
 
-import android.annotation.SuppressLint
-import android.view.View
+import android.os.Bundle
+import android.view.WindowManager
+import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
 import androidx.viewbinding.ViewBinding
 import com.eratart.baristashandbook.R
 import com.eratart.baristashandbook.baseui.activity.BaseActivity
 import com.eratart.baristashandbook.core.ext.observe
 import com.eratart.baristashandbook.core.ext.postDelayed
+import com.eratart.baristashandbook.databinding.ActivityRoutingBinding
 import com.eratart.baristashandbook.domain.model.Item
-import com.eratart.baristashandbook.presentation.splash.viewmodel.SplashViewModel
+import com.eratart.baristashandbook.presentation.routing.viewmodel.RoutingViewModel
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
-@SuppressLint("CustomSplashScreen")
-class SplashActivity : BaseActivity<SplashViewModel, ViewBinding>() {
-    override val binding: ViewBinding? = null
-    override val viewModel: SplashViewModel by viewModel()
+
+class RoutingActivity : BaseActivity<RoutingViewModel, ViewBinding>() {
+
+    override val viewModel: RoutingViewModel by viewModel()
+    override val binding by lazy { ActivityRoutingBinding.inflate(layoutInflater) }
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        installSplashScreen()
+        super.onCreate(savedInstanceState)
+
+        window.setFlags(
+            WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN
+        )
+    }
 
     override fun initView() {
-        window.decorView.systemUiVisibility = View.SYSTEM_UI_FLAG_FULLSCREEN
     }
 
     override fun initViewModel() {

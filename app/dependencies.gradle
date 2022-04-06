@@ -8,7 +8,8 @@ ext.ver = [
         csvVersion               : "4.6",
         glideVersion             : "4.13.0",
         firebaseBomVersion       : "29.2.1",
-        dotsIndicatorVersion     : "4.2"
+        dotsIndicatorVersion     : "4.2",
+        splashScreenVersion      : "1.0.0-beta02"
 ]
 
 ext.library = [
@@ -24,7 +25,8 @@ ext.library = [
         firebaseBom             : "com.google.firebase:firebase-bom:$ver.firebaseBomVersion",
         firebaseAnalyticsKtx    : "com.google.firebase:firebase-analytics-ktx",
         firebaseCrashlyticsKtx  : "com.google.firebase:firebase-crashlytics-ktx",
-        dotsIndicator           : "com.tbuonomo:dotsindicator:$ver.dotsIndicatorVersion"
+        dotsIndicator           : "com.tbuonomo:dotsindicator:$ver.dotsIndicatorVersion",
+        splashScreen            : "androidx.core:core-splashscreen:$ver.splashScreenVersion"
 ]
 
 ext.sdk = [

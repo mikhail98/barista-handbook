@@ -4,7 +4,7 @@ import com.eratart.baristashandbook.presentation.itemscategorieslist.view.ItemsC
 import com.eratart.baristashandbook.presentation.itemscategorieslist.viewmodel.ItemsCategoriesListViewModel
 import org.koin.dsl.module
 
-val itemsListModule = module {
+val itemsCategoriesListModule = module {
     scope<ItemsCategoriesListActivity> {
         scoped { ItemsCategoriesListViewModel(get()) }
     }

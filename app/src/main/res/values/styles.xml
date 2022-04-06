@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <style name="AppTheme" parent="Theme.MaterialComponents.Light.DarkActionBar" />
+    <style name="AppTheme" parent="Theme.AppCompat.DayNight" />
 
-    <style name="BaseActivityTheme" parent="Theme.AppCompat.NoActionBar">
+    <style name="BaseActivityTheme" parent="AppTheme">
         <item name="android:windowBackground">@color/background</item>
         <item name="android:screenOrientation">portrait</item>
         <item name="android:exported">false</item>
@@ -12,5 +12,10 @@
     <style name="SplashTheme" parent="BaseActivityTheme">
         <item name="android:windowBackground">@drawable/bg_splash_screen</item>
         <item name="android:screenOrientation">portrait</item>
+    </style>
+
+    <style name="Theme.App.Starting" parent="Theme.SplashScreen">
+        <item name="windowSplashScreenBackground">@color/transparent</item>
+        <item name="postSplashScreenTheme">@style/AppTheme</item>
     </style>
 </resources>

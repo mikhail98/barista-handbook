@@ -92,5 +92,7 @@ dependencies {
 
     implementation library.dotsIndicator
 
+    implementation library.splashScreen
+
     annotationProcessor library.glideAnnotationProcessor
 }

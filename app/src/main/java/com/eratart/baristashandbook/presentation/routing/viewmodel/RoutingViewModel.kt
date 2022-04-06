@@ -1,4 +1,4 @@
-package com.eratart.baristashandbook.presentation.splash.viewmodel
+package com.eratart.baristashandbook.presentation.routing.viewmodel
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
@@ -8,7 +8,7 @@ import com.eratart.baristashandbook.domain.model.Item
 import com.eratart.baristashandbook.domain.preferences.IAppPreferences
 import com.eratart.baristashandbook.domain.preferences.IOnboardingPreferences
 
-class SplashViewModel(
+class RoutingViewModel(
     private val onboardingPreferences: IOnboardingPreferences,
     private val appCacheInteractor: IAppCacheInteractor,
     appPreferences: IAppPreferences
