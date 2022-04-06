@@ -1,11 +1,13 @@
 package com.eratart.baristashandbook.presentation.itemscategorieslist.view.recycler
 
+import androidx.viewbinding.ViewBinding
 import com.eratart.baristashandbook.baseui.view.recyclerview.BaseRecyclerViewHolder
 import com.eratart.baristashandbook.databinding.ItemDrinkCategoryBinding
 import com.eratart.baristashandbook.domain.model.ItemCategory
 
 class ItemCategoryViewHolder(private val binding: ItemDrinkCategoryBinding) :
-    BaseRecyclerViewHolder<Any, ItemDrinkCategoryBinding>(binding) {
+    BaseRecyclerViewHolder<Any, ViewBinding>(binding) {
+
 
     private val tvCount by lazy { binding.tvItemsCount }
     private val tvTitle by lazy { binding.tvTitle }

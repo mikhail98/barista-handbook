@@ -9,13 +9,12 @@ import com.eratart.baristashandbook.databinding.ItemDrinkCategoryBinding
 import com.eratart.baristashandbook.domain.model.Item
 import com.eratart.baristashandbook.domain.model.ItemCategory
 
-class ItemCategoryAdapter(viewModels: MutableList<*>) :
-    BaseRecyclerAdapter<Any>(viewModels as MutableList<Any>) {
+class ItemCategoryAdapter(viewModels: MutableList<Any>) :
+    BaseRecyclerAdapter<Any>(viewModels) {
 
     companion object {
         private const val TYPE_CATEGORY = 0
         private const val TYPE_DRINK = 1
-        private const val TYPE_HEADER = 1
     }
 
     override fun getBindingViewHolder(
@@ -30,12 +29,9 @@ class ItemCategoryAdapter(viewModels: MutableList<*>) :
                 val view = ItemDrinkBinding.inflate(getInflater(parent), parent, false)
                 ItemViewHolder(view)
             }
-            else -> {
-                val view = ItemDrinkCategoryBinding.inflate(getInflater(parent), parent, false)
-                ItemCategoryViewHolder(view)
-            }
+            else -> throw RuntimeException("Unsupported type")
         }
-        return viewHolder as BaseRecyclerViewHolder<Any, ViewBinding>
+        return viewHolder
     }
 
     override fun getItemViewType(position: Int): Int {
@@ -43,7 +39,7 @@ class ItemCategoryAdapter(viewModels: MutableList<*>) :
         return when (item) {
             is ItemCategory -> TYPE_CATEGORY
             is Item -> TYPE_DRINK
-            else -> TYPE_HEADER
+            else -> throw RuntimeException("Unsupported type")
         }
     }
 }
