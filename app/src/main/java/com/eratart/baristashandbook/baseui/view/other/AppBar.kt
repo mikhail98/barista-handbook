@@ -173,6 +173,7 @@ class AppBar(context: Context, attributeSet: AttributeSet? = null) :
     fun deactivateSearch(activity: Activity) {
         isSearchActive = false
 
+        etSearch.setText(StringConstants.EMPTY)
         etSearch.gone()
         etSearch.clearFocus()
         KeyboardUtil.hide(activity)
