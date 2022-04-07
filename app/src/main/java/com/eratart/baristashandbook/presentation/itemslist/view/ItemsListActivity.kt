@@ -1,6 +1,7 @@
 package com.eratart.baristashandbook.presentation.itemslist.view
 
 import com.eratart.baristashandbook.R
+import com.eratart.baristashandbook.domain.model.Item
 import com.eratart.baristashandbook.presentation.itemslist.viewmodel.ItemsListViewModel
 import com.eratart.baristashandbook.presentationbase.itemslistactivity.BaseItemsListActivity
 import org.koin.androidx.viewmodel.ext.android.viewModel
@@ -15,6 +16,10 @@ class ItemsListActivity : BaseItemsListActivity<ItemsListViewModel>() {
     }
 
     override fun onItemClick(item: Any, pos: Int) {
-
+        when (item) {
+            is Item -> {
+                globalNavigator.startItemDetailsActivity(this, item, category)
+            }
+        }
     }
 }

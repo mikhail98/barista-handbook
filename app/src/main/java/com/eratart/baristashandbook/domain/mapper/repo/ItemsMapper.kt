@@ -11,7 +11,7 @@ class ItemsMapper : ICsvMapper<Item> {
 
     companion object {
         private const val INGREDIENTS_SPLITTER = "::"
-        private const val MIN_LINE_SIZE = 7
+        private const val MIN_LINE_SIZE = 8
     }
 
     override fun mapFromCsvLine(inputList: List<Array<String>>): List<Item> {
@@ -33,9 +33,11 @@ class ItemsMapper : ICsvMapper<Item> {
                     }
                     Ingredient(title, volume)
                 }
-                val portionsAmount = drink[6].toIntOrNull() ?: IntConstants.ONE
+                val instructions = drink[5].split(StringConstants.NEW_LINE)
+                val portionsAmount = drink[7].toIntOrNull() ?: IntConstants.ONE
                 val item = Item(
-                    id, drink[1], drink[2], photos, ingredients, drink[5], portionsAmount
+                    id, drink[1], drink[2], photos, ingredients,
+                    instructions, drink[6], portionsAmount
                 )
                 newList.add(item)
             }

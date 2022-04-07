@@ -2,7 +2,9 @@ package com.eratart.baristashandbook.tools.navigator
 
 import android.app.Activity
 import android.content.Intent
+import com.eratart.baristashandbook.domain.model.Dish
 import com.eratart.baristashandbook.domain.model.Item
+import com.eratart.baristashandbook.domain.model.ItemCategory
 import com.eratart.baristashandbook.presentation.artinstructions.view.ArtInstructionsActivity
 import com.eratart.baristashandbook.presentation.dishdetails.view.DishDetailsActivity
 import com.eratart.baristashandbook.presentation.disheslist.view.DishesListActivity
@@ -22,8 +24,11 @@ class GlobalNavigator : IGlobalNavigator {
         activity.startActivity(Intent(activity, ArtInstructionsActivity::class.java))
     }
 
-    override fun startDishDetailsActivity(activity: Activity) {
-        activity.startActivity(Intent(activity, DishDetailsActivity::class.java))
+    override fun startDishDetailsActivity(activity: Activity, dish: Dish) {
+        val intent = Intent(activity, DishDetailsActivity::class.java).apply {
+            putExtra(DishDetailsActivity.EXTRAS_DISH, dish)
+        }
+        activity.startActivity(intent)
     }
 
     override fun startDishesListActivity(activity: Activity) {
@@ -34,17 +39,24 @@ class GlobalNavigator : IGlobalNavigator {
         activity.startActivity(Intent(activity, FavoritesActivity::class.java))
     }
 
-    override fun startItemDetailsActivity(activity: Activity) {
-        activity.startActivity(Intent(activity, ItemDetailsActivity::class.java))
+    override fun startItemDetailsActivity(activity: Activity, item: Item, category: ItemCategory?) {
+        val intent = Intent(activity, ItemDetailsActivity::class.java).apply {
+            putExtra(ItemDetailsActivity.EXTRAS_ITEM, item)
+            putExtra(ItemDetailsActivity.EXTRAS_ITEM_CATEGORY, category)
+        }
+        activity.startActivity(intent)
     }
 
     override fun startItemsCategoriesListActivity(activity: Activity) {
         activity.startActivity(Intent(activity, ItemsCategoriesListActivity::class.java))
     }
 
-    override fun startItemsListActivity(activity: Activity, subtitle: String, items: List<Item>) {
+    override fun startItemsListActivity(
+        activity: Activity, subtitle: String, items: List<Item>, category: ItemCategory?
+    ) {
         val intent = Intent(activity, ItemsListActivity::class.java).apply {
             putExtra(BaseItemsListActivity.EXTRAS_SUBTITLE, subtitle)
+            putExtra(BaseItemsListActivity.EXTRAS_CATEGORY, category)
             putParcelableArrayListExtra(BaseItemsListActivity.EXTRAS_ITEMS, ArrayList(items))
         }
         activity.startActivity(intent)

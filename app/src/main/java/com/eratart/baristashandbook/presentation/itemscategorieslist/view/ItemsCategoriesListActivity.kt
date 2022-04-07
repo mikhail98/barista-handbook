@@ -16,7 +16,7 @@ class ItemsCategoriesListActivity : BaseItemsListActivity<ItemsCategoriesListVie
     override val viewModel: ItemsCategoriesListViewModel by viewModel()
 
     override fun onCreate(savedInstanceState: Bundle?) {
-        sourceList.addAll(ItemCategoriesMock.getCategories(4))
+        sourceList.addAll(ItemCategoriesMock.getCategories())
         super.onCreate(savedInstanceState)
     }
 
@@ -26,35 +26,36 @@ class ItemsCategoriesListActivity : BaseItemsListActivity<ItemsCategoriesListVie
 
     override fun onSearch(searchString: String) {
         if (searchString.isEmpty()) {
-            resetSearch()
+            showContent(sourceList)
         } else {
-            mutableList.clear()
-
+            val filteredList = mutableListOf<Any>()
             sourceList.filterIsInstance<ItemCategory>().forEach { category ->
                 if (category.title.contains(searchString, true)) {
-                    mutableList.add(category)
+                    filteredList.add(category)
                 }
             }
             sourceList.filterIsInstance<ItemCategory>().forEach { category ->
                 category.drinks.forEach { drink ->
                     if (drink.title.contains(searchString, true)) {
-                        mutableList.add(drink)
+                        filteredList.add(drink)
                     }
                 }
             }
-            itemAdapter.notifyDataSetChanged()
+            showContent(filteredList)
         }
 
-        rvItems.scheduleLayoutAnimation()
     }
 
     override fun onItemClick(item: Any, pos: Int) {
         when (item) {
             is Item -> {
-                globalNavigator.startItemDetailsActivity(this)
+                val category = sourceList
+                    .filterIsInstance<ItemCategory>()
+                    .find { category -> category.drinks.contains(item) }
+                globalNavigator.startItemDetailsActivity(this, item, category)
             }
             is ItemCategory -> {
-                globalNavigator.startItemsListActivity(this, item.title, item.drinks)
+                globalNavigator.startItemsListActivity(this, item.title, item.drinks, item)
             }
         }
     }

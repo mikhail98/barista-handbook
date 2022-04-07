@@ -18,4 +18,11 @@
     <string name="main_menu_drinks">Drinks</string>
     <string name="main_menu_latte_art">Latte-art</string>
     <string name="main_menu_favorites">Favorites</string>
+
+    <string name="app_search">Search</string>
+    <string name="app_not_found_title">Nothing was found</string>
+    <string name="app_not_found_description">Try to search something… another</string>
+
+    <string name="item_details_ingredients">Ingredients</string>
+    <string name="item_details_instruction">How to prepare</string>
 </resources>

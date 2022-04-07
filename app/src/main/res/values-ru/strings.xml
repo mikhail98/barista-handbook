@@ -16,4 +16,11 @@
     <string name="main_menu_drinks">Напитки</string>
     <string name="main_menu_latte_art">Латте-арт</string>
     <string name="main_menu_favorites">Избранное</string>
+
+    <string name="app_search">Поиск</string>
+    <string name="app_not_found_title">Ничего не найдено</string>
+    <string name="app_not_found_description">Попробуйте изменить ваш поисковый запрос</string>
+
+    <string name="item_details_ingredients">Ингредиенты</string>
+    <string name="item_details_instruction">Способ приготовления</string>
 </resources>

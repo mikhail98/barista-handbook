@@ -1,4 +1,4 @@
-package com.eratart.baristashandbook.presentation.itemscategorieslist.view.recycler
+package com.eratart.baristashandbook.presentationbase.itemslistactivity.recycler
 
 import androidx.viewbinding.ViewBinding
 import com.eratart.baristashandbook.R

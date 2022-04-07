@@ -14,6 +14,7 @@ object StringConstants {
     const val QUESTION = "?"
     const val BRACE_OPEN = "("
     const val BRACE_CLOSE = ")"
+    const val BIG_DOT = "•"
 
     const val NEW_LINE = "\n"
 

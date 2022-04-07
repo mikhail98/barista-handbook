@@ -1,4 +1,4 @@
-package com.eratart.baristashandbook.presentation.itemscategorieslist.view.recycler
+package com.eratart.baristashandbook.presentationbase.itemslistactivity.recycler
 
 import android.view.ViewGroup
 import androidx.viewbinding.ViewBinding
@@ -35,8 +35,7 @@ class ItemCategoryAdapter(viewModels: MutableList<Any>) :
     }
 
     override fun getItemViewType(position: Int): Int {
-        val item = getItem(position)
-        return when (item) {
+        return when (getItem(position)) {
             is ItemCategory -> TYPE_CATEGORY
             is Item -> TYPE_DRINK
             else -> throw RuntimeException("Unsupported type")

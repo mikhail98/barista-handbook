@@ -1,7 +1,5 @@
 package com.eratart.baristashandbook.baseui.view.other
 
-
-import android.app.Activity
 import android.content.Context
 import android.text.Editable
 import android.text.TextWatcher
@@ -9,19 +7,30 @@ import android.util.AttributeSet
 import android.widget.EditText
 import android.widget.FrameLayout
 import android.widget.ImageView
+import androidx.appcompat.app.AppCompatActivity
 import androidx.constraintlayout.widget.ConstraintLayout
 import com.eratart.baristashandbook.R
 import com.eratart.baristashandbook.baseui.utils.KeyboardUtil
+import com.eratart.baristashandbook.core.constants.LongConstants
 import com.eratart.baristashandbook.core.constants.StringConstants
 import com.eratart.baristashandbook.core.ext.gone
+import com.eratart.baristashandbook.core.ext.invisible
 import com.eratart.baristashandbook.core.ext.loadImageWithGlide
 import com.eratart.baristashandbook.core.ext.visible
 import com.google.android.material.textview.MaterialTextView
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.ExperimentalCoroutinesApi
+import kotlinx.coroutines.FlowPreview
+import kotlinx.coroutines.channels.awaitClose
+import kotlinx.coroutines.flow.channelFlow
+import kotlinx.coroutines.flow.debounce
+import kotlinx.coroutines.flow.launchIn
+import kotlinx.coroutines.flow.onEach
 
 class AppBar(context: Context, attributeSet: AttributeSet? = null) :
     FrameLayout(context, attributeSet) {
 
-    private val view = inflate(context, R.layout.item_app_bar, this)
+    private val view = inflate(context, R.layout.view_app_bar, this)
 
     private val clRoot: ConstraintLayout by lazy { view.findViewById(R.id.clRoot) }
     private val tvTitle: MaterialTextView by lazy { view.findViewById(R.id.tvTitle) }
@@ -40,15 +49,14 @@ class AppBar(context: Context, attributeSet: AttributeSet? = null) :
     private var background: Int? = null
     private var tintColor: Int? = null
 
-    var isSearchActive: Boolean = false
-
     private var isSearchBtnShown = false
     private var isMoreBtnShown = false
 
-    private var onSearchClosed: (() -> Unit)? = null
-    fun setOnSearchClosedListener(listener: () -> Unit) {
-        this.onSearchClosed = listener
-    }
+    var isSearchActive: Boolean = false
+    private var searchDebounce = LongConstants.ZERO
+    private var searchListener: ((String) -> Unit)? = null
+
+    private var activity: AppCompatActivity? = null
 
     init {
         try {
@@ -69,12 +77,19 @@ class AppBar(context: Context, attributeSet: AttributeSet? = null) :
         setSubtitleText(subtitle)
         setBackgroundColor(background)
         setIconsTintColor(tintColor)
+        setHintText(searchHint)
 
         etSearch.setOnFocusChangeListener { view, isFocused ->
             if (isFocused) {
                 KeyboardUtil.show(view.context, view)
             }
         }
+
+        initBackBtn()
+    }
+
+    fun init(activity: AppCompatActivity) {
+        this.activity = activity
     }
 
     fun initMoreBtn(listener: (() -> Unit)?) {
@@ -87,24 +102,48 @@ class AppBar(context: Context, attributeSet: AttributeSet? = null) :
         }
     }
 
-    fun initSearchBtn(listener: (String) -> Unit) {
+    @FlowPreview
+    @ExperimentalCoroutinesApi
+    fun initSearchBtn(searchDebounce: Long, listener: (String) -> Unit) {
         isSearchBtnShown = true
+        this.searchDebounce = searchDebounce
+        this.searchListener = listener
         btnSearch.visible()
         btnSearch.setOnClickListener {
             if (isSearchActive) {
                 etSearch.setText(StringConstants.EMPTY)
             } else {
-                activateSearch(listener)
+                activateSearch()
             }
         }
+
+        channelFlow {
+            val textWatcher = object : TextWatcher {
+                override fun beforeTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {}
+
+                override fun onTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {}
+
+                override fun afterTextChanged(editable: Editable?) {
+                    offer(editable.toString())
+                }
+            }
+
+            etSearch.addTextChangedListener(textWatcher)
+
+            awaitClose {
+                etSearch.removeTextChangedListener(textWatcher)
+            }
+        }.debounce(searchDebounce)
+            .onEach { listener.invoke(it) }
+            .launchIn(activity as CoroutineScope)
     }
 
-    fun initBackBtn(activity: Activity) {
+    private fun initBackBtn() {
         btnBack.setOnClickListener {
             if (isSearchActive) {
-                deactivateSearch(activity)
+                deactivateSearch()
             } else {
-                activity.onBackPressed()
+                activity?.onBackPressed()
             }
         }
     }
@@ -143,39 +182,23 @@ class AppBar(context: Context, attributeSet: AttributeSet? = null) :
         }
     }
 
-    private fun activateSearch(listener: (String) -> Unit) {
+    private fun activateSearch() {
         isSearchActive = true
         etSearch.visible()
         etSearch.requestFocus()
 
-        etSearch.addTextChangedListener(object : TextWatcher {
-            override fun beforeTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
-
-            }
-
-            override fun onTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
-
-            }
-
-            override fun afterTextChanged(editable: Editable) {
-                listener.invoke(editable.toString())
-            }
-
-        })
-
         btnSearch.loadImageWithGlide(R.drawable.ic_clear)
 
         btnMore.gone()
-        tvTitle.gone()
+        tvTitle.invisible()
         tvSubtitle.gone()
     }
 
-    fun deactivateSearch(activity: Activity) {
+    fun deactivateSearch() {
         isSearchActive = false
 
         etSearch.setText(StringConstants.EMPTY)
         etSearch.gone()
-        etSearch.clearFocus()
         KeyboardUtil.hide(activity)
 
         btnSearch.loadImageWithGlide(R.drawable.ic_search)
@@ -187,6 +210,5 @@ class AppBar(context: Context, attributeSet: AttributeSet? = null) :
         if (!tvSubtitle.text.isNullOrEmpty()) {
             tvSubtitle.visible()
         }
-        onSearchClosed?.invoke()
     }
 }

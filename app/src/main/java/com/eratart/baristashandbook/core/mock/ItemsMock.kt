@@ -1,19 +1,19 @@
 package com.eratart.baristashandbook.core.mock
 
 import com.eratart.baristashandbook.core.util.ImageUrlUtil
-import com.eratart.baristashandbook.domain.model.Ingredient
 import com.eratart.baristashandbook.domain.model.Item
 
 object ItemsMock {
 
     private fun getItem(pos: Int, categoryTitle: String) = Item(
-        "latte",
+        "latte$pos",
         "Латте $categoryTitle $pos",
         "Латте описание $pos",
         listOf(ImageUrlUtil.getImageUrl(ImageUrlUtil.DRINKS, "latte", "Frame%201.jpg")),
-        listOf(Ingredient("Пакетика травы", "2")),
+        IngredientsMock.getIngredients(5),
+        listOf("Сначала укропу", "Потом кошачью жопу"),
         "cup",
-        1
+        pos
     )
 
     fun getItems(amount: Int, categoryTitle: String): MutableList<Item> {

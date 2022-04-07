@@ -10,7 +10,7 @@ object ItemCategoriesMock {
         return ItemCategory("category$pos", title, drinks.size, drinks)
     }
 
-    fun getCategories(amount: Int): MutableList<ItemCategory> {
+    fun getCategories(amount: Int = 4): MutableList<ItemCategory> {
         val categories = mutableListOf<ItemCategory>()
         for (i in 0 until amount) {
             categories.add(getCategory(i))

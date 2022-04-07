@@ -10,6 +10,7 @@ data class Item(
     val description: String,
     val photos: List<String>,
     val ingredients: List<Ingredient>,
+    val instructions: List<String>,
     val dish: String,
     val portionsAmount: Int
 ): Parcelable

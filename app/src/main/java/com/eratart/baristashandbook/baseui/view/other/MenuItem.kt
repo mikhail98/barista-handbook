@@ -7,13 +7,12 @@ import android.util.AttributeSet
 import android.widget.FrameLayout
 import android.widget.ImageView
 import com.eratart.baristashandbook.R
-import com.eratart.baristashandbook.core.ext.loadImageWithGlide
 import com.google.android.material.textview.MaterialTextView
 
 class MenuItem(context: Context, attributeSet: AttributeSet? = null) :
     FrameLayout(context, attributeSet) {
 
-    private val view = inflate(context, R.layout.item_menu, this)
+    private val view = inflate(context, R.layout.view_menu, this)
 
     private val ivMenuItem: ImageView by lazy { view.findViewById(R.id.ivMenuItem) }
     private val tvMenuItem: MaterialTextView by lazy { view.findViewById(R.id.tvMenuItem) }

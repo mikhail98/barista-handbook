@@ -13,7 +13,11 @@
         <attr name="text" />
         <attr name="subtitle" format="string|reference" />
         <attr name="searchHint" format="string|reference" />
-        <attr name="backColor" format="reference|color"/>
-        <attr name="iconTitColor" format="reference|color"/>
+        <attr name="backColor" format="reference|color" />
+        <attr name="iconTitColor" format="reference|color" />
+    </declare-styleable>
+
+    <declare-styleable name="FavoritesButton">
+        <attr name="isFavorite" format="boolean" />
     </declare-styleable>
 </resources>

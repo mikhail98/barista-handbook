@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="one_portion">%1$d portion</string>
+    <string name="two_portions">%1$d portions</string>
+    <string name="five_portions">%1$d portions</string>
+    <string name="zero_portions">0 portions</string>
+</resources>

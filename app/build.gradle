@@ -83,6 +83,7 @@ dependencies {
     implementation library.encryptedPrefs
     implementation library.csvReader
     implementation library.glide
+    implementation library.coroutines
 
     implementation platform(library.firebaseBom)
     implementation library.firebaseAnalyticsKtx

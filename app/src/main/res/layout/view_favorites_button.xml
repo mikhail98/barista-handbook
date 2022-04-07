@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<merge xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="@dimen/main_btn_size"
+        android:layout_height="@dimen/main_btn_size"
+        android:animateLayoutChanges="true"
+        android:background="@drawable/bg_main_btn_dark">
+
+        <ImageView
+            android:id="@+id/ivFavorite"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@drawable/ripple_btn"
+            android:padding="@dimen/mini_padding"
+            android:src="@drawable/ic_item_favorites_outline" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</merge>

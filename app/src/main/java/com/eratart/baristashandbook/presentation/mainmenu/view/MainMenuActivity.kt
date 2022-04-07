@@ -46,7 +46,9 @@ class MainMenuActivity : BaseActivity<MainViewModel, ActivityMainMenuBinding>() 
             globalNavigator.startItemsCategoriesListActivity(this)
         }
         itemLatteArt.setOnClickListener {}
-        itemFavorites.setOnClickListener {}
+        itemFavorites.setOnClickListener {
+            globalNavigator.startFavoritesActivity(this)
+        }
         btnInfo.setOnClickListener { }
         btnSettings.setOnClickListener { }
     }

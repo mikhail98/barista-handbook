@@ -1,6 +1,206 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    tools:background="@color/background">
+
+    <com.eratart.baristashandbook.baseui.view.other.AppBar
+        android:id="@+id/appBar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:elevation="@dimen/default_elevation"
+        app:backColor="@color/action_bar_30"
+        app:iconTitColor="@color/eminem"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <androidx.core.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <ImageView
+                android:id="@+id/ivDrink"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:scaleType="centerCrop"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:layout_height="360dp"
+                tools:src="@drawable/splash_bg_vertical" />
+
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/tvDrinkTitle"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/default_margin"
+                android:layout_marginTop="@dimen/default_margin"
+                android:layout_marginEnd="@dimen/default_margin"
+                android:ellipsize="end"
+                android:fontFamily="@font/manrope_bold"
+                android:maxLines="1"
+                android:textAppearance="@style/TextAppearance.MaterialComponents.Headline5"
+                android:textColor="@color/eminem"
+                app:layout_constraintEnd_toStartOf="@id/fbFavorite"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/ivDrink"
+                tools:text="Кофе" />
+
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/tvDrinkSubtitle"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/default_margin"
+                android:layout_marginTop="@dimen/mini_margin"
+                android:layout_marginEnd="@dimen/default_margin"
+                android:ellipsize="end"
+                android:fontFamily="@font/manrope_semibold"
+                android:maxLines="1"
+                android:textAllCaps="true"
+                android:textAppearance="@style/TextAppearance.MaterialComponents.Caption"
+                android:textColor="@color/gray_80"
+                android:textSize="10sp"
+                app:layout_constraintEnd_toStartOf="@id/fbFavorite"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/tvDrinkTitle"
+                tools:text="Напитки • Черный кофе" />
+
+            <com.eratart.baristashandbook.baseui.view.other.FavoritesButton
+                android:id="@+id/fbFavorite"
+                android:layout_width="@dimen/main_btn_size"
+                android:layout_height="@dimen/main_btn_size"
+                android:layout_marginEnd="@dimen/default_margin"
+                app:isFavorite="false"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="@id/tvDrinkTitle" />
+
+            <ImageView
+                android:id="@+id/ivPortions"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/default_margin"
+                android:layout_marginTop="@dimen/default_margin"
+                android:src="@drawable/ic_portions"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/tvDrinkSubtitle" />
+
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/tvPortions"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/micro_margin"
+                android:fontFamily="@font/manrope_medium"
+                android:textAppearance="@style/TextAppearance.MaterialComponents.Body2"
+                android:textColor="@color/gray_80"
+                app:layout_constraintBottom_toBottomOf="@id/ivPortions"
+                app:layout_constraintStart_toEndOf="@id/ivPortions"
+                app:layout_constraintTop_toTopOf="@id/ivPortions"
+                tools:text="1 порция" />
+
+            <ImageView
+                android:id="@+id/ivDish"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/default_margin"
+                android:layout_marginTop="@dimen/mini_margin"
+                android:src="@drawable/ic_dish"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/ivPortions" />
+
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/tvDish"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/micro_margin"
+                android:fontFamily="@font/manrope_medium"
+                android:textAppearance="@style/TextAppearance.MaterialComponents.Body2"
+                android:textColor="@color/gray_80"
+                app:layout_constraintBottom_toBottomOf="@id/ivDish"
+                app:layout_constraintStart_toEndOf="@id/ivDish"
+                app:layout_constraintTop_toTopOf="@id/ivDish"
+                tools:text="Бокал Highball Glass " />
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/clIngredients"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/default_margin"
+                android:layout_marginTop="@dimen/default_margin"
+                android:layout_marginEnd="@dimen/default_margin"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/tvDish">
+
+                <com.google.android.material.textview.MaterialTextView
+                    android:id="@+id/tvIngredientsTitle"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/bg_ingredients_header"
+                    android:fontFamily="@font/manrope_bold"
+                    android:gravity="center"
+                    android:padding="@dimen/mini_padding"
+                    android:text="@string/item_details_ingredients"
+                    android:textAppearance="@style/TextAppearance.MaterialComponents.Body1"
+                    android:textColor="@color/eminem"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/rvIngredients"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/divider_size"
+                    android:background="@drawable/bg_ingredients_footer"
+                    android:clipToPadding="false"
+                    android:overScrollMode="never"
+                    android:paddingTop="@dimen/padding_6"
+                    android:paddingBottom="@dimen/padding_6"
+                    app:layout_constraintTop_toBottomOf="@id/tvIngredientsTitle"
+                    tools:itemCount="3"
+                    tools:listitem="@layout/item_ingredient" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/tvInstructionsTitle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/default_margin"
+                android:layout_marginTop="@dimen/default_margin"
+                android:fontFamily="@font/manrope_bold"
+                android:text="@string/item_details_instruction"
+                android:textAppearance="@style/TextAppearance.MaterialComponents.Body1"
+                android:textColor="@color/eminem"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/clIngredients" />
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/rvInstructions"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/divider_size"
+                android:clipToPadding="false"
+                android:overScrollMode="never"
+                android:paddingTop="@dimen/micro_padding"
+                android:paddingBottom="@dimen/micro_padding"
+                app:layout_constraintTop_toBottomOf="@id/tvInstructionsTitle"
+                tools:itemCount="3"
+                tools:listitem="@layout/item_instruction" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.core.widget.NestedScrollView>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

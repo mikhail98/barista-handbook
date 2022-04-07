@@ -1,12 +1,17 @@
 package com.eratart.baristashandbook.presentationbase.itemslistactivity
 
+import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.eratart.baristashandbook.baseui.activity.BaseActivity
 import com.eratart.baristashandbook.baseui.viewmodel.BaseViewModel
+import com.eratart.baristashandbook.core.ext.gone
+import com.eratart.baristashandbook.core.ext.visible
 import com.eratart.baristashandbook.databinding.ActivityItemsListBinding
 import com.eratart.baristashandbook.domain.model.Item
 import com.eratart.baristashandbook.domain.model.ItemCategory
-import com.eratart.baristashandbook.presentation.itemscategorieslist.view.recycler.ItemCategoryAdapter
+import com.eratart.baristashandbook.presentationbase.itemslistactivity.recycler.ItemCategoryAdapter
+import com.eratart.baristashandbook.presentationbase.itemslistactivity.recycler.swipe.SwipeController
+
 
 abstract class BaseItemsListActivity<VM : BaseViewModel> :
     BaseActivity<VM, ActivityItemsListBinding>() {
@@ -14,11 +19,18 @@ abstract class BaseItemsListActivity<VM : BaseViewModel> :
     companion object {
         const val EXTRAS_SUBTITLE = "ItemsListActivity.EXTRAS_SUBTITLE"
         const val EXTRAS_ITEMS = "ItemsListActivity.EXTRAS_ITEMS"
+
+        const val EXTRAS_CATEGORY = "ItemsListActivity.EXTRAS_CATEGORY"
+
+        const val SEARCH_DEBOUNCE = 250L
     }
 
     abstract val titleRes: Int
-    private val subtitle by lazy { intent.getStringExtra(EXTRAS_SUBTITLE) }
+    protected open var swipeEnabled: Boolean = false
+
     private val items by lazy { intent.getParcelableArrayListExtra<Item>(EXTRAS_ITEMS) ?: listOf() }
+    private val subtitle by lazy { intent.getStringExtra(EXTRAS_SUBTITLE) }
+    protected val category by lazy { intent.getParcelableExtra<ItemCategory>(EXTRAS_CATEGORY) }
 
     protected val sourceList by lazy { ArrayList<Any>(items) }
     protected val mutableList by lazy { mutableListOf<Any>() }
@@ -27,21 +39,13 @@ abstract class BaseItemsListActivity<VM : BaseViewModel> :
     override val binding by lazy { ActivityItemsListBinding.inflate(layoutInflater) }
     protected val rvItems by lazy { binding.rvItems }
     protected val appBar by lazy { binding.appBar }
+    protected val layoutNotFound by lazy { binding.layoutNotFound.root }
 
     override fun initView() {
-        appBar.initBackBtn(this)
-        appBar.initMoreBtn { }
-        appBar.initSearchBtn { searchString -> onSearch(searchString) }
-
+        appBar.init(this)
+        appBar.initSearchBtn(SEARCH_DEBOUNCE) { searchString -> onSearch(searchString) }
         appBar.setTitleText(getString(titleRes))
-
-        subtitle?.run {
-            appBar.setSubtitleText(this)
-        }
-
-        appBar.setOnSearchClosedListener {
-            resetSearch()
-        }
+        appBar.setSubtitleText(subtitle)
 
         mutableList.addAll(sourceList)
         rvItems.apply {
@@ -53,15 +57,29 @@ abstract class BaseItemsListActivity<VM : BaseViewModel> :
         itemAdapter.setOnItemClick { item, i ->
             onItemClick(item, i)
         }
+
+        if(swipeEnabled) {
+            val swipeControllerCallback = object : SwipeController.Callback {
+                override fun onSwipedAway(position: Int) {
+                    itemAdapter.getItem(position)?.run {
+                        if (this is Item) {
+                            onItemSwipedAway(this, position)
+                        }
+                    }
+                }
+            }
+            val swipeController = SwipeController(this, swipeControllerCallback)
+            ItemTouchHelper(swipeController).attachToRecyclerView(rvItems)
+        }
     }
 
     abstract fun onItemClick(item: Any, pos: Int)
+    protected open fun onItemSwipedAway(item: Item, pos: Int) {}
 
     protected open fun onSearch(searchString: String) {
         if (searchString.isEmpty()) {
-            resetSearch()
+            showContent(sourceList)
         } else {
-            mutableList.clear()
             val filteredList = sourceList.filter {
                 when (it) {
                     is Item -> it.title.contains(searchString, true)
@@ -69,22 +87,28 @@ abstract class BaseItemsListActivity<VM : BaseViewModel> :
                     else -> false
                 }
             }
-            mutableList.addAll(filteredList)
-            itemAdapter.notifyDataSetChanged()
+            showContent(filteredList)
         }
-
-        rvItems.scheduleLayoutAnimation()
     }
 
-    protected fun resetSearch() {
+    protected fun showContent(list: List<Any>) {
+        if (list == mutableList) return
+
         mutableList.clear()
-        mutableList.addAll(sourceList)
+        mutableList.addAll(list)
         itemAdapter.notifyDataSetChanged()
+
+        if (list.isNotEmpty()) {
+            layoutNotFound.gone()
+            rvItems.scheduleLayoutAnimation()
+        } else {
+            layoutNotFound.visible()
+        }
     }
 
     override fun onBackPressed() {
         if (appBar.isSearchActive) {
-            appBar.deactivateSearch(this)
+            appBar.deactivateSearch()
         } else {
             super.onBackPressed()
         }
