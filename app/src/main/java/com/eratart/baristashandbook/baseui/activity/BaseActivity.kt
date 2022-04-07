@@ -7,19 +7,21 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
 import androidx.viewbinding.ViewBinding
 import com.eratart.baristashandbook.R
-import com.eratart.baristashandbook.baseui.view.DefaultFullscreenLoader
+import com.eratart.baristashandbook.baseui.view.relativelayout.DefaultFullscreenLoader
 import com.eratart.baristashandbook.baseui.viewmodel.BaseViewModel
 import com.eratart.baristashandbook.core.ext.gone
 import com.eratart.baristashandbook.core.ext.observe
 import com.eratart.baristashandbook.core.ext.setVisibleAlpha
 import com.eratart.baristashandbook.tools.navigator.IGlobalNavigator
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
 import org.koin.android.ext.android.inject
 import org.koin.android.scope.AndroidScopeComponent
 import org.koin.androidx.scope.activityScope
 import org.koin.core.scope.Scope
 
 abstract class BaseActivity<VM : BaseViewModel, VB : ViewBinding> : AppCompatActivity(),
-    AndroidScopeComponent {
+    AndroidScopeComponent, CoroutineScope {
 
     abstract val binding: VB?
     abstract val viewModel: VM
@@ -27,6 +29,7 @@ abstract class BaseActivity<VM : BaseViewModel, VB : ViewBinding> : AppCompatAct
     abstract fun initView()
     abstract fun initViewModel()
 
+    override val coroutineContext = Dispatchers.Main
     override val scope: Scope by activityScope()
     protected val globalNavigator: IGlobalNavigator by inject()
 

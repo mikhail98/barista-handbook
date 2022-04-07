@@ -1,5 +1,6 @@
 id,title,description,photos,ingredients,dish,portionsAmount
-latte,Латте,Кофе хуёфе,"drinks/latte/Frame%201.jpg
-drinks/latte/Frame%201.jpg","2 пакетика травы
-75 ампул мескалина
-диэтиламин лизергиновая кислота",main_cup,2
+latte,Латте,Кофе хуёфе,"Frame%201.jpg
+Frame%201.jpg","пакетика травы::2
+ампул мескалина::75
+диэтиламин лизергиновая кислота::1","hello
+bye",main_cup,2

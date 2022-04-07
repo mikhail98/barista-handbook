@@ -1,21 +1,25 @@
 package com.eratart.baristashandbook.presentation.itemslist.view
 
-import com.eratart.baristashandbook.baseui.activity.BaseActivity
-import com.eratart.baristashandbook.databinding.ActivityArtInstructionsBinding
-import com.eratart.baristashandbook.databinding.ActivityItemsListBinding
-import com.eratart.baristashandbook.presentation.artinstructions.viewmodel.ArtInstructionsViewModel
+import com.eratart.baristashandbook.R
+import com.eratart.baristashandbook.domain.model.Item
 import com.eratart.baristashandbook.presentation.itemslist.viewmodel.ItemsListViewModel
+import com.eratart.baristashandbook.presentationbase.itemslistactivity.BaseItemsListActivity
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
-class ItemsListActivity :
-    BaseActivity<ItemsListViewModel, ActivityItemsListBinding>() {
+class ItemsListActivity : BaseItemsListActivity<ItemsListViewModel>() {
 
+    override val titleRes = R.string.main_menu_drinks
     override val viewModel: ItemsListViewModel by viewModel()
-    override val binding by lazy { ActivityItemsListBinding.inflate(layoutInflater) }
-
-    override fun initView() {
-    }
 
     override fun initViewModel() {
+
+    }
+
+    override fun onItemClick(item: Any, pos: Int) {
+        when (item) {
+            is Item -> {
+                globalNavigator.startItemDetailsActivity(this, item, category)
+            }
+        }
     }
 }

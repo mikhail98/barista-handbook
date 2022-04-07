@@ -26,12 +26,13 @@ import com.eratart.baristashandbook.presentation.dishdetails.di.dishDetailsModul
 import com.eratart.baristashandbook.presentation.disheslist.di.dishesListModule
 import com.eratart.baristashandbook.presentation.favorites.di.favoritesModule
 import com.eratart.baristashandbook.presentation.itemdetails.di.itemDetailsModule
+import com.eratart.baristashandbook.presentation.itemscategorieslist.di.itemsCategoriesListModule
 import com.eratart.baristashandbook.presentation.itemslist.di.itemsListModule
 import com.eratart.baristashandbook.presentation.mainmenu.di.mainMenuModule
 import com.eratart.baristashandbook.presentation.news.di.newsModule
 import com.eratart.baristashandbook.presentation.onboarding.di.onboardingModule
+import com.eratart.baristashandbook.presentation.routing.di.routingModule
 import com.eratart.baristashandbook.presentation.settings.di.settingsModule
-import com.eratart.baristashandbook.presentation.splash.di.splashModule
 import com.eratart.baristashandbook.tools.navigator.GlobalNavigator
 import com.eratart.baristashandbook.tools.navigator.IGlobalNavigator
 import com.google.firebase.analytics.FirebaseAnalytics
@@ -54,12 +55,13 @@ object AppModules {
         modulesList.add(dishesListModule)
         modulesList.add(favoritesModule)
         modulesList.add(itemDetailsModule)
+        modulesList.add(itemsCategoriesListModule)
         modulesList.add(itemsListModule)
         modulesList.add(mainMenuModule)
         modulesList.add(newsModule)
         modulesList.add(onboardingModule)
         modulesList.add(settingsModule)
-        modulesList.add(splashModule)
+        modulesList.add(routingModule)
         return modulesList
     }
 }

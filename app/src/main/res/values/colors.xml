@@ -7,8 +7,18 @@
     <color name="transparent">#00000000</color>
 
     <!-- UI Colors -->
-    <color name="accent">#ff2d55</color>
+    <color name="accent">#84614b</color>
     <color name="bg_overlay">#bb000000</color>
-    <color name="action_bar">#131314</color>
+    <color name="background">#101011</color>
+    <color name="background_2">#181819</color>
+    <color name="action_bar">#1C1C1D</color>
+    <color name="action_bar_30">#1E1C1C1D</color>
+
+    <color name="gray_28">#282829</color>
+    <color name="gray_58">#585859</color>
+    <color name="gray_80">#808081</color>
+    <color name="gray_CF">#CFCFD0</color>
+
+    <color name="red_error">#EC7167</color>
 
 </resources>

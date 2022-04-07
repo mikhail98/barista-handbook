@@ -1,3 +1,26 @@
 <resources>
-    <string name="app_name">Справочник Бариста</string>
+    <string name="onboarding_title_1">Title 1. Mega feature</string>
+    <string name="onboarding_title_2">Title 2. Mega feature</string>
+    <string name="onboarding_title_3">Title 3. Mega feature</string>
+    <string name="onboarding_title_4">Title 4. Mega feature</string>
+    <string name="onboarding_title_5">Title 5. Mega feature</string>
+
+    <string name="onboarding_description_1">Subtitle 1. Mega feature, i can\'t imagine how you lived without this awesome handbook!</string>
+    <string name="onboarding_description_2">Subtitle 2. Mega feature, i can\'t imagine how you lived without this awesome handbook!</string>
+    <string name="onboarding_description_3">Subtitle 3. Mega feature, i can\'t imagine how you lived without this awesome handbook!</string>
+    <string name="onboarding_description_4">Subtitle 4. Mega feature, i can\'t imagine how you lived without this awesome handbook!</string>
+    <string name="onboarding_description_5">Subtitle 5. Mega feature, i can\'t imagine how you lived without this awesome handbook!</string>
+
+    <string name="main_menu_news">Новости</string>
+    <string name="main_menu_dishes">Посуда</string>
+    <string name="main_menu_drinks">Напитки</string>
+    <string name="main_menu_latte_art">Латте-арт</string>
+    <string name="main_menu_favorites">Избранное</string>
+
+    <string name="app_search">Поиск</string>
+    <string name="app_not_found_title">Ничего не найдено</string>
+    <string name="app_not_found_description">Попробуйте изменить ваш поисковый запрос</string>
+
+    <string name="item_details_ingredients">Ингредиенты</string>
+    <string name="item_details_instruction">Способ приготовления</string>
 </resources>

@@ -23,9 +23,25 @@
     <dimen name="default_margin">16dp</dimen>
     <dimen name="small_margin">12dp</dimen>
     <dimen name="mini_margin">8dp</dimen>
+    <dimen name="margin_6">6dp</dimen>
     <dimen name="micro_margin">4dp</dimen>
     <dimen name="nano_margin">2dp</dimen>
 
+    <dimen name="default_elevation">2dp</dimen>
+
     <dimen name="progress_bar_size">86dp</dimen>
 
+    <dimen name="main_btn_size">32dp</dimen>
+    <dimen name="main_btn_radius">6dp</dimen>
+
+    <dimen name="menu_item_size">32dp</dimen>
+    <dimen name="list_item_size">56dp</dimen>
+
+    <dimen name="category_count_height">14dp</dimen>
+    <dimen name="app_bar_height">56dp</dimen>
+
+    <dimen name="divider_size">1dp</dimen>
+
+    <dimen name="instruction_index_size">28sp</dimen>
+    <dimen name="items_list_buttons_size">130dp</dimen>
 </resources>

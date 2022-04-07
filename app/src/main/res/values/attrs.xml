@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <attr name="text" format="string|reference" />
+    <attr name="icon" format="reference" />
+
+    <declare-styleable name="MenuItem">
+        <attr name="text" />
+        <attr name="icon" />
+    </declare-styleable>
+
+    <declare-styleable name="AppBar">
+        <attr name="text" />
+        <attr name="subtitle" format="string|reference" />
+        <attr name="searchHint" format="string|reference" />
+        <attr name="backColor" format="reference|color" />
+        <attr name="iconTitColor" format="reference|color" />
+    </declare-styleable>
+
+    <declare-styleable name="FavoritesButton">
+        <attr name="isFavorite" format="boolean" />
+    </declare-styleable>
+</resources>

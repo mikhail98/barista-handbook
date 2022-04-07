@@ -3,13 +3,12 @@ plugins {
     id 'org.jetbrains.kotlin.android'
     id 'com.google.gms.google-services'
     id 'com.google.firebase.crashlytics'
+    id 'kotlin-parcelize'
 }
 
 apply from: "dependencies.gradle"
 apply from: "version.gradle"
-
-Properties properties = new Properties()
-properties.load(project.rootProject.file('ci.properties').newDataInputStream())
+apply from: "signing.gradle"
 
 android {
     compileSdkVersion sdk.compileSdkVersion
@@ -30,10 +29,10 @@ android {
 
     signingConfigs {
         release {
-            storeFile file(properties.getProperty("keyFile"))
-            storePassword properties.getProperty("storePassword")
-            keyAlias properties.getProperty("keyAlias")
-            keyPassword properties.getProperty("keyPassword")
+            storeFile file(signingConfig.keyFile)
+            storePassword signingConfig.storePassword
+            keyAlias signingConfig.keyAlias
+            keyPassword signingConfig.keyPassword
         }
     }
 
@@ -84,10 +83,15 @@ dependencies {
     implementation library.encryptedPrefs
     implementation library.csvReader
     implementation library.glide
+    implementation library.coroutines
 
     implementation platform(library.firebaseBom)
     implementation library.firebaseAnalyticsKtx
     implementation library.firebaseCrashlyticsKtx
+
+    implementation library.dotsIndicator
+
+    implementation library.splashScreen
 
     annotationProcessor library.glideAnnotationProcessor
 }
