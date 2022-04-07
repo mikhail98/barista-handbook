@@ -23,7 +23,7 @@ class FavoritesActivity : BaseItemsListActivity<FavoritesViewModel>() {
 
     private fun handleFavorites(favorites: List<Item>) {
         sourceList.replaceAllWith(favorites.asReversed())
-        showContent(favorites.asReversed())
+        showContent(favorites.asReversed(), false)
     }
 
     override fun onItemClick(item: Any, pos: Int) {

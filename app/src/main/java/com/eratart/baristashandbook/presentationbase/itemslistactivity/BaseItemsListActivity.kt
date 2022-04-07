@@ -58,7 +58,7 @@ abstract class BaseItemsListActivity<VM : BaseViewModel> :
             onItemClick(item, i)
         }
 
-        if(swipeEnabled) {
+        if (swipeEnabled) {
             val swipeControllerCallback = object : SwipeController.Callback {
                 override fun onSwipedAway(position: Int) {
                     itemAdapter.getItem(position)?.run {
@@ -91,8 +91,8 @@ abstract class BaseItemsListActivity<VM : BaseViewModel> :
         }
     }
 
-    protected fun showContent(list: List<Any>) {
-        if (list == mutableList) return
+    protected fun showContent(list: List<Any>, checkSame: Boolean = true) {
+        if (list == mutableList && checkSame) return
 
         mutableList.clear()
         mutableList.addAll(list)
