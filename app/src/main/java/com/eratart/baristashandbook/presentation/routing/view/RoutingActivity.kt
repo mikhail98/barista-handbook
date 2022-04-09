@@ -34,14 +34,8 @@ class RoutingActivity : BaseActivity<RoutingViewModel, ViewBinding>() {
     override fun initViewModel() {
         viewModel.apply {
             observe(showOnboarding, ::handleOnboardingShown)
-            observe(data, ::handleData)
             loadDataToCache()
         }
-    }
-
-    //REMOVE
-    private fun handleData(data: List<Item>) {
-        println("RE:: ${data.first().photos}")
     }
 
     private fun handleOnboardingShown(isShown: Boolean) {

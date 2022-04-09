@@ -1,8 +1,6 @@
 package com.eratart.baristashandbook.presentation.itemscategorieslist.view
 
-import android.os.Bundle
 import com.eratart.baristashandbook.R
-import com.eratart.baristashandbook.core.mock.ItemCategoriesMock
 import com.eratart.baristashandbook.domain.model.Item
 import com.eratart.baristashandbook.domain.model.ItemCategory
 import com.eratart.baristashandbook.presentation.itemscategorieslist.viewmodel.ItemsCategoriesListViewModel
@@ -12,13 +10,7 @@ import org.koin.androidx.viewmodel.ext.android.viewModel
 class ItemsCategoriesListActivity : BaseItemsListActivity<ItemsCategoriesListViewModel>() {
 
     override val titleRes = R.string.main_menu_drinks
-
     override val viewModel: ItemsCategoriesListViewModel by viewModel()
-
-    override fun onCreate(savedInstanceState: Bundle?) {
-        sourceList.addAll(ItemCategoriesMock.getCategories())
-        super.onCreate(savedInstanceState)
-    }
 
     override fun initViewModel() {
 

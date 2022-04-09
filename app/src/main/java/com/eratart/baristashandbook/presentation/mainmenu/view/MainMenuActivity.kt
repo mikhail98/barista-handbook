@@ -5,7 +5,11 @@ import com.eratart.baristashandbook.R
 import com.eratart.baristashandbook.baseui.activity.BaseActivity
 import com.eratart.baristashandbook.core.ext.dpToPx
 import com.eratart.baristashandbook.core.ext.getScreenWidth
+import com.eratart.baristashandbook.core.ext.observe
+import com.eratart.baristashandbook.core.mock.DishesMock
+import com.eratart.baristashandbook.core.mock.ItemCategoriesMock
 import com.eratart.baristashandbook.databinding.ActivityMainMenuBinding
+import com.eratart.baristashandbook.domain.model.Dish
 import com.eratart.baristashandbook.presentation.mainmenu.viewmodel.MainViewModel
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
@@ -22,6 +26,8 @@ class MainMenuActivity : BaseActivity<MainViewModel, ActivityMainMenuBinding>() 
     private val viewGradient by lazy { binding.viewGradient }
     private val btnInfo by lazy { binding.btnInfo }
     private val btnSettings by lazy { binding.btnSettings }
+
+    private val dishes by lazy { mutableListOf<Dish>() }
 
     override fun initView() {
         initMenuLayout()
@@ -41,9 +47,13 @@ class MainMenuActivity : BaseActivity<MainViewModel, ActivityMainMenuBinding>() 
 
     private fun initClickListeners() {
         itemNews.setOnClickListener {}
-        itemDishes.setOnClickListener {}
+        itemDishes.setOnClickListener {
+            globalNavigator.startDishesListActivity(this, dishes)
+        }
         itemDrinks.setOnClickListener {
-            globalNavigator.startItemsCategoriesListActivity(this)
+            globalNavigator.startItemsCategoriesListActivity(
+                this, ItemCategoriesMock.getCategories()
+            )
         }
         itemLatteArt.setOnClickListener {}
         itemFavorites.setOnClickListener {
@@ -54,6 +64,14 @@ class MainMenuActivity : BaseActivity<MainViewModel, ActivityMainMenuBinding>() 
     }
 
     override fun initViewModel() {
+        viewModel.apply {
+            observe(dishesFromCache, ::handleDishesFromCache)
+            fetchDishes()
+        }
+    }
 
+    private fun handleDishesFromCache(dishes: List<Dish>) {
+        this.dishes.clear()
+        this.dishes.addAll(dishes)
     }
 }

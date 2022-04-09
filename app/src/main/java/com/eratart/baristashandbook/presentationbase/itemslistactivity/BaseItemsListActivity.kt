@@ -7,6 +7,7 @@ import com.eratart.baristashandbook.baseui.viewmodel.BaseViewModel
 import com.eratart.baristashandbook.core.ext.gone
 import com.eratart.baristashandbook.core.ext.visible
 import com.eratart.baristashandbook.databinding.ActivityItemsListBinding
+import com.eratart.baristashandbook.domain.model.Dish
 import com.eratart.baristashandbook.domain.model.Item
 import com.eratart.baristashandbook.domain.model.ItemCategory
 import com.eratart.baristashandbook.presentationbase.itemslistactivity.recycler.ItemCategoryAdapter
@@ -82,6 +83,7 @@ abstract class BaseItemsListActivity<VM : BaseViewModel> :
         } else {
             val filteredList = sourceList.filter {
                 when (it) {
+                    is Dish -> it.title.contains(searchString, true)
                     is Item -> it.title.contains(searchString, true)
                     is ItemCategory -> it.title.contains(searchString, true)
                     else -> false

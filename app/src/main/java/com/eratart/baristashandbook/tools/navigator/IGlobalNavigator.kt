@@ -11,13 +11,13 @@ interface IGlobalNavigator {
 
     fun startDishDetailsActivity(activity: Activity, dish: Dish)
 
-    fun startDishesListActivity(activity: Activity)
+    fun startDishesListActivity(activity: Activity, dishes: List<Dish>)
 
     fun startFavoritesActivity(activity: Activity)
 
     fun startItemDetailsActivity(activity: Activity, item: Item, category: ItemCategory?)
 
-    fun startItemsCategoriesListActivity(activity: Activity)
+    fun startItemsCategoriesListActivity(activity: Activity, list: List<ItemCategory>)
 
     fun startItemsListActivity(
         activity: Activity, subtitle: String, items: List<Item>, category: ItemCategory?
