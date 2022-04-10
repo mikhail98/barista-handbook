@@ -51,7 +51,6 @@ class GlobalNavigator : IGlobalNavigator {
     }
 
     override fun startItemsCategoriesListActivity(activity: Activity, list: List<ItemCategory>) {
-        activity.startActivity(Intent(activity, ItemsCategoriesListActivity::class.java))
         val intent = Intent(activity, ItemsCategoriesListActivity::class.java).apply {
             putExtra(BaseItemsListActivity.EXTRAS_ITEMS, ArrayList(list))
         }

@@ -19,6 +19,7 @@ object StringConstants {
     const val NEW_LINE = "\n"
 
     const val CSV_EXT = ".csv"
+    const val PDF_EXT = ".pdf"
 
     const val SLASH_UNICODE = "%2F"
 }

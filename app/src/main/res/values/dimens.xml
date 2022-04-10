@@ -44,4 +44,6 @@
 
     <dimen name="instruction_index_size">28sp</dimen>
     <dimen name="items_list_buttons_size">130dp</dimen>
+
+    <dimen name="share_icon_size">64dp</dimen>
 </resources>

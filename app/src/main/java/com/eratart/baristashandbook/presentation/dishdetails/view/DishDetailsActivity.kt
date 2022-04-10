@@ -1,12 +1,16 @@
 package com.eratart.baristashandbook.presentation.dishdetails.view
 
-import androidx.constraintlayout.widget.ConstraintLayout
 import com.eratart.baristashandbook.baseui.activity.BaseActivity
 import com.eratart.baristashandbook.core.ext.getScreenWidth
 import com.eratart.baristashandbook.core.ext.loadImageWithGlide
+import com.eratart.baristashandbook.core.ext.setHeight
+import com.eratart.baristashandbook.core.mock.ItemsMock
+import com.eratart.baristashandbook.core.util.TextViewUrlUtil.setLinksClickable
+import com.eratart.baristashandbook.core.util.markdown.MarkdownUtil.renderMD
 import com.eratart.baristashandbook.databinding.ActivityDishDetailsBinding
 import com.eratart.baristashandbook.domain.model.Dish
 import com.eratart.baristashandbook.presentation.dishdetails.viewmodel.DishDetailsViewModel
+import com.eratart.baristashandbook.presentationbase.sharebottomsheet.ShareBottomSheetDialogFragment
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class DishDetailsActivity : BaseActivity<DishDetailsViewModel, ActivityDishDetailsBinding>() {
@@ -28,11 +32,11 @@ class DishDetailsActivity : BaseActivity<DishDetailsViewModel, ActivityDishDetai
 
     override fun initView() {
         appBar.init(this)
-        appBar.initMoreBtn { }
+        appBar.initShareBtn {
+            ShareBottomSheetDialogFragment.show(supportFragmentManager, dish = dish)
+        }
 
-        val ivDishParams = ivDish.layoutParams as ConstraintLayout.LayoutParams
-        ivDishParams.height = getScreenWidth()
-        ivDish.layoutParams = ivDishParams
+        ivDish.setHeight(getScreenWidth())
 
         dish?.run {
             initDish(this)
@@ -45,7 +49,12 @@ class DishDetailsActivity : BaseActivity<DishDetailsViewModel, ActivityDishDetai
         }
         tvDishTitle.text = dish.title
         tvVolume.text = dish.volume
-        tvDishDescription.text = dish.description
+        tvDishDescription.renderMD(dish.description)
+        tvDishDescription.setLinksClickable { link ->
+            ItemsMock.getItems(5, "test").firstOrNull { it.id.contains(link) }?.apply {
+                globalNavigator.startItemDetailsActivity(this@DishDetailsActivity, this, null)
+            }
+        }
     }
 
     override fun initViewModel() {

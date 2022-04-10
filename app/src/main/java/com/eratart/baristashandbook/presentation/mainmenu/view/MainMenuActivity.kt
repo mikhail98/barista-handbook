@@ -1,12 +1,11 @@
 package com.eratart.baristashandbook.presentation.mainmenu.view
 
-import androidx.constraintlayout.widget.ConstraintLayout
 import com.eratart.baristashandbook.R
 import com.eratart.baristashandbook.baseui.activity.BaseActivity
 import com.eratart.baristashandbook.core.ext.dpToPx
 import com.eratart.baristashandbook.core.ext.getScreenWidth
 import com.eratart.baristashandbook.core.ext.observe
-import com.eratart.baristashandbook.core.mock.DishesMock
+import com.eratart.baristashandbook.core.ext.setHeight
 import com.eratart.baristashandbook.core.mock.ItemCategoriesMock
 import com.eratart.baristashandbook.databinding.ActivityMainMenuBinding
 import com.eratart.baristashandbook.domain.model.Dish
@@ -36,13 +35,8 @@ class MainMenuActivity : BaseActivity<MainViewModel, ActivityMainMenuBinding>() 
 
     private fun initMenuLayout() {
         val newHeight = (getScreenWidth() - resources.getDimension(R.dimen.default_margin)) * 3 / 2
-        val llMenuParams = llMenu.layoutParams as ConstraintLayout.LayoutParams
-        llMenuParams.height = newHeight.toInt()
-        llMenu.layoutParams = llMenuParams
-
-        val viewGradientParams = viewGradient.layoutParams as ConstraintLayout.LayoutParams
-        viewGradientParams.height = newHeight.toInt() - 20.dpToPx()
-        viewGradient.layoutParams = viewGradientParams
+        llMenu.setHeight(newHeight)
+        viewGradient.setHeight(newHeight - 20.dpToPx())
     }
 
     private fun initClickListeners() {

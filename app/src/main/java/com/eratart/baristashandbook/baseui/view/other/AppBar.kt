@@ -38,7 +38,7 @@ class AppBar(context: Context, attributeSet: AttributeSet? = null) :
     private val etSearch: EditText by lazy { view.findViewById(R.id.etSearch) }
     private val btnBack: ImageView by lazy { view.findViewById(R.id.btnBack) }
     private val btnSearch: ImageView by lazy { view.findViewById(R.id.btnSearch) }
-    private val btnMore: ImageView by lazy { view.findViewById(R.id.btnMore) }
+    private val btnShare: ImageView by lazy { view.findViewById(R.id.btnShare) }
 
     private val attributes by lazy {
         context.theme.obtainStyledAttributes(attributeSet, R.styleable.AppBar, 0, 0)
@@ -92,13 +92,13 @@ class AppBar(context: Context, attributeSet: AttributeSet? = null) :
         this.activity = activity
     }
 
-    fun initMoreBtn(listener: (() -> Unit)?) {
+    fun initShareBtn(listener: (() -> Unit)?) {
         isMoreBtnShown = true
         if (listener != null) {
-            btnMore.visible()
-            btnMore.setOnClickListener { listener.invoke() }
+            btnShare.visible()
+            btnShare.setOnClickListener { listener.invoke() }
         } else {
-            btnMore.gone()
+            btnShare.gone()
         }
     }
 
@@ -173,7 +173,7 @@ class AppBar(context: Context, attributeSet: AttributeSet? = null) :
         val colorToApply = color ?: context.getColor(R.color.gray_80)
         btnBack.setColorFilter(colorToApply)
         btnSearch.setColorFilter(colorToApply)
-        btnMore.setColorFilter(colorToApply)
+        btnShare.setColorFilter(colorToApply)
     }
 
     fun setBackgroundColor(color: Int?) {
@@ -189,7 +189,7 @@ class AppBar(context: Context, attributeSet: AttributeSet? = null) :
 
         btnSearch.loadImageWithGlide(R.drawable.ic_clear)
 
-        btnMore.gone()
+        btnShare.gone()
         tvTitle.invisible()
         tvSubtitle.gone()
     }
@@ -204,7 +204,7 @@ class AppBar(context: Context, attributeSet: AttributeSet? = null) :
         btnSearch.loadImageWithGlide(R.drawable.ic_search)
 
         if (isMoreBtnShown) {
-            btnMore.visible()
+            btnShare.visible()
         }
         tvTitle.visible()
         if (!tvSubtitle.text.isNullOrEmpty()) {

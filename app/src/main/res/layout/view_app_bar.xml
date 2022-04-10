@@ -91,17 +91,17 @@
             android:src="@drawable/ic_search"
             android:visibility="gone"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toStartOf="@id/btnMore"
+            app:layout_constraintEnd_toStartOf="@id/btnShare"
             app:layout_constraintTop_toTopOf="parent" />
 
         <ImageView
-            android:id="@+id/btnMore"
+            android:id="@+id/btnShare"
             android:layout_width="@dimen/main_btn_size"
             android:layout_height="@dimen/main_btn_size"
             android:layout_marginEnd="@dimen/default_margin"
             android:background="?selectableItemBackgroundBorderless"
             android:padding="@dimen/micro_padding"
-            android:src="@drawable/ic_more_vertical"
+            android:src="@drawable/ic_share"
             android:visibility="gone"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"

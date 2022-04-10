@@ -12,7 +12,7 @@
     <string name="onboarding_description_3">Subtitle 3. Mega feature, i can\'t imagine how you lived without this awesome handbook!</string>
     <string name="onboarding_description_4">Subtitle 4. Mega feature, i can\'t imagine how you lived without this awesome handbook!</string>
     <string name="onboarding_description_5">Subtitle 5. Mega feature, i can\'t imagine how you lived without this awesome handbook!</string>
-    
+
     <string name="main_menu_news">News</string>
     <string name="main_menu_dishes">Dishes</string>
     <string name="main_menu_drinks">Drinks</string>
@@ -22,7 +22,15 @@
     <string name="app_search">Search</string>
     <string name="app_not_found_title">Nothing was found</string>
     <string name="app_not_found_description">Try to search something… another</string>
+    <string name="app_available_on_google_play">%1$s at Google Play:</string>
+
+    <string name="app_share">Share as</string>
+
+    <string name="app_as_text">Text</string>
+    <string name="app_as_pdf">Document</string>
 
     <string name="item_details_ingredients">Ingredients</string>
     <string name="item_details_instruction">How to prepare</string>
+
+    <string name="dish_details_volume">Volume:</string>
 </resources>
