@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@color/background_2">
+
+    <com.google.android.material.textview.MaterialTextView
+        android:id="@+id/tvShareTitle"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginStart="@dimen/default_margin"
+        android:layout_marginTop="@dimen/default_margin"
+        android:fontFamily="@font/manrope_bold"
+        android:text="@string/app_share"
+        android:textAppearance="@style/TextAppearance.MaterialComponents.Headline6"
+        android:textColor="@color/gray_CF"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <LinearLayout
+        android:id="@+id/llRootShare"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/default_margin"
+        android:orientation="horizontal"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tvShareTitle">
+
+        <RelativeLayout
+            android:id="@+id/btnShareAsText"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:background="?selectableItemBackgroundBorderless"
+            android:gravity="center">
+
+            <ImageView
+                android:id="@+id/ivShareAsText"
+                android:layout_width="@dimen/share_icon_size"
+                android:layout_height="@dimen/share_icon_size"
+                android:layout_centerHorizontal="true"
+                android:src="@drawable/ic_share_as_text" />
+
+            <com.google.android.material.textview.MaterialTextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/ivShareAsText"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="@dimen/micro_margin"
+                android:fontFamily="@font/manrope_medium"
+                android:text="@string/app_as_text"
+                android:textAppearance="@style/TextAppearance.MaterialComponents.Body1"
+                android:textColor="@color/gray_80" />
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:id="@+id/btnShareAsPdf"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:background="?selectableItemBackgroundBorderless"
+            android:gravity="center">
+
+            <ImageView
+                android:id="@+id/ivShareAsPdf"
+                android:layout_width="@dimen/share_icon_size"
+                android:layout_height="@dimen/share_icon_size"
+                android:layout_centerHorizontal="true"
+                android:src="@drawable/ic_share_as_pdf" />
+
+            <com.google.android.material.textview.MaterialTextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/ivShareAsPdf"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="@dimen/micro_margin"
+                android:fontFamily="@font/manrope_medium"
+                android:text="@string/app_as_pdf"
+                android:textAppearance="@style/TextAppearance.MaterialComponents.Body1"
+                android:textColor="@color/gray_80" />
+
+        </RelativeLayout>
+    </LinearLayout>
+
+    <com.eratart.baristashandbook.baseui.view.relativelayout.DefaultFullscreenLoader
+        android:id="@+id/progress"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:visibility="gone"
+        app:layout_constraintBottom_toBottomOf="@id/llRootShare"
+        app:layout_constraintEnd_toEndOf="@id/llRootShare"
+        app:layout_constraintStart_toStartOf="@id/llRootShare"
+        app:layout_constraintTop_toTopOf="@id/llRootShare" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

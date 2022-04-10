@@ -31,8 +31,11 @@ class GlobalNavigator : IGlobalNavigator {
         activity.startActivity(intent)
     }
 
-    override fun startDishesListActivity(activity: Activity) {
-        activity.startActivity(Intent(activity, DishesListActivity::class.java))
+    override fun startDishesListActivity(activity: Activity, dishes: List<Dish>) {
+        val intent = Intent(activity, DishesListActivity::class.java).apply {
+            putParcelableArrayListExtra(BaseItemsListActivity.EXTRAS_ITEMS, ArrayList(dishes))
+        }
+        activity.startActivity(intent)
     }
 
     override fun startFavoritesActivity(activity: Activity) {
@@ -47,8 +50,11 @@ class GlobalNavigator : IGlobalNavigator {
         activity.startActivity(intent)
     }
 
-    override fun startItemsCategoriesListActivity(activity: Activity) {
-        activity.startActivity(Intent(activity, ItemsCategoriesListActivity::class.java))
+    override fun startItemsCategoriesListActivity(activity: Activity, list: List<ItemCategory>) {
+        val intent = Intent(activity, ItemsCategoriesListActivity::class.java).apply {
+            putExtra(BaseItemsListActivity.EXTRAS_ITEMS, ArrayList(list))
+        }
+        activity.startActivity(intent)
     }
 
     override fun startItemsListActivity(

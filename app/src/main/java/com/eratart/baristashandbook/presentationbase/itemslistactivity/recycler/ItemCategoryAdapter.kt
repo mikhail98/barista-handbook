@@ -6,6 +6,7 @@ import com.eratart.baristashandbook.baseui.view.recyclerview.BaseRecyclerAdapter
 import com.eratart.baristashandbook.baseui.view.recyclerview.BaseRecyclerViewHolder
 import com.eratart.baristashandbook.databinding.ItemDrinkBinding
 import com.eratart.baristashandbook.databinding.ItemDrinkCategoryBinding
+import com.eratart.baristashandbook.domain.model.Dish
 import com.eratart.baristashandbook.domain.model.Item
 import com.eratart.baristashandbook.domain.model.ItemCategory
 
@@ -37,7 +38,7 @@ class ItemCategoryAdapter(viewModels: MutableList<Any>) :
     override fun getItemViewType(position: Int): Int {
         return when (getItem(position)) {
             is ItemCategory -> TYPE_CATEGORY
-            is Item -> TYPE_DRINK
+            is Item, is Dish -> TYPE_DRINK
             else -> throw RuntimeException("Unsupported type")
         }
     }

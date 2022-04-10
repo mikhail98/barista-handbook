@@ -6,7 +6,7 @@ import com.eratart.baristashandbook.domain.model.Item
 object ItemsMock {
 
     private fun getItem(pos: Int, categoryTitle: String) = Item(
-        "latte$pos",
+        "espresso$pos",
         "Латте $categoryTitle $pos",
         "Латте описание $pos",
         listOf(ImageUrlUtil.getImageUrl(ImageUrlUtil.DRINKS, "latte", "Frame%201.jpg")),

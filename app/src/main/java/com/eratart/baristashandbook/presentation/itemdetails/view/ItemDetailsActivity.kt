@@ -1,6 +1,5 @@
 package com.eratart.baristashandbook.presentation.itemdetails.view
 
-import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.eratart.baristashandbook.R
 import com.eratart.baristashandbook.baseui.activity.BaseActivity
@@ -9,6 +8,7 @@ import com.eratart.baristashandbook.core.constants.StringConstants
 import com.eratart.baristashandbook.core.ext.getScreenWidth
 import com.eratart.baristashandbook.core.ext.loadImageWithGlide
 import com.eratart.baristashandbook.core.ext.observe
+import com.eratart.baristashandbook.core.ext.setHeight
 import com.eratart.baristashandbook.core.mock.DishesMock
 import com.eratart.baristashandbook.databinding.ActivityItemDetailsBinding
 import com.eratart.baristashandbook.domain.model.Item
@@ -16,6 +16,7 @@ import com.eratart.baristashandbook.domain.model.ItemCategory
 import com.eratart.baristashandbook.presentation.itemdetails.view.recycler.ingredients.IngredientAdapter
 import com.eratart.baristashandbook.presentation.itemdetails.view.recycler.instructions.InstructionAdapter
 import com.eratart.baristashandbook.presentation.itemdetails.viewmodel.ItemDetailsViewModel
+import com.eratart.baristashandbook.presentationbase.sharebottomsheet.ShareBottomSheetDialogFragment
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class ItemDetailsActivity : BaseActivity<ItemDetailsViewModel, ActivityItemDetailsBinding>() {
@@ -43,11 +44,11 @@ class ItemDetailsActivity : BaseActivity<ItemDetailsViewModel, ActivityItemDetai
 
     override fun initView() {
         appBar.init(this)
-        appBar.initMoreBtn { }
+        appBar.initShareBtn {
+            ShareBottomSheetDialogFragment.show(supportFragmentManager, item = item)
+        }
 
-        val ivDrinkParams = ivDrink.layoutParams as ConstraintLayout.LayoutParams
-        ivDrinkParams.height = getScreenWidth()
-        ivDrink.layoutParams = ivDrinkParams
+        ivDrink.setHeight(getScreenWidth())
 
         item?.run {
             initItem(this)

@@ -1,11 +1,19 @@
 package com.eratart.baristashandbook.data.repository
 
 import android.content.Context
+import com.eratart.baristashandbook.domain.mapper.repo.DishesMapper
 import com.eratart.baristashandbook.domain.model.Dish
 import com.eratart.baristashandbook.domain.repository.IDishesRepo
 
 class DishesRepo(context: Context) : BaseRepo(context), IDishesRepo {
+
+    companion object {
+        private const val TABLE_PREFIX = "dishes_items_"
+    }
+
+    private val dishesMapper by lazy { DishesMapper() }
+
     override fun getDishes(): List<Dish> {
-        return emptyList()
+        return getDataFromTable(TABLE_PREFIX, dishesMapper)
     }
 }

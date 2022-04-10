@@ -1,6 +1,8 @@
 package com.eratart.baristashandbook.core.ext
 
+import android.content.Context
 import android.content.res.Resources
+import android.graphics.Bitmap
 import android.graphics.drawable.Drawable
 import android.os.Handler
 import android.os.Looper
@@ -8,9 +10,12 @@ import android.view.View
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.annotation.DrawableRes
+import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.viewpager.widget.ViewPager
 import androidx.viewpager2.widget.ViewPager2
 import com.bumptech.glide.Glide
+import com.bumptech.glide.request.target.CustomTarget
+import com.bumptech.glide.request.transition.Transition
 import com.eratart.baristashandbook.baseui.view.viewpager.ViewPageScroller
 import com.eratart.baristashandbook.core.constants.FloatConstants
 import com.eratart.baristashandbook.core.ext.ViewExt.DURATION_DEFAULT_GONE
@@ -160,4 +165,33 @@ fun ImageView.loadImageWithGlideCircle(@DrawableRes drawableRes: Int) {
         .load(drawableRes)
         .circleCrop()
         .into(this)
+}
+
+fun Context.getBitmapFromUrl(url: String, onBitmapReady: (Bitmap?) -> Unit) {
+    Glide.with(this)
+        .asBitmap()
+        .load(url)
+        .into(object : CustomTarget<Bitmap>() {
+            override fun onResourceReady(resource: Bitmap, transition: Transition<in Bitmap>?) {
+                onBitmapReady.invoke(resource)
+            }
+
+            override fun onLoadFailed(errorDrawable: Drawable?) {
+                super.onLoadFailed(errorDrawable)
+                onBitmapReady.invoke(null)
+            }
+
+            override fun onLoadCleared(placeholder: Drawable?) {
+            }
+        })
+}
+
+fun View.setHeight(height: Float) {
+    setHeight(height.toInt())
+}
+
+fun View.setHeight(height: Int) {
+    val viewParams = this.layoutParams as ConstraintLayout.LayoutParams
+    viewParams.height = height
+    this.layoutParams = viewParams
 }

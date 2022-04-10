@@ -1,11 +1,14 @@
 package com.eratart.baristashandbook.presentation.mainmenu.view
 
-import androidx.constraintlayout.widget.ConstraintLayout
 import com.eratart.baristashandbook.R
 import com.eratart.baristashandbook.baseui.activity.BaseActivity
 import com.eratart.baristashandbook.core.ext.dpToPx
 import com.eratart.baristashandbook.core.ext.getScreenWidth
+import com.eratart.baristashandbook.core.ext.observe
+import com.eratart.baristashandbook.core.ext.setHeight
+import com.eratart.baristashandbook.core.mock.ItemCategoriesMock
 import com.eratart.baristashandbook.databinding.ActivityMainMenuBinding
+import com.eratart.baristashandbook.domain.model.Dish
 import com.eratart.baristashandbook.presentation.mainmenu.viewmodel.MainViewModel
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
@@ -23,6 +26,8 @@ class MainMenuActivity : BaseActivity<MainViewModel, ActivityMainMenuBinding>() 
     private val btnInfo by lazy { binding.btnInfo }
     private val btnSettings by lazy { binding.btnSettings }
 
+    private val dishes by lazy { mutableListOf<Dish>() }
+
     override fun initView() {
         initMenuLayout()
         initClickListeners()
@@ -30,20 +35,19 @@ class MainMenuActivity : BaseActivity<MainViewModel, ActivityMainMenuBinding>() 
 
     private fun initMenuLayout() {
         val newHeight = (getScreenWidth() - resources.getDimension(R.dimen.default_margin)) * 3 / 2
-        val llMenuParams = llMenu.layoutParams as ConstraintLayout.LayoutParams
-        llMenuParams.height = newHeight.toInt()
-        llMenu.layoutParams = llMenuParams
-
-        val viewGradientParams = viewGradient.layoutParams as ConstraintLayout.LayoutParams
-        viewGradientParams.height = newHeight.toInt() - 20.dpToPx()
-        viewGradient.layoutParams = viewGradientParams
+        llMenu.setHeight(newHeight)
+        viewGradient.setHeight(newHeight - 20.dpToPx())
     }
 
     private fun initClickListeners() {
         itemNews.setOnClickListener {}
-        itemDishes.setOnClickListener {}
+        itemDishes.setOnClickListener {
+            globalNavigator.startDishesListActivity(this, dishes)
+        }
         itemDrinks.setOnClickListener {
-            globalNavigator.startItemsCategoriesListActivity(this)
+            globalNavigator.startItemsCategoriesListActivity(
+                this, ItemCategoriesMock.getCategories()
+            )
         }
         itemLatteArt.setOnClickListener {}
         itemFavorites.setOnClickListener {
@@ -54,6 +58,14 @@ class MainMenuActivity : BaseActivity<MainViewModel, ActivityMainMenuBinding>() 
     }
 
     override fun initViewModel() {
+        viewModel.apply {
+            observe(dishesFromCache, ::handleDishesFromCache)
+            fetchDishes()
+        }
+    }
 
+    private fun handleDishesFromCache(dishes: List<Dish>) {
+        this.dishes.clear()
+        this.dishes.addAll(dishes)
     }
 }

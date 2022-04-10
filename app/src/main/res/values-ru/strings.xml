@@ -20,7 +20,14 @@
     <string name="app_search">Поиск</string>
     <string name="app_not_found_title">Ничего не найдено</string>
     <string name="app_not_found_description">Попробуйте изменить ваш поисковый запрос</string>
+    <string name="app_available_on_google_play">%1$s в Google Play:</string>
+
+    <string name="app_share">Отправить как</string>
+    <string name="app_as_text">Текст</string>
+    <string name="app_as_pdf">Документ</string>
 
     <string name="item_details_ingredients">Ингредиенты</string>
     <string name="item_details_instruction">Способ приготовления</string>
+
+    <string name="dish_details_volume">Объем:</string>
 </resources>

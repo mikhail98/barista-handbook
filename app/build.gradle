@@ -25,6 +25,7 @@ android {
         resConfigs "en", "ru"
 
         buildConfigField("String", "ARCHIEVE_NAME", "\"$archives.archivesBaseName\"")
+        buildConfigField("String", "APP_URL_GOOGLE", "\"$urls.appUrl\"")
     }
 
     signingConfigs {
@@ -90,8 +91,8 @@ dependencies {
     implementation library.firebaseCrashlyticsKtx
 
     implementation library.dotsIndicator
-
     implementation library.splashScreen
+    implementation library.kotlinCore
 
     annotationProcessor library.glideAnnotationProcessor
 }

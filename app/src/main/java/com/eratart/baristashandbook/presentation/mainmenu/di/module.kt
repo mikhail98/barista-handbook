@@ -6,6 +6,6 @@ import org.koin.dsl.module
 
 val mainMenuModule = module {
     scope<MainMenuActivity> {
-        scoped { MainViewModel(get()) }
+        scoped { MainViewModel(get(), get()) }
     }
 }
