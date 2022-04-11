@@ -3,7 +3,7 @@ package com.eratart.baristashandbook.data.repository
 import android.content.Context
 import com.eratart.baristashandbook.core.constants.StringConstants
 import com.eratart.baristashandbook.core.util.LocaleUtil
-import com.eratart.baristashandbook.domain.mapper.ICsvMapper
+import com.eratart.baristashandbook.data.mapper.ICsvMapper
 import com.opencsv.CSVReader
 import java.io.InputStreamReader
 

@@ -46,6 +46,7 @@ abstract class BaseActivity<VM : BaseViewModel, VB : ViewBinding> : AppCompatAct
 
         viewModel.apply {
             observe(isLoading, ::renderLoader)
+            onCreate()
         }
 
         supportActionBar?.hide()

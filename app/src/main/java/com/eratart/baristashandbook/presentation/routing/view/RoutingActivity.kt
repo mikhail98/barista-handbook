@@ -34,7 +34,6 @@ class RoutingActivity : BaseActivity<RoutingViewModel, ViewBinding>() {
     override fun initViewModel() {
         viewModel.apply {
             observe(showOnboarding, ::handleOnboardingShown)
-            loadDataToCache()
         }
     }
 

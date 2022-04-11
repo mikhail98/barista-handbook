@@ -6,16 +6,24 @@ import com.eratart.baristashandbook.baseui.view.recyclerview.BaseRecyclerAdapter
 import com.eratart.baristashandbook.baseui.view.recyclerview.BaseRecyclerViewHolder
 import com.eratart.baristashandbook.databinding.ItemDrinkBinding
 import com.eratart.baristashandbook.databinding.ItemDrinkCategoryBinding
+import com.eratart.baristashandbook.databinding.ItemNewsBinding
 import com.eratart.baristashandbook.domain.model.Dish
 import com.eratart.baristashandbook.domain.model.Item
 import com.eratart.baristashandbook.domain.model.ItemCategory
+import com.eratart.baristashandbook.domain.model.NewsBot
 
-class ItemCategoryAdapter(viewModels: MutableList<Any>) :
+class ItemsListAdapter(viewModels: MutableList<Any>) :
     BaseRecyclerAdapter<Any>(viewModels) {
 
     companion object {
         private const val TYPE_CATEGORY = 0
         private const val TYPE_DRINK = 1
+        private const val TYPE_NEWS = 2
+    }
+
+    private var newListener: NewsViewHolder.INewsListener? = null
+    fun setNewsListener(listener: NewsViewHolder.INewsListener){
+        newListener = listener
     }
 
     override fun getBindingViewHolder(
@@ -30,6 +38,10 @@ class ItemCategoryAdapter(viewModels: MutableList<Any>) :
                 val view = ItemDrinkBinding.inflate(getInflater(parent), parent, false)
                 ItemViewHolder(view)
             }
+            TYPE_NEWS -> {
+                val view = ItemNewsBinding.inflate(getInflater(parent), parent, false)
+                NewsViewHolder(view, newListener)
+            }
             else -> throw RuntimeException("Unsupported type")
         }
         return viewHolder
@@ -39,6 +51,7 @@ class ItemCategoryAdapter(viewModels: MutableList<Any>) :
         return when (getItem(position)) {
             is ItemCategory -> TYPE_CATEGORY
             is Item, is Dish -> TYPE_DRINK
+            is NewsBot -> TYPE_NEWS
             else -> throw RuntimeException("Unsupported type")
         }
     }

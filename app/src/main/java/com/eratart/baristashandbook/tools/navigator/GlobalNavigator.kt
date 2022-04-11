@@ -2,9 +2,11 @@ package com.eratart.baristashandbook.tools.navigator
 
 import android.app.Activity
 import android.content.Intent
+import android.net.Uri
 import com.eratart.baristashandbook.domain.model.Dish
 import com.eratart.baristashandbook.domain.model.Item
 import com.eratart.baristashandbook.domain.model.ItemCategory
+import com.eratart.baristashandbook.domain.model.NewsBot
 import com.eratart.baristashandbook.presentation.artinstructions.view.ArtInstructionsActivity
 import com.eratart.baristashandbook.presentation.dishdetails.view.DishDetailsActivity
 import com.eratart.baristashandbook.presentation.disheslist.view.DishesListActivity
@@ -13,10 +15,12 @@ import com.eratart.baristashandbook.presentation.itemdetails.view.ItemDetailsAct
 import com.eratart.baristashandbook.presentation.itemscategorieslist.view.ItemsCategoriesListActivity
 import com.eratart.baristashandbook.presentation.itemslist.view.ItemsListActivity
 import com.eratart.baristashandbook.presentation.mainmenu.view.MainMenuActivity
-import com.eratart.baristashandbook.presentation.news.view.NewsActivity
+import com.eratart.baristashandbook.presentation.news_details.view.NewsDetailsActivity
+import com.eratart.baristashandbook.presentation.news_list.view.NewsListActivity
 import com.eratart.baristashandbook.presentation.onboarding.view.OnboardingActivity
 import com.eratart.baristashandbook.presentation.settings.view.SettingsActivity
 import com.eratart.baristashandbook.presentationbase.itemslistactivity.BaseItemsListActivity
+
 
 class GlobalNavigator : IGlobalNavigator {
 
@@ -72,8 +76,15 @@ class GlobalNavigator : IGlobalNavigator {
         activity.startActivity(Intent(activity, MainMenuActivity::class.java))
     }
 
-    override fun startNewsActivity(activity: Activity) {
-        activity.startActivity(Intent(activity, NewsActivity::class.java))
+    override fun startNewsListActivity(activity: Activity) {
+        activity.startActivity(Intent(activity, NewsListActivity::class.java))
+    }
+
+    override fun startNewsDetailsActivity(activity: Activity, newsBot: NewsBot) {
+        val intent = Intent(activity, NewsDetailsActivity::class.java).apply {
+            putExtra(NewsDetailsActivity.EXTRAS_NEWS, newsBot)
+        }
+        activity.startActivity(intent)
     }
 
     override fun startOnboardingActivity(activity: Activity) {
@@ -82,5 +93,9 @@ class GlobalNavigator : IGlobalNavigator {
 
     override fun startSettingsActivity(activity: Activity) {
         activity.startActivity(Intent(activity, SettingsActivity::class.java))
+    }
+
+    override fun openInBrowser(activity: Activity, url: String) {
+        activity.startActivity(Intent(Intent.ACTION_VIEW, Uri.parse(url)))
     }
 }
