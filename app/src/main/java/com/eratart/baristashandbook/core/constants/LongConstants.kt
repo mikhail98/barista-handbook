@@ -10,6 +10,8 @@ object LongConstants {
     const val MILLISECONDS_IN_SECOND = 1000L
     const val MILLISECONDS_PER_DAY = 86400000L
     const val MORE_THAN_ONE_DAY = MILLISECONDS_PER_DAY + ONE
+
+    const val SEARCH_DEBOUNCE = 250L
 }
 
 fun Long?.orZero() = this ?: LongConstants.ZERO

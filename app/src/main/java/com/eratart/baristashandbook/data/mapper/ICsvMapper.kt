@@ -1,4 +1,4 @@
-package com.eratart.baristashandbook.domain.mapper
+package com.eratart.baristashandbook.data.mapper
 
 interface ICsvMapper<T> {
 

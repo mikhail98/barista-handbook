@@ -19,7 +19,7 @@
 
     <string name="app_search">Поиск</string>
     <string name="app_not_found_title">Ничего не найдено</string>
-    <string name="app_not_found_description">Попробуйте изменить ваш поисковый запрос</string>
+    <string name="app_not_found_description">Поищите что-нибудь… другое</string>
     <string name="app_available_on_google_play">%1$s в Google Play:</string>
 
     <string name="app_share">Отправить как</string>

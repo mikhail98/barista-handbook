@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:foreground="?selectableItemBackground"
+    android:paddingBottom="@dimen/default_padding"
+    tools:background="@color/background">
+
+    <ImageView
+        android:id="@+id/ivNews"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/list_item_news_image_size"
+        android:scaleType="centerCrop"
+        android:src="@drawable/ic_placeholder"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <com.google.android.material.textview.MaterialTextView
+        android:id="@+id/tvNewsDate"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/default_margin"
+        android:layout_marginTop="@dimen/mini_margin"
+        android:layout_marginEnd="@dimen/default_margin"
+        android:fontFamily="@font/manrope_semibold"
+        android:text="20.03.2022 18:45"
+        android:textAllCaps="true"
+        android:textAppearance="@style/TextAppearance.MaterialComponents.Caption"
+        android:textColor="@color/gray_80"
+        android:textSize="10sp"
+        app:layout_constraintEnd_toStartOf="@id/btnOpenInBrowser"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/ivNews" />
+
+    <com.google.android.material.textview.MaterialTextView
+        android:id="@+id/tvNewsTitle"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/default_margin"
+        android:layout_marginEnd="@dimen/default_margin"
+        android:fontFamily="@font/manrope_bold"
+        android:textAppearance="@style/TextAppearance.MaterialComponents.Headline6"
+        android:textColor="@color/eminem"
+        app:layout_constraintEnd_toStartOf="@id/btnOpenInBrowser"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tvNewsDate"
+        tools:text="Заголовок новости" />
+
+    <com.google.android.material.textview.MaterialTextView
+        android:id="@+id/tvNewsText"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/default_margin"
+        android:layout_marginTop="@dimen/micro_margin"
+        android:layout_marginEnd="@dimen/default_margin"
+        android:ellipsize="end"
+        android:fontFamily="@font/manrope_regular"
+        android:maxLines="2"
+        android:textAppearance="@style/TextAppearance.MaterialComponents.Caption"
+        android:textColor="@color/gray_80"
+        android:visibility="gone"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tvNewsTitle"
+        tools:text="Мы модерируем качество фотографий в обьявлениях, словно вы смотрите вещи в модном бутике"
+        tools:visibility="visible" />
+
+    <ImageView
+        android:id="@+id/btnOpenInBrowser"
+        android:layout_width="@dimen/main_btn_size"
+        android:layout_height="@dimen/main_btn_size"
+        android:layout_marginEnd="@dimen/mini_margin"
+        android:background="@drawable/bg_main_btn_dark"
+        android:foreground="@drawable/ripple_btn"
+        android:padding="@dimen/micro_padding"
+        android:src="@drawable/ic_open_in_browser"
+        android:visibility="gone"
+        app:layout_constraintBottom_toBottomOf="@id/tvNewsTitle"
+        app:layout_constraintEnd_toStartOf="@id/btnShare"
+        app:layout_constraintTop_toTopOf="@id/tvNewsDate"
+        app:tint="@color/gray_80"
+        tools:visibility="visible" />
+
+    <ImageView
+        android:id="@+id/btnShare"
+        android:layout_width="@dimen/main_btn_size"
+        android:layout_height="@dimen/main_btn_size"
+        android:layout_marginEnd="@dimen/default_margin"
+        android:background="@drawable/bg_main_btn_dark"
+        android:foreground="@drawable/ripple_btn"
+        android:padding="@dimen/padding_6"
+        android:src="@drawable/ic_share"
+        app:layout_constraintBottom_toBottomOf="@id/tvNewsTitle"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@id/tvNewsDate"
+        app:tint="@color/gray_80" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

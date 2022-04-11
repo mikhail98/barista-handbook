@@ -16,7 +16,11 @@ class RoutingViewModel(
     private val _showOnboarding = MutableLiveData<Boolean>()
     val showOnboarding: LiveData<Boolean> = _showOnboarding
 
-    fun loadDataToCache() {
+    override fun onCreate() {
+        loadDataToCache()
+    }
+
+    private fun loadDataToCache() {
         appCacheInteractor.initCache()
         _showOnboarding.postValue(onboardingPreferences.isStartupOnboardingShown())
     }

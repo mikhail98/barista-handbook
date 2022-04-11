@@ -4,6 +4,7 @@ import android.app.Activity
 import com.eratart.baristashandbook.domain.model.Dish
 import com.eratart.baristashandbook.domain.model.Item
 import com.eratart.baristashandbook.domain.model.ItemCategory
+import com.eratart.baristashandbook.domain.model.NewsBot
 
 interface IGlobalNavigator {
 
@@ -25,10 +26,14 @@ interface IGlobalNavigator {
 
     fun startMainMenuActivity(activity: Activity)
 
-    fun startNewsActivity(activity: Activity)
+    fun startNewsListActivity(activity: Activity)
+
+    fun startNewsDetailsActivity(activity: Activity, newsBot: NewsBot)
 
     fun startOnboardingActivity(activity: Activity)
 
     fun startSettingsActivity(activity: Activity)
+
+    fun openInBrowser(activity: Activity, url: String)
 
 }

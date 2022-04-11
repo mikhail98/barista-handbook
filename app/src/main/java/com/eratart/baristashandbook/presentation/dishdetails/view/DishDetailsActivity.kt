@@ -16,7 +16,7 @@ import org.koin.androidx.viewmodel.ext.android.viewModel
 class DishDetailsActivity : BaseActivity<DishDetailsViewModel, ActivityDishDetailsBinding>() {
 
     companion object {
-        const val EXTRAS_DISH = "ItemDetailsActivity.EXTRAS_DISH"
+        const val EXTRAS_DISH = "DishDetailsActivity.EXTRAS_DISH"
     }
 
     private val dish by lazy { intent.getParcelableExtra<Dish>(EXTRAS_DISH) }

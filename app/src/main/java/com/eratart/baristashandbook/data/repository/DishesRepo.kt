@@ -1,7 +1,7 @@
 package com.eratart.baristashandbook.data.repository
 
 import android.content.Context
-import com.eratart.baristashandbook.domain.mapper.repo.DishesMapper
+import com.eratart.baristashandbook.data.mapper.repo.DishesMapper
 import com.eratart.baristashandbook.domain.model.Dish
 import com.eratart.baristashandbook.domain.repository.IDishesRepo
 

@@ -40,7 +40,9 @@ class MainMenuActivity : BaseActivity<MainViewModel, ActivityMainMenuBinding>() 
     }
 
     private fun initClickListeners() {
-        itemNews.setOnClickListener {}
+        itemNews.setOnClickListener {
+            globalNavigator.startNewsListActivity(this)
+        }
         itemDishes.setOnClickListener {
             globalNavigator.startDishesListActivity(this, dishes)
         }
@@ -60,7 +62,6 @@ class MainMenuActivity : BaseActivity<MainViewModel, ActivityMainMenuBinding>() 
     override fun initViewModel() {
         viewModel.apply {
             observe(dishesFromCache, ::handleDishesFromCache)
-            fetchDishes()
         }
     }
 

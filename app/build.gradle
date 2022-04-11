@@ -94,5 +94,9 @@ dependencies {
     implementation library.splashScreen
     implementation library.kotlinCore
 
+    implementation library.retrofit
+    implementation library.retrofitConverter
+    implementation library.okhttp
+
     annotationProcessor library.glideAnnotationProcessor
 }

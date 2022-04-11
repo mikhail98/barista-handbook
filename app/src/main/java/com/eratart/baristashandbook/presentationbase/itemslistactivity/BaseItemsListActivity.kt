@@ -4,13 +4,15 @@ import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.eratart.baristashandbook.baseui.activity.BaseActivity
 import com.eratart.baristashandbook.baseui.viewmodel.BaseViewModel
+import com.eratart.baristashandbook.core.constants.LongConstants.SEARCH_DEBOUNCE
 import com.eratart.baristashandbook.core.ext.gone
 import com.eratart.baristashandbook.core.ext.visible
 import com.eratart.baristashandbook.databinding.ActivityItemsListBinding
 import com.eratart.baristashandbook.domain.model.Dish
 import com.eratart.baristashandbook.domain.model.Item
 import com.eratart.baristashandbook.domain.model.ItemCategory
-import com.eratart.baristashandbook.presentationbase.itemslistactivity.recycler.ItemCategoryAdapter
+import com.eratart.baristashandbook.domain.model.NewsBot
+import com.eratart.baristashandbook.presentationbase.itemslistactivity.recycler.ItemsListAdapter
 import com.eratart.baristashandbook.presentationbase.itemslistactivity.recycler.swipe.SwipeController
 
 
@@ -22,8 +24,6 @@ abstract class BaseItemsListActivity<VM : BaseViewModel> :
         const val EXTRAS_ITEMS = "ItemsListActivity.EXTRAS_ITEMS"
 
         const val EXTRAS_CATEGORY = "ItemsListActivity.EXTRAS_CATEGORY"
-
-        const val SEARCH_DEBOUNCE = 250L
     }
 
     abstract val titleRes: Int
@@ -35,12 +35,12 @@ abstract class BaseItemsListActivity<VM : BaseViewModel> :
 
     protected val sourceList by lazy { ArrayList<Any>(items) }
     protected val mutableList by lazy { mutableListOf<Any>() }
-    protected val itemAdapter by lazy { ItemCategoryAdapter(mutableList) }
+    protected val itemAdapter by lazy { ItemsListAdapter(mutableList) }
 
     override val binding by lazy { ActivityItemsListBinding.inflate(layoutInflater) }
-    protected val rvItems by lazy { binding.rvItems }
-    protected val appBar by lazy { binding.appBar }
-    protected val layoutNotFound by lazy { binding.layoutNotFound.root }
+    private val rvItems by lazy { binding.rvItems }
+    private val appBar by lazy { binding.appBar }
+    private val layoutNotFound by lazy { binding.layoutNotFound.root }
 
     override fun initView() {
         appBar.init(this)
@@ -86,6 +86,8 @@ abstract class BaseItemsListActivity<VM : BaseViewModel> :
                     is Dish -> it.title.contains(searchString, true)
                     is Item -> it.title.contains(searchString, true)
                     is ItemCategory -> it.title.contains(searchString, true)
+                    is NewsBot -> it.title.contains(searchString, true) || it.text.orEmpty()
+                        .contains(searchString, true)
                     else -> false
                 }
             }

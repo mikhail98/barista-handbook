@@ -37,6 +37,8 @@
     <dimen name="menu_item_size">32dp</dimen>
     <dimen name="list_item_size">56dp</dimen>
 
+    <dimen name="list_item_news_image_size">180dp</dimen>
+
     <dimen name="category_count_height">14dp</dimen>
     <dimen name="app_bar_height">56dp</dimen>
 

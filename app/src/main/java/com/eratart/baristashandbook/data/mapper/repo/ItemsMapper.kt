@@ -1,9 +1,9 @@
-package com.eratart.baristashandbook.domain.mapper.repo
+package com.eratart.baristashandbook.data.mapper.repo
 
 import com.eratart.baristashandbook.core.constants.IntConstants
 import com.eratart.baristashandbook.core.constants.StringConstants
 import com.eratart.baristashandbook.core.util.ImageUrlUtil
-import com.eratart.baristashandbook.domain.mapper.ICsvMapper
+import com.eratart.baristashandbook.data.mapper.ICsvMapper
 import com.eratart.baristashandbook.domain.model.Ingredient
 import com.eratart.baristashandbook.domain.model.Item
 
