@@ -9,11 +9,6 @@
         <item name="android:exported">false</item>
     </style>
 
-    <style name="SplashTheme" parent="BaseActivityTheme">
-        <item name="android:windowBackground">@drawable/bg_splash_screen</item>
-        <item name="android:screenOrientation">portrait</item>
-    </style>
-
     <style name="Theme.App.Starting" parent="Theme.SplashScreen">
         <item name="windowSplashScreenBackground">@color/background</item>
         <item name="postSplashScreenTheme">@style/AppTheme</item>
