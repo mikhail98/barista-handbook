@@ -3,7 +3,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:id="@+id/loader"
-    android:background="@color/bg_overlay"
+    android:background="@color/action_bar_30"
     xmlns:android="http://schemas.android.com/apk/res/android">
 
     <ProgressBar

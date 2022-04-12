@@ -1,6 +1,7 @@
 package com.eratart.baristashandbook.data.repository
 
 import android.content.Context
+import com.eratart.baristashandbook.core.constants.StringConstants
 import com.eratart.baristashandbook.data.mapper.repo.DishesMapper
 import com.eratart.baristashandbook.domain.model.Dish
 import com.eratart.baristashandbook.domain.repository.IDishesRepo
@@ -8,7 +9,7 @@ import com.eratart.baristashandbook.domain.repository.IDishesRepo
 class DishesRepo(context: Context) : BaseRepo(context), IDishesRepo {
 
     companion object {
-        private const val TABLE_PREFIX = "dishes_items_"
+        private const val TABLE_PREFIX = "dishes".plus(StringConstants.UNDERLINE)
     }
 
     private val dishesMapper by lazy { DishesMapper() }

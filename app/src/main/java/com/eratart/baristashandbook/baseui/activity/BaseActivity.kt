@@ -12,6 +12,8 @@ import com.eratart.baristashandbook.baseui.viewmodel.BaseViewModel
 import com.eratart.baristashandbook.core.ext.gone
 import com.eratart.baristashandbook.core.ext.observe
 import com.eratart.baristashandbook.core.ext.setVisibleAlpha
+import com.eratart.baristashandbook.core.ext.visibleWithAlpha
+import com.eratart.baristashandbook.domain.firebase.IFirebaseAnalyticsManager
 import com.eratart.baristashandbook.tools.navigator.IGlobalNavigator
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
@@ -32,6 +34,7 @@ abstract class BaseActivity<VM : BaseViewModel, VB : ViewBinding> : AppCompatAct
     override val coroutineContext = Dispatchers.Main
     override val scope: Scope by activityScope()
     protected val globalNavigator: IGlobalNavigator by inject()
+    val analyticsManager: IFirebaseAnalyticsManager by inject()
 
     private val activityRootView by lazy { binding?.root }
     private lateinit var loader: DefaultFullscreenLoader
@@ -75,6 +78,10 @@ abstract class BaseActivity<VM : BaseViewModel, VB : ViewBinding> : AppCompatAct
     }
 
     protected fun renderLoader(isVisible: Boolean) {
-        loader.setVisibleAlpha(isVisible)
+        if(isVisible) {
+            loader.visibleWithAlpha()
+        } else {
+            loader.gone()
+        }
     }
 }

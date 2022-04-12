@@ -46,10 +46,9 @@ class GlobalNavigator : IGlobalNavigator {
         activity.startActivity(Intent(activity, FavoritesActivity::class.java))
     }
 
-    override fun startItemDetailsActivity(activity: Activity, item: Item, category: ItemCategory?) {
+    override fun startItemDetailsActivity(activity: Activity, item: Item) {
         val intent = Intent(activity, ItemDetailsActivity::class.java).apply {
             putExtra(ItemDetailsActivity.EXTRAS_ITEM, item)
-            putExtra(ItemDetailsActivity.EXTRAS_ITEM_CATEGORY, category)
         }
         activity.startActivity(intent)
     }

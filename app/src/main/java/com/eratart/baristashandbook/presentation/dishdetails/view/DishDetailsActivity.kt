@@ -1,14 +1,13 @@
 package com.eratart.baristashandbook.presentation.dishdetails.view
 
 import com.eratart.baristashandbook.baseui.activity.BaseActivity
-import com.eratart.baristashandbook.core.ext.getScreenWidth
-import com.eratart.baristashandbook.core.ext.loadImageWithGlide
-import com.eratart.baristashandbook.core.ext.setHeight
-import com.eratart.baristashandbook.core.mock.ItemsMock
+import com.eratart.baristashandbook.core.ext.*
 import com.eratart.baristashandbook.core.util.TextViewUrlUtil.setLinksClickable
 import com.eratart.baristashandbook.core.util.markdown.MarkdownUtil.renderMD
 import com.eratart.baristashandbook.databinding.ActivityDishDetailsBinding
+import com.eratart.baristashandbook.domain.firebase.AnalyticsEvents
 import com.eratart.baristashandbook.domain.model.Dish
+import com.eratart.baristashandbook.domain.model.Item
 import com.eratart.baristashandbook.presentation.dishdetails.viewmodel.DishDetailsViewModel
 import com.eratart.baristashandbook.presentationbase.sharebottomsheet.ShareBottomSheetDialogFragment
 import org.koin.androidx.viewmodel.ext.android.viewModel
@@ -20,6 +19,7 @@ class DishDetailsActivity : BaseActivity<DishDetailsViewModel, ActivityDishDetai
     }
 
     private val dish by lazy { intent.getParcelableExtra<Dish>(EXTRAS_DISH) }
+    private val items by lazy { mutableListOf<Item>() }
 
     override val viewModel: DishDetailsViewModel by viewModel()
     override val binding by lazy { ActivityDishDetailsBinding.inflate(layoutInflater) }
@@ -32,7 +32,7 @@ class DishDetailsActivity : BaseActivity<DishDetailsViewModel, ActivityDishDetai
 
     override fun initView() {
         appBar.init(this)
-        appBar.initShareBtn {
+        appBar.initShareBtn(AnalyticsEvents.click_dish_details_share) {
             ShareBottomSheetDialogFragment.show(supportFragmentManager, dish = dish)
         }
 
@@ -51,12 +51,20 @@ class DishDetailsActivity : BaseActivity<DishDetailsViewModel, ActivityDishDetai
         tvVolume.text = dish.volume
         tvDishDescription.renderMD(dish.description)
         tvDishDescription.setLinksClickable { link ->
-            ItemsMock.getItems(5, "test").firstOrNull { it.id.contains(link) }?.apply {
-                globalNavigator.startItemDetailsActivity(this@DishDetailsActivity, this, null)
+            items.firstOrNull { item -> item.id.contains(link) }?.apply {
+                analyticsManager.logEvent(AnalyticsEvents.click_dish_details_hyperlink)
+                globalNavigator.startItemDetailsActivity(this@DishDetailsActivity, this)
             }
         }
     }
 
     override fun initViewModel() {
+        viewModel.apply {
+            observe(items, ::handleItems)
+        }
+    }
+
+    private fun handleItems(items: List<Item>) {
+        this.items.replaceAllWith(items)
     }
 }

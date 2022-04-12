@@ -4,6 +4,7 @@ import com.eratart.baristashandbook.R
 import com.eratart.baristashandbook.core.ext.getBitmapFromUrl
 import com.eratart.baristashandbook.core.ext.observe
 import com.eratart.baristashandbook.core.ext.replaceAllWith
+import com.eratart.baristashandbook.domain.firebase.AnalyticsEvents
 import com.eratart.baristashandbook.domain.model.NewsBot
 import com.eratart.baristashandbook.presentation.news_list.viewmodel.NewsListViewModel
 import com.eratart.baristashandbook.presentationbase.itemslistactivity.BaseItemsListActivity
@@ -18,6 +19,8 @@ class NewsListActivity : BaseItemsListActivity<NewsListViewModel>(), NewsViewHol
     override var swipeEnabled = false
     override val viewModel: NewsListViewModel by viewModel()
     private val shareTool: IShareTool by lazy { ShareTool(this) }
+
+    override val searchAnalyticsEvent by lazy { AnalyticsEvents.click_news_list_search }
 
     override fun initView() {
         itemAdapter.setNewsListener(this)
@@ -39,6 +42,7 @@ class NewsListActivity : BaseItemsListActivity<NewsListViewModel>(), NewsViewHol
         when (item) {
             is NewsBot -> {
                 if (item.text != null) {
+                    analyticsManager.logEvent(AnalyticsEvents.click_news_list_item)
                     globalNavigator.startNewsDetailsActivity(this, item)
                 }
             }
@@ -46,10 +50,12 @@ class NewsListActivity : BaseItemsListActivity<NewsListViewModel>(), NewsViewHol
     }
 
     override fun onOpenInBrowserClick(url: String) {
+        analyticsManager.logEvent(AnalyticsEvents.click_news_list_item_open_in_browser)
         globalNavigator.openInBrowser(this, url)
     }
 
     override fun onShareClick(news: NewsBot) {
+        analyticsManager.logEvent(AnalyticsEvents.click_news_list_item_share)
         getBitmapFromUrl(news.photoUrl.orEmpty()) { bitmap ->
             val textToShare = news.getTextToShare()
             if (bitmap != null) {

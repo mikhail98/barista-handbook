@@ -7,9 +7,9 @@ import android.util.AttributeSet
 import android.widget.EditText
 import android.widget.FrameLayout
 import android.widget.ImageView
-import androidx.appcompat.app.AppCompatActivity
 import androidx.constraintlayout.widget.ConstraintLayout
 import com.eratart.baristashandbook.R
+import com.eratart.baristashandbook.baseui.activity.BaseActivity
 import com.eratart.baristashandbook.baseui.utils.KeyboardUtil
 import com.eratart.baristashandbook.core.constants.LongConstants
 import com.eratart.baristashandbook.core.constants.StringConstants
@@ -50,13 +50,13 @@ class AppBar(context: Context, attributeSet: AttributeSet? = null) :
     private var tintColor: Int? = null
 
     private var isSearchBtnShown = false
-    private var isMoreBtnShown = false
+    private var isShareBtnShown = false
 
     var isSearchActive: Boolean = false
     private var searchDebounce = LongConstants.ZERO
     private var searchListener: ((String) -> Unit)? = null
 
-    private var activity: AppCompatActivity? = null
+    private var activity: BaseActivity<*, *>? = null
 
     init {
         try {
@@ -88,15 +88,20 @@ class AppBar(context: Context, attributeSet: AttributeSet? = null) :
         initBackBtn()
     }
 
-    fun init(activity: AppCompatActivity) {
+    fun init(activity: BaseActivity<*, *>) {
         this.activity = activity
     }
 
-    fun initShareBtn(listener: (() -> Unit)?) {
-        isMoreBtnShown = true
+    fun initShareBtn(event: String?, listener: (() -> Unit)?) {
+        isShareBtnShown = true
         if (listener != null) {
             btnShare.visible()
-            btnShare.setOnClickListener { listener.invoke() }
+            btnShare.setOnClickListener {
+                event?.run {
+                    activity?.analyticsManager?.logEvent(this)
+                }
+                listener.invoke()
+            }
         } else {
             btnShare.gone()
         }
@@ -104,7 +109,7 @@ class AppBar(context: Context, attributeSet: AttributeSet? = null) :
 
     @FlowPreview
     @ExperimentalCoroutinesApi
-    fun initSearchBtn(searchDebounce: Long, listener: (String) -> Unit) {
+    fun initSearchBtn(searchDebounce: Long, event: String, listener: (String) -> Unit) {
         isSearchBtnShown = true
         this.searchDebounce = searchDebounce
         this.searchListener = listener
@@ -113,6 +118,7 @@ class AppBar(context: Context, attributeSet: AttributeSet? = null) :
             if (isSearchActive) {
                 etSearch.setText(StringConstants.EMPTY)
             } else {
+                activity?.analyticsManager?.logEvent(event)
                 activateSearch()
             }
         }
@@ -203,7 +209,7 @@ class AppBar(context: Context, attributeSet: AttributeSet? = null) :
 
         btnSearch.loadImageWithGlide(R.drawable.ic_search)
 
-        if (isMoreBtnShown) {
+        if (isShareBtnShown) {
             btnShare.visible()
         }
         tvTitle.visible()

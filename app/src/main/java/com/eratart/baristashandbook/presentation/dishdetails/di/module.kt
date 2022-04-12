@@ -6,6 +6,6 @@ import org.koin.dsl.module
 
 val dishDetailsModule = module {
     scope<DishDetailsActivity> {
-        scoped { DishDetailsViewModel(get()) }
+        scoped { DishDetailsViewModel(get(), get()) }
     }
 }

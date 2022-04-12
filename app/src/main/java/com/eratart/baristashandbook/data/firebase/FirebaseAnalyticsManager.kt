@@ -12,6 +12,7 @@ class FirebaseAnalyticsManager(private val firebaseAnalytics: FirebaseAnalytics)
         private const val PARAM_VERSION = "appVersion"
         private const val PARAM_PLATFORM = "platform"
         private const val PLATFORM = "Android"
+
     }
 
     override fun logEvent(eventName: String) {

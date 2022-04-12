@@ -16,7 +16,7 @@ interface IGlobalNavigator {
 
     fun startFavoritesActivity(activity: Activity)
 
-    fun startItemDetailsActivity(activity: Activity, item: Item, category: ItemCategory?)
+    fun startItemDetailsActivity(activity: Activity, item: Item)
 
     fun startItemsCategoriesListActivity(activity: Activity, list: List<ItemCategory>)
 

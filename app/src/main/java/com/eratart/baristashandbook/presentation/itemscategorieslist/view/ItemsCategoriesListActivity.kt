@@ -1,6 +1,7 @@
 package com.eratart.baristashandbook.presentation.itemscategorieslist.view
 
 import com.eratart.baristashandbook.R
+import com.eratart.baristashandbook.domain.firebase.AnalyticsEvents
 import com.eratart.baristashandbook.domain.model.Item
 import com.eratart.baristashandbook.domain.model.ItemCategory
 import com.eratart.baristashandbook.presentation.itemscategorieslist.viewmodel.ItemsCategoriesListViewModel
@@ -11,6 +12,8 @@ class ItemsCategoriesListActivity : BaseItemsListActivity<ItemsCategoriesListVie
 
     override val titleRes = R.string.main_menu_drinks
     override val viewModel: ItemsCategoriesListViewModel by viewModel()
+
+    override val searchAnalyticsEvent by lazy { AnalyticsEvents.click_categories_list_search }
 
     override fun initViewModel() {
 
@@ -41,12 +44,12 @@ class ItemsCategoriesListActivity : BaseItemsListActivity<ItemsCategoriesListVie
     override fun onItemClick(item: Any, pos: Int) {
         when (item) {
             is Item -> {
-                val category = sourceList
-                    .filterIsInstance<ItemCategory>()
-                    .find { category -> category.drinks.contains(item) }
-                globalNavigator.startItemDetailsActivity(this, item, category)
+                analyticsManager.logEvent(AnalyticsEvents.click_categories_list_item_item)
+                globalNavigator.startItemDetailsActivity(this, item)
             }
+
             is ItemCategory -> {
+                analyticsManager.logEvent(AnalyticsEvents.click_categories_list_item_category)
                 globalNavigator.startItemsListActivity(this, item.title, item.drinks, item)
             }
         }

@@ -8,6 +8,8 @@ import com.eratart.baristashandbook.core.constants.IntConstants
 import com.eratart.baristashandbook.core.ext.setTextAnimation
 import com.eratart.baristashandbook.core.ext.setViewPageScroller
 import com.eratart.baristashandbook.databinding.ActivityOnboardingBinding
+import com.eratart.baristashandbook.domain.firebase.AnalyticsEvents
+import com.eratart.baristashandbook.presentation.onboarding.model.AnalyticsData
 import com.eratart.baristashandbook.presentation.onboarding.model.OnboardingModel
 import com.eratart.baristashandbook.presentation.onboarding.model.OnboardingModelsUtil
 import com.eratart.baristashandbook.presentation.onboarding.view.viewpager.OnboardingViewPagerAdapter
@@ -29,30 +31,33 @@ class OnboardingActivity : BaseActivity<OnboardingViewModel, ActivityOnboardingB
 
     private val pagerAdapter by lazy { OnboardingViewPagerAdapter(this, models) }
 
+    private var isAfterClick = false
+
     override fun initView() {
         vpOnboarding.apply {
             offscreenPageLimit = pagerAdapter.itemCount
             adapter = pagerAdapter
             tlDots.setViewPager2(this)
             setViewPageScroller(ViewPageScroller(context, AccelerateDecelerateInterpolator()))
+            selectItem(IntConstants.ZERO, false, AnalyticsData.NONE)
             registerOnPageChangeCallback(PageChangedListener2 {
-                handleModelSelected(models[it], true)
+                handleModelSelected(models[it], true, AnalyticsData.SWIPE)
             })
-            selectItem(IntConstants.ZERO, false)
         }
         btnNext.setOnClickListener {
             val currentItem = vpOnboarding.currentItem
             if (currentItem == models.size - IntConstants.ONE) {
                 skipOnboarding()
             } else {
-                selectItem(currentItem + IntConstants.ONE, true)
+                selectItem(currentItem + IntConstants.ONE, true, AnalyticsData.CLICK)
             }
         }
     }
 
-    private fun selectItem(pos: Int, animateTextChanges: Boolean) {
+    private fun selectItem(pos: Int, animateTextChanges: Boolean, analyticsData: AnalyticsData) {
+        handleModelSelected(models[pos], animateTextChanges, analyticsData)
+        isAfterClick = true
         vpOnboarding.setCurrentItem(pos, true)
-        handleModelSelected(models[pos], animateTextChanges)
     }
 
     private fun skipOnboarding() {
@@ -60,7 +65,9 @@ class OnboardingActivity : BaseActivity<OnboardingViewModel, ActivityOnboardingB
         finish()
     }
 
-    private fun handleModelSelected(model: OnboardingModel, animateTextChanges: Boolean) {
+    private fun handleModelSelected(
+        model: OnboardingModel, animateTextChanges: Boolean, analyticsData: AnalyticsData
+    ) {
         vpOnboarding.isUserInputEnabled = model.isSwipable
         if (animateTextChanges) {
             tvTitle.setTextAnimation(model.title)
@@ -68,6 +75,21 @@ class OnboardingActivity : BaseActivity<OnboardingViewModel, ActivityOnboardingB
         } else {
             tvTitle.setText(model.title)
             tvSubtitle.setText(model.subtitle)
+        }
+        val currentItem = vpOnboarding.currentItem
+        if (currentItem <= models.size - IntConstants.ONE) {
+            when (analyticsData) {
+                AnalyticsData.CLICK -> {
+                    analyticsManager.logEvent(AnalyticsEvents.action_onboarding_click)
+                }
+                AnalyticsData.SWIPE -> {
+                    if (!isAfterClick) {
+                        analyticsManager.logEvent(AnalyticsEvents.action_onboarding_swipe)
+                    } else {
+                        isAfterClick = false
+                    }
+                }
+            }
         }
     }
 

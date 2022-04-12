@@ -11,6 +11,7 @@ data class Item(
     val photos: List<String>,
     val ingredients: List<Ingredient>,
     val instructions: List<String>,
-    val dish: String,
-    val portionsAmount: Int
-): Parcelable
+    val dishId: String,
+    val portionsAmount: Int,
+    val categoryId: String
+) : Parcelable
