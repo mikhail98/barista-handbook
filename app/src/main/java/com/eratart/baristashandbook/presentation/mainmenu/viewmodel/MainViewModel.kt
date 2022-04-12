@@ -6,6 +6,7 @@ import com.eratart.baristashandbook.baseui.viewmodel.BaseViewModel
 import com.eratart.baristashandbook.domain.interactor.cache.IAppCacheInteractor
 import com.eratart.baristashandbook.domain.interactor.tg.INewsInteractor
 import com.eratart.baristashandbook.domain.model.Dish
+import com.eratart.baristashandbook.domain.model.ItemCategory
 import com.eratart.baristashandbook.domain.preferences.IAppPreferences
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
@@ -19,12 +20,16 @@ class MainViewModel(
     private val _dishesFromCache = MutableLiveData<List<Dish>>()
     val dishesFromCache: LiveData<List<Dish>> = _dishesFromCache
 
+    private val _itemCategoriesFromCache = MutableLiveData<List<ItemCategory>>()
+    val itemCategoriesFromCache: LiveData<List<ItemCategory>> = _itemCategoriesFromCache
+
     override fun onCreate() {
         fetchDishes()
     }
 
-    fun fetchDishes() {
+    private fun fetchDishes() {
         _dishesFromCache.postValue(appCacheInteractor.getDishes())
+        _itemCategoriesFromCache.postValue(appCacheInteractor.getItemCategories())
     }
 
 }

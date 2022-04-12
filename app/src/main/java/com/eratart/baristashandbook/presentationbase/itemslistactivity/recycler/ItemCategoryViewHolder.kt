@@ -8,7 +8,6 @@ import com.eratart.baristashandbook.domain.model.ItemCategory
 class ItemCategoryViewHolder(private val binding: ItemDrinkCategoryBinding) :
     BaseRecyclerViewHolder<Any, ViewBinding>(binding) {
 
-
     private val tvCount by lazy { binding.tvItemsCount }
     private val tvTitle by lazy { binding.tvTitle }
 
@@ -16,6 +15,6 @@ class ItemCategoryViewHolder(private val binding: ItemDrinkCategoryBinding) :
         super.bindItem(item)
         item as ItemCategory
         tvTitle.text = item.title
-        tvCount.text = item.count.toString()
+        tvCount.text = item.drinks.size.toString()
     }
 }

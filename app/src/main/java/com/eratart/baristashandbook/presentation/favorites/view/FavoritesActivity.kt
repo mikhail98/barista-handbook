@@ -3,8 +3,9 @@ package com.eratart.baristashandbook.presentation.favorites.view
 import com.eratart.baristashandbook.R
 import com.eratart.baristashandbook.core.ext.observe
 import com.eratart.baristashandbook.core.ext.replaceAllWith
-import com.eratart.baristashandbook.core.mock.ItemCategoriesMock
+import com.eratart.baristashandbook.domain.firebase.AnalyticsEvents
 import com.eratart.baristashandbook.domain.model.Item
+import com.eratart.baristashandbook.domain.model.ItemCategory
 import com.eratart.baristashandbook.presentation.favorites.viewmodel.FavoritesViewModel
 import com.eratart.baristashandbook.presentationbase.itemslistactivity.BaseItemsListActivity
 import org.koin.androidx.viewmodel.ext.android.viewModel
@@ -15,9 +16,14 @@ class FavoritesActivity : BaseItemsListActivity<FavoritesViewModel>() {
     override var swipeEnabled = true
     override val viewModel: FavoritesViewModel by viewModel()
 
+    override val searchAnalyticsEvent by lazy { AnalyticsEvents.click_favorites_search }
+
+    private val itemCategories by lazy { mutableListOf<ItemCategory>() }
+
     override fun initViewModel() {
         viewModel.apply {
             observe(favoritesList, ::handleFavorites)
+            observe(itemCategoriesFromCache, ::handleItemCategoriesFromCache)
         }
     }
 
@@ -26,19 +32,24 @@ class FavoritesActivity : BaseItemsListActivity<FavoritesViewModel>() {
         showContent(favorites.asReversed(), false)
     }
 
+    private fun handleItemCategoriesFromCache(itemCategories: List<ItemCategory>) {
+        this.itemCategories.replaceAllWith(itemCategories)
+    }
+
     override fun onItemClick(item: Any, pos: Int) {
         when (item) {
             is Item -> {
-                val category = ItemCategoriesMock.getCategories()
-                    .find { category -> category.drinks.contains(item) }
-                globalNavigator.startItemDetailsActivity(this, item, category)
+                analyticsManager.logEvent(AnalyticsEvents.click_favorites_item)
+                globalNavigator.startItemDetailsActivity(this, item)
             }
         }
     }
 
     override fun onItemSwipedAway(item: Item, pos: Int) {
+        analyticsManager.logEvent(AnalyticsEvents.action_favorites_remove_swipe)
         itemAdapter.removeAtPosition(pos)
         viewModel.removeFromFavorites(item)
+        showContent(mutableList, false)
     }
 
     override fun onResume() {

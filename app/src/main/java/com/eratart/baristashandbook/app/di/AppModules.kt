@@ -11,6 +11,7 @@ import com.eratart.baristashandbook.data.preferencnes.impl.AppPreferences
 import com.eratart.baristashandbook.data.preferencnes.impl.FavoritesPreferences
 import com.eratart.baristashandbook.data.preferencnes.impl.OnboardingPreferences
 import com.eratart.baristashandbook.data.repository.DishesRepo
+import com.eratart.baristashandbook.data.repository.ItemCategoriesRepo
 import com.eratart.baristashandbook.data.repository.ItemsRepo
 import com.eratart.baristashandbook.data.repository.NewsRepo
 import com.eratart.baristashandbook.domain.cache.IAppCache
@@ -25,6 +26,7 @@ import com.eratart.baristashandbook.domain.preferences.IAppPreferences
 import com.eratart.baristashandbook.domain.preferences.IFavoritesPreferences
 import com.eratart.baristashandbook.domain.preferences.IOnboardingPreferences
 import com.eratart.baristashandbook.domain.repository.IDishesRepo
+import com.eratart.baristashandbook.domain.repository.IItemCategoriesRepo
 import com.eratart.baristashandbook.domain.repository.IItemsRepo
 import com.eratart.baristashandbook.domain.repository.INewsRepo
 import com.eratart.baristashandbook.presentation.artinstructions.di.artInstructionsModule
@@ -86,13 +88,14 @@ val analyticsModule = module {
 }
 
 val repoModule = module {
+    single<IItemCategoriesRepo> { ItemCategoriesRepo(get()) }
     single<IDishesRepo> { DishesRepo(get()) }
     single<IItemsRepo> { ItemsRepo(get()) }
     single<INewsRepo> { NewsRepo(get()) }
 }
 
 val cacheModule = module {
-    single<IAppCache> { AppCache(get(), get()) }
+    single<IAppCache> { AppCache(get(), get(), get()) }
 }
 
 val interactorModule = module {

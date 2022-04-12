@@ -4,6 +4,7 @@ import com.eratart.baristashandbook.R
 import com.eratart.baristashandbook.baseui.activity.BaseActivity
 import com.eratart.baristashandbook.core.ext.*
 import com.eratart.baristashandbook.databinding.ActivityNewsDetailsBinding
+import com.eratart.baristashandbook.domain.firebase.AnalyticsEvents
 import com.eratart.baristashandbook.domain.model.NewsBot
 import com.eratart.baristashandbook.presentation.news_details.viewmodel.NewsDetailsViewModel
 import com.eratart.baristashandbook.tools.share.IShareTool
@@ -35,7 +36,7 @@ class NewsDetailsActivity : BaseActivity<NewsDetailsViewModel, ActivityNewsDetai
         ivNews.setHeight(getScreenWidth())
 
         news?.run {
-            appBar.initShareBtn {
+            appBar.initShareBtn(AnalyticsEvents.click_news_details_share) {
                 getBitmapFromUrl(photoUrl.orEmpty()) { bitmap ->
                     val textToShare = getTextToShare()
                     if (bitmap != null) {
@@ -61,6 +62,7 @@ class NewsDetailsActivity : BaseActivity<NewsDetailsViewModel, ActivityNewsDetai
         if (item.url != null) {
             btnShowInBrowser.visible()
             btnShowInBrowser.setOnClickListener {
+                analyticsManager.logEvent(AnalyticsEvents.click_news_details_open_in_browser)
                 globalNavigator.openInBrowser(this, item.url)
             }
         }

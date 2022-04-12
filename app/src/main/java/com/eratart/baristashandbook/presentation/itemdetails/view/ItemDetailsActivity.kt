@@ -9,8 +9,9 @@ import com.eratart.baristashandbook.core.ext.getScreenWidth
 import com.eratart.baristashandbook.core.ext.loadImageWithGlide
 import com.eratart.baristashandbook.core.ext.observe
 import com.eratart.baristashandbook.core.ext.setHeight
-import com.eratart.baristashandbook.core.mock.DishesMock
 import com.eratart.baristashandbook.databinding.ActivityItemDetailsBinding
+import com.eratart.baristashandbook.domain.firebase.AnalyticsEvents
+import com.eratart.baristashandbook.domain.model.Dish
 import com.eratart.baristashandbook.domain.model.Item
 import com.eratart.baristashandbook.domain.model.ItemCategory
 import com.eratart.baristashandbook.presentation.itemdetails.view.recycler.ingredients.IngredientAdapter
@@ -23,11 +24,9 @@ class ItemDetailsActivity : BaseActivity<ItemDetailsViewModel, ActivityItemDetai
 
     companion object {
         const val EXTRAS_ITEM = "ItemDetailsActivity.EXTRAS_ITEM"
-        const val EXTRAS_ITEM_CATEGORY = "ItemDetailsActivity.EXTRAS_ITEM_CATEGORY"
     }
 
     private val item by lazy { intent.getParcelableExtra<Item>(EXTRAS_ITEM) }
-    private val category by lazy { intent.getParcelableExtra<ItemCategory>(EXTRAS_ITEM_CATEGORY) }
 
     override val viewModel: ItemDetailsViewModel by viewModel()
     override val binding by lazy { ActivityItemDetailsBinding.inflate(layoutInflater) }
@@ -44,27 +43,38 @@ class ItemDetailsActivity : BaseActivity<ItemDetailsViewModel, ActivityItemDetai
 
     override fun initView() {
         appBar.init(this)
-        appBar.initShareBtn {
+        appBar.initShareBtn(AnalyticsEvents.click_item_details_share) {
             ShareBottomSheetDialogFragment.show(supportFragmentManager, item = item)
         }
 
         ivDrink.setHeight(getScreenWidth())
+    }
 
-        item?.run {
-            initItem(this)
+    override fun initViewModel() {
+        viewModel.apply {
+            observe(initData, ::handleInitData)
+        }
+        viewModel.fetchIsFavorite(item)
+    }
+
+    private fun handleInitData(initData: Triple<Boolean, Dish, ItemCategory>) {
+        item?.apply {
+            initItem(this, initData)
         }
     }
 
-    private fun initItem(item: Item) {
+    private fun initItem(item: Item, data: Triple<Boolean, Dish, ItemCategory>) {
         if (item.photos.isNotEmpty()) {
             ivDrink.loadImageWithGlide(item.photos.first())
+        } else {
+            ivDrink.loadImageWithGlide(R.drawable.ic_placeholder)
         }
         tvDrinkTitle.text = item.title
         tvDrinkSubtitle.text = getString(R.string.main_menu_drinks)
             .plus(StringConstants.SPACE)
             .plus(StringConstants.BIG_DOT)
             .plus(StringConstants.SPACE)
-            .plus(category?.title.orEmpty())
+            .plus(data.third.title)
 
         tvPortions.text = PluralsUtil.getQuantityString(
             context = this,
@@ -74,12 +84,16 @@ class ItemDetailsActivity : BaseActivity<ItemDetailsViewModel, ActivityItemDetai
             five = R.string.five_portions,
             zero = R.string.zero_portions
         )
-        tvDish.text = item.dish
+
+        tvDish.text = data.second.title
         tvDish.setOnClickListener {
-            globalNavigator.startDishDetailsActivity(this, DishesMock.getDish(1))
+            analyticsManager.logEvent(AnalyticsEvents.click_item_details_dish)
+            globalNavigator.startDishDetailsActivity(this@ItemDetailsActivity, data.second)
         }
 
+        fbFavorite.setFavorite(data.first, false)
         fbFavorite.setOnCheckChangeListener { onFavoriteChange ->
+            analyticsManager.logEvent(AnalyticsEvents.click_item_details_favorites)
             viewModel.markFavorite(item, onFavoriteChange)
         }
 
@@ -92,16 +106,5 @@ class ItemDetailsActivity : BaseActivity<ItemDetailsViewModel, ActivityItemDetai
             layoutManager = LinearLayoutManager(context)
             adapter = InstructionAdapter(item.instructions.toMutableList())
         }
-    }
-
-    override fun initViewModel() {
-        viewModel.apply {
-            observe(isFavorite, ::handleIsFavorite)
-        }
-        viewModel.fetchIsFavorite(item)
-    }
-
-    private fun handleIsFavorite(isFavorite: Boolean) {
-        fbFavorite.setFavorite(isFavorite, false)
     }
 }

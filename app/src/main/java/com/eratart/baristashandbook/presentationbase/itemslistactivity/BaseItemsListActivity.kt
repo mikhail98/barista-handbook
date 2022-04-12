@@ -6,7 +6,8 @@ import com.eratart.baristashandbook.baseui.activity.BaseActivity
 import com.eratart.baristashandbook.baseui.viewmodel.BaseViewModel
 import com.eratart.baristashandbook.core.constants.LongConstants.SEARCH_DEBOUNCE
 import com.eratart.baristashandbook.core.ext.gone
-import com.eratart.baristashandbook.core.ext.visible
+import com.eratart.baristashandbook.core.ext.replaceAllWith
+import com.eratart.baristashandbook.core.ext.visibleWithAlpha
 import com.eratart.baristashandbook.databinding.ActivityItemsListBinding
 import com.eratart.baristashandbook.domain.model.Dish
 import com.eratart.baristashandbook.domain.model.Item
@@ -27,6 +28,7 @@ abstract class BaseItemsListActivity<VM : BaseViewModel> :
     }
 
     abstract val titleRes: Int
+    abstract val searchAnalyticsEvent: String
     protected open var swipeEnabled: Boolean = false
 
     private val items by lazy { intent.getParcelableArrayListExtra<Item>(EXTRAS_ITEMS) ?: listOf() }
@@ -44,7 +46,9 @@ abstract class BaseItemsListActivity<VM : BaseViewModel> :
 
     override fun initView() {
         appBar.init(this)
-        appBar.initSearchBtn(SEARCH_DEBOUNCE) { searchString -> onSearch(searchString) }
+        appBar.initSearchBtn(SEARCH_DEBOUNCE, searchAnalyticsEvent) { searchString ->
+            onSearch(searchString)
+        }
         appBar.setTitleText(getString(titleRes))
         appBar.setSubtitleText(subtitle)
 
@@ -98,15 +102,14 @@ abstract class BaseItemsListActivity<VM : BaseViewModel> :
     protected fun showContent(list: List<Any>, checkSame: Boolean = true) {
         if (list == mutableList && checkSame) return
 
-        mutableList.clear()
-        mutableList.addAll(list)
+        mutableList.replaceAllWith(list)
         itemAdapter.notifyDataSetChanged()
 
         if (list.isNotEmpty()) {
             layoutNotFound.gone()
             rvItems.scheduleLayoutAnimation()
         } else {
-            layoutNotFound.visible()
+            layoutNotFound.visibleWithAlpha()
         }
     }
 

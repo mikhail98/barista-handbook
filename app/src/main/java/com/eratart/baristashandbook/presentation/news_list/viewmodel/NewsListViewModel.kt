@@ -8,6 +8,7 @@ import com.eratart.baristashandbook.domain.model.NewsBot
 import com.eratart.baristashandbook.domain.preferences.IAppPreferences
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 
 class NewsListViewModel(private val newsInteractor: INewsInteractor, appPreferences: IAppPreferences) :
@@ -23,6 +24,7 @@ class NewsListViewModel(private val newsInteractor: INewsInteractor, appPreferen
     private fun fetchNews() {
         setLoading(true)
         CoroutineScope(Dispatchers.IO).launch {
+            delay(500)
             _news.postValue(newsInteractor.getNews().asReversed())
             setLoading(false)
         }
