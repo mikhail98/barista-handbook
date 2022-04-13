@@ -8,10 +8,15 @@ import com.eratart.baristashandbook.databinding.ItemInstructionBinding
 class InstructionAdapter(viewModels: MutableList<String>) :
     BaseRecyclerAdapter<String>(viewModels) {
 
+    private var linkClickListener: InstructionViewHolder.ILinkClickListener? = null
+    fun setLinkClickListener(listener: InstructionViewHolder.ILinkClickListener){
+        linkClickListener = listener
+    }
+
     override fun getBindingViewHolder(
         viewType: Int, parent: ViewGroup
     ): BaseRecyclerViewHolder<String, ItemInstructionBinding> {
         val view = ItemInstructionBinding.inflate(getInflater(parent), parent, false)
-        return InstructionViewHolder(view)
+        return InstructionViewHolder(view, linkClickListener)
     }
 }

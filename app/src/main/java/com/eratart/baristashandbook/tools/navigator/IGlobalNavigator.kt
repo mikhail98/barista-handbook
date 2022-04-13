@@ -8,6 +8,8 @@ import com.eratart.baristashandbook.domain.model.NewsBot
 
 interface IGlobalNavigator {
 
+    fun startAppInfoActivity(activity: Activity)
+
     fun startArtInstructionActivity(activity: Activity)
 
     fun startDishDetailsActivity(activity: Activity, dish: Dish)

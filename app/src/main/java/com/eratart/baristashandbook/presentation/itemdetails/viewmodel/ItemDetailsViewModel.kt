@@ -19,6 +19,17 @@ class ItemDetailsViewModel(
     private val _initData = MutableLiveData<Triple<Boolean, Dish, ItemCategory>>()
     val initData: LiveData<Triple<Boolean, Dish, ItemCategory>> = _initData
 
+    private val _items = MutableLiveData<List<Item>>()
+    val items: LiveData<List<Item>> = _items
+
+    override fun onCreate() {
+        fetchItems()
+    }
+
+    private fun fetchItems() {
+        _items.postValue(appCacheInteractor.getItems())
+    }
+
     fun fetchIsFavorite(item: Item?) {
         item ?: return
         val isFavorite = favoritesInteractor.checkIsFavorite(item)

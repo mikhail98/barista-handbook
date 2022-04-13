@@ -52,6 +52,7 @@ class MainMenuActivity : BaseActivity<MainViewModel, ActivityMainMenuBinding>() 
             globalNavigator.startItemsCategoriesListActivity(this, itemCategories)
         }
         itemLatteArt.setOnClickListener {
+            //TODO Implement latte-art
             analyticsManager.logEvent(AnalyticsEvents.click_main_menu_latte_art)
         }
         itemFavorites.setOnClickListener {
@@ -60,8 +61,10 @@ class MainMenuActivity : BaseActivity<MainViewModel, ActivityMainMenuBinding>() 
         }
         btnInfo.setOnClickListener {
             analyticsManager.logEvent(AnalyticsEvents.click_main_menu_app_info)
+            globalNavigator.startAppInfoActivity(this)
         }
         btnSettings.setOnClickListener {
+            //TODO Implement settings
             analyticsManager.logEvent(AnalyticsEvents.click_main_menu_settings)
         }
     }

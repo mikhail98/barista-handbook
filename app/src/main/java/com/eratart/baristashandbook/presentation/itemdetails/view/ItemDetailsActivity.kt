@@ -5,10 +5,7 @@ import com.eratart.baristashandbook.R
 import com.eratart.baristashandbook.baseui.activity.BaseActivity
 import com.eratart.baristashandbook.baseui.utils.PluralsUtil
 import com.eratart.baristashandbook.core.constants.StringConstants
-import com.eratart.baristashandbook.core.ext.getScreenWidth
-import com.eratart.baristashandbook.core.ext.loadImageWithGlide
-import com.eratart.baristashandbook.core.ext.observe
-import com.eratart.baristashandbook.core.ext.setHeight
+import com.eratart.baristashandbook.core.ext.*
 import com.eratart.baristashandbook.databinding.ActivityItemDetailsBinding
 import com.eratart.baristashandbook.domain.firebase.AnalyticsEvents
 import com.eratart.baristashandbook.domain.model.Dish
@@ -16,18 +13,23 @@ import com.eratart.baristashandbook.domain.model.Item
 import com.eratart.baristashandbook.domain.model.ItemCategory
 import com.eratart.baristashandbook.presentation.itemdetails.view.recycler.ingredients.IngredientAdapter
 import com.eratart.baristashandbook.presentation.itemdetails.view.recycler.instructions.InstructionAdapter
+import com.eratart.baristashandbook.presentation.itemdetails.view.recycler.instructions.InstructionViewHolder
 import com.eratart.baristashandbook.presentation.itemdetails.viewmodel.ItemDetailsViewModel
-import com.eratart.baristashandbook.presentationbase.sharebottomsheet.ShareBottomSheetDialogFragment
+import com.eratart.baristashandbook.tools.share.IShareUtil
+import org.koin.android.ext.android.inject
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
-class ItemDetailsActivity : BaseActivity<ItemDetailsViewModel, ActivityItemDetailsBinding>() {
+class ItemDetailsActivity : BaseActivity<ItemDetailsViewModel, ActivityItemDetailsBinding>(),
+    InstructionViewHolder.ILinkClickListener {
 
     companion object {
         const val EXTRAS_ITEM = "ItemDetailsActivity.EXTRAS_ITEM"
     }
 
     private val item by lazy { intent.getParcelableExtra<Item>(EXTRAS_ITEM) }
+    private val items by lazy { mutableListOf<Item>() }
 
+    private val shareUtil: IShareUtil by inject()
     override val viewModel: ItemDetailsViewModel by viewModel()
     override val binding by lazy { ActivityItemDetailsBinding.inflate(layoutInflater) }
 
@@ -43,9 +45,6 @@ class ItemDetailsActivity : BaseActivity<ItemDetailsViewModel, ActivityItemDetai
 
     override fun initView() {
         appBar.init(this)
-        appBar.initShareBtn(AnalyticsEvents.click_item_details_share) {
-            ShareBottomSheetDialogFragment.show(supportFragmentManager, item = item)
-        }
 
         ivDrink.setHeight(getScreenWidth())
     }
@@ -53,6 +52,7 @@ class ItemDetailsActivity : BaseActivity<ItemDetailsViewModel, ActivityItemDetai
     override fun initViewModel() {
         viewModel.apply {
             observe(initData, ::handleInitData)
+            observe(items, ::handleItems)
         }
         viewModel.fetchIsFavorite(item)
     }
@@ -63,7 +63,14 @@ class ItemDetailsActivity : BaseActivity<ItemDetailsViewModel, ActivityItemDetai
         }
     }
 
+    private fun handleItems(items: List<Item>) {
+        this.items.replaceAllWith(items)
+    }
+
     private fun initItem(item: Item, data: Triple<Boolean, Dish, ItemCategory>) {
+        appBar.initShareBtn(AnalyticsEvents.click_item_details_share) {
+            shareUtil.shareItemAsText(item)
+        }
         if (item.photos.isNotEmpty()) {
             ivDrink.loadImageWithGlide(item.photos.first())
         } else {
@@ -104,7 +111,16 @@ class ItemDetailsActivity : BaseActivity<ItemDetailsViewModel, ActivityItemDetai
 
         rvInstructions.apply {
             layoutManager = LinearLayoutManager(context)
-            adapter = InstructionAdapter(item.instructions.toMutableList())
+            adapter = InstructionAdapter(item.instructions.toMutableList()).apply {
+                setLinkClickListener(this@ItemDetailsActivity)
+            }
+        }
+    }
+
+    override fun onItemClick(itemId: String) {
+        items.find { item -> item.id == itemId }?.apply {
+            analyticsManager.logEvent(AnalyticsEvents.click_item_details_hyperlink)
+            globalNavigator.startItemDetailsActivity(this@ItemDetailsActivity, this)
         }
     }
 }

@@ -20,8 +20,12 @@ class ItemsMapper : ICsvMapper<Item> {
         inputList.drop(IntConstants.ONE).forEach { drink ->
             if (drink.size == MIN_LINE_SIZE) {
                 val id = drink[0]
-                val photos = drink[3].split(StringConstants.NEW_LINE).map { path ->
-                    ImageUrlUtil.getImageUrl(ImageUrlUtil.DRINKS, id, path)
+                val photos = if (drink[3].isNotEmpty()) {
+                    drink[3].split(StringConstants.NEW_LINE).map { path ->
+                        ImageUrlUtil.getImageUrl(ImageUrlUtil.DRINKS, id, path)
+                    }
+                } else {
+                    listOf()
                 }
                 val ingredients = drink[4].split(StringConstants.NEW_LINE).map { ingredient ->
                     val ingredientList = ingredient.split(INGREDIENTS_SPLITTER)

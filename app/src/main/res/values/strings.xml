@@ -33,4 +33,9 @@
     <string name="item_details_instruction">How to prepare</string>
 
     <string name="dish_details_volume">Volume:</string>
+
+    <string name="app_info_title">About</string>
+    <string name="app_info_connect_with_us">Connect with us</string>
+    <string name="app_info_rate_at_google_play">Rate at Google Play</string>
+    <string name="app_info_created_by">Created with love <![CDATA[<br>by <a href="https://google.com">WEB M.Y.</a>]]></string>
 </resources>

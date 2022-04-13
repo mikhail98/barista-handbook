@@ -23,6 +23,14 @@ class ShareTool(private val activity: Activity) : IShareTool {
         private const val IMAGE_TMP = "image_tmp"
     }
 
+    override fun shareApp() {
+        val textToShare = getAppUrlSuffix(false)
+        val sendIntent = Intent().apply {
+            putExtra(Intent.EXTRA_TEXT, textToShare)
+        }
+        startActivity(sendIntent, TYPE_PLAIN, activity.getString(R.string.app_name))
+    }
+
     override fun shareText(text: String, title: String?) {
         val textToShare = text.plus(getAppUrlSuffix(true))
         val sendIntent = Intent().apply {

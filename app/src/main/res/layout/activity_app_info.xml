@@ -1,0 +1,177 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:background="@color/background">
+
+    <com.eratart.baristashandbook.baseui.view.other.AppBar
+        android:id="@+id/appBar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:text="@string/app_info_title" />
+
+    <ImageView
+        android:id="@+id/ivBg"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:src="@drawable/bg_app_info"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/appBar" />
+
+    <View
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:background="@drawable/bg_gradient"
+        app:layout_constraintBottom_toBottomOf="@id/ivBg"
+        app:layout_constraintEnd_toEndOf="@id/ivBg"
+        app:layout_constraintStart_toStartOf="@id/ivBg"
+        app:layout_constraintTop_toTopOf="@id/ivBg" />
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/cvLogo"
+        android:layout_width="@dimen/app_info_icon_size"
+        android:layout_height="@dimen/app_info_icon_size"
+        android:layout_marginTop="@dimen/margin_32"
+        app:cardBackgroundColor="@color/accent"
+        app:cardCornerRadius="@dimen/radius_16"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/appBar">
+
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:src="@drawable/ic_launcher" />
+    </androidx.cardview.widget.CardView>
+
+
+    <com.google.android.material.textview.MaterialTextView
+        android:id="@+id/tvAppName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/mini_margin"
+        android:fontFamily="@font/manrope_bold"
+        android:text="@string/app_name"
+        android:textAppearance="@style/TextAppearance.MaterialComponents.Headline5"
+        android:textColor="@color/eminem"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/cvLogo" />
+
+    <com.google.android.material.textview.MaterialTextView
+        android:id="@+id/tvAppVersionName"
+        android:layout_width="wrap_content"
+        android:layout_height="@dimen/app_info_version_height"
+        android:layout_marginTop="@dimen/mini_margin"
+        android:background="@drawable/bg_category_count"
+        android:fontFamily="@font/manrope_medium"
+        android:paddingStart="@dimen/micro_padding"
+        android:paddingEnd="@dimen/micro_padding"
+        android:textAppearance="@style/TextAppearance.MaterialComponents.Caption"
+        android:textColor="@color/gray_80"
+        android:textSize="10sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tvAppName"
+        tools:text="v0.9.0" />
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/clConnectWithUs"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/app_info_btn_height"
+        android:background="?selectableItemBackground"
+        app:layout_constraintBottom_toTopOf="@id/clRateApp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent">
+
+        <com.google.android.material.textview.MaterialTextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/default_margin"
+            android:layout_marginEnd="@dimen/default_margin"
+            android:fontFamily="@font/manrope_medium"
+            android:text="@string/app_info_connect_with_us"
+            android:textAppearance="@style/TextAppearance.MaterialComponents.Body1"
+            android:textColor="@color/eminem"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@id/ivConnectWithUs"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <ImageView
+            android:id="@+id/ivConnectWithUs"
+            android:layout_width="@dimen/main_btn_size"
+            android:layout_height="@dimen/main_btn_size"
+            android:layout_marginEnd="@dimen/default_margin"
+            android:background="?selectableItemBackgroundBorderless"
+            android:padding="@dimen/micro_padding"
+            android:src="@drawable/ic_small_arrow_right"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:tint="@color/gray_80" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/clRateApp"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/app_info_btn_height"
+        android:layout_marginBottom="@dimen/margin_48"
+        android:background="?selectableItemBackground"
+        app:layout_constraintBottom_toTopOf="@id/tvCreatedBy"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent">
+
+        <com.google.android.material.textview.MaterialTextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/default_margin"
+            android:layout_marginEnd="@dimen/default_margin"
+            android:fontFamily="@font/manrope_medium"
+            android:text="@string/app_info_rate_at_google_play"
+            android:textAppearance="@style/TextAppearance.MaterialComponents.Body1"
+            android:textColor="@color/eminem"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@id/ivRateApp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <ImageView
+            android:id="@+id/ivRateApp"
+            android:layout_width="@dimen/main_btn_size"
+            android:layout_height="@dimen/main_btn_size"
+            android:layout_marginEnd="@dimen/default_margin"
+            android:background="?selectableItemBackgroundBorderless"
+            android:padding="@dimen/micro_padding"
+            android:src="@drawable/ic_small_arrow_right"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:tint="@color/gray_80" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <com.google.android.material.textview.MaterialTextView
+        android:id="@+id/tvCreatedBy"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="@dimen/margin_24"
+        android:fontFamily="@font/manrope_semibold"
+        android:gravity="center"
+        android:textAppearance="@style/TextAppearance.MaterialComponents.Caption"
+        android:textColor="@color/gray_80"
+        android:textColorLink="@color/eminem"
+        android:textSize="10sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        tools:text="@string/app_info_created_by" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

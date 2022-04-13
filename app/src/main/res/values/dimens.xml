@@ -3,6 +3,7 @@
 
     <dimen name="radius_4">4dp</dimen>
     <dimen name="radius_8">8dp</dimen>
+    <dimen name="radius_16">16dp</dimen>
 
     <dimen name="padding_64">64dp</dimen>
     <dimen name="padding_48">48dp</dimen>
@@ -48,4 +49,8 @@
     <dimen name="items_list_buttons_size">130dp</dimen>
 
     <dimen name="share_icon_size">64dp</dimen>
+
+    <dimen name="app_info_icon_size">80dp</dimen>
+    <dimen name="app_info_version_height">14dp</dimen>
+    <dimen name="app_info_btn_height">56dp</dimen>
 </resources>

@@ -29,6 +29,7 @@ import com.eratart.baristashandbook.domain.repository.IDishesRepo
 import com.eratart.baristashandbook.domain.repository.IItemCategoriesRepo
 import com.eratart.baristashandbook.domain.repository.IItemsRepo
 import com.eratart.baristashandbook.domain.repository.INewsRepo
+import com.eratart.baristashandbook.presentation.appinfo.di.appInfoModule
 import com.eratart.baristashandbook.presentation.artinstructions.di.artInstructionsModule
 import com.eratart.baristashandbook.presentation.dishdetails.di.dishDetailsModule
 import com.eratart.baristashandbook.presentation.disheslist.di.dishesListModule
@@ -59,6 +60,7 @@ object AppModules {
         modulesList.add(interactorModule)
         modulesList.add(cacheModule)
 
+        modulesList.add(appInfoModule)
         modulesList.add(artInstructionsModule)
         modulesList.add(dishDetailsModule)
         modulesList.add(dishesListModule)

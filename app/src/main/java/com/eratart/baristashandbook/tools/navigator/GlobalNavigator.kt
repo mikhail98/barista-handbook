@@ -7,6 +7,7 @@ import com.eratart.baristashandbook.domain.model.Dish
 import com.eratart.baristashandbook.domain.model.Item
 import com.eratart.baristashandbook.domain.model.ItemCategory
 import com.eratart.baristashandbook.domain.model.NewsBot
+import com.eratart.baristashandbook.presentation.appinfo.view.AppInfoActivity
 import com.eratart.baristashandbook.presentation.artinstructions.view.ArtInstructionsActivity
 import com.eratart.baristashandbook.presentation.dishdetails.view.DishDetailsActivity
 import com.eratart.baristashandbook.presentation.disheslist.view.DishesListActivity
@@ -23,6 +24,10 @@ import com.eratart.baristashandbook.presentationbase.itemslistactivity.BaseItems
 
 
 class GlobalNavigator : IGlobalNavigator {
+
+    override fun startAppInfoActivity(activity: Activity) {
+        activity.startActivity(Intent(activity, AppInfoActivity::class.java))
+    }
 
     override fun startArtInstructionActivity(activity: Activity) {
         activity.startActivity(Intent(activity, ArtInstructionsActivity::class.java))

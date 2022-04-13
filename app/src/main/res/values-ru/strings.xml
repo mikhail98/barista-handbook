@@ -30,4 +30,10 @@
     <string name="item_details_instruction">Способ приготовления</string>
 
     <string name="dish_details_volume">Объем:</string>
+
+    <string name="app_info_title">О приложении</string>
+    <string name="app_info_connect_with_us">Связаться с нами</string>
+    <string name="app_info_rate_at_google_play">Оценить в Google Play</string>
+    <string name="app_info_created_by">Создано с любовью <![CDATA[<br>командой <a href="https://google.com">WEB M.Y.</a>]]></string>
+
 </resources>
