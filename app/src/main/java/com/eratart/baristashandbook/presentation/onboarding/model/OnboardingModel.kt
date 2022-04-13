@@ -9,8 +9,6 @@ import kotlinx.parcelize.Parcelize
 class OnboardingModel(
     @StringRes
     val title: Int,
-    @StringRes
-    val subtitle: Int,
     @DrawableRes
     val imageRes: Int,
     val isSkippable: Boolean,

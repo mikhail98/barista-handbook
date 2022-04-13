@@ -10,7 +10,7 @@ import org.koin.dsl.module
 
 val dishDetailsModule = module {
     scope<DishDetailsActivity> {
-        scoped { DishDetailsViewModel(get(), get()) }
+        scoped { DishDetailsViewModel(get(), get(), get()) }
         scoped<IShareTool> { ShareTool(get()) }
         scoped<IShareUtil> { ShareUtil(get(), get()) }
     }

@@ -5,6 +5,8 @@ import com.eratart.baristashandbook.baseui.activity.BaseActivity
 import com.eratart.baristashandbook.baseui.view.viewpager.PageChangedListener2
 import com.eratart.baristashandbook.baseui.view.viewpager.ViewPageScroller
 import com.eratart.baristashandbook.core.constants.IntConstants
+import com.eratart.baristashandbook.core.ext.getScreenWidth
+import com.eratart.baristashandbook.core.ext.setHeight
 import com.eratart.baristashandbook.core.ext.setTextAnimation
 import com.eratart.baristashandbook.core.ext.setViewPageScroller
 import com.eratart.baristashandbook.databinding.ActivityOnboardingBinding
@@ -25,7 +27,6 @@ class OnboardingActivity : BaseActivity<OnboardingViewModel, ActivityOnboardingB
 
     private val vpOnboarding by lazy { binding.vpOnboarding }
     private val tvTitle by lazy { binding.tvTitle }
-    private val tvSubtitle by lazy { binding.tvSubtitle }
     private val btnNext by lazy { binding.btnNext }
     private val tlDots by lazy { binding.tlDots }
 
@@ -35,6 +36,7 @@ class OnboardingActivity : BaseActivity<OnboardingViewModel, ActivityOnboardingB
 
     override fun initView() {
         vpOnboarding.apply {
+            setHeight(getScreenWidth() * 10 / 9)
             offscreenPageLimit = pagerAdapter.itemCount
             adapter = pagerAdapter
             tlDots.setViewPager2(this)
@@ -71,10 +73,8 @@ class OnboardingActivity : BaseActivity<OnboardingViewModel, ActivityOnboardingB
         vpOnboarding.isUserInputEnabled = model.isSwipable
         if (animateTextChanges) {
             tvTitle.setTextAnimation(model.title)
-            tvSubtitle.setTextAnimation(model.subtitle)
         } else {
             tvTitle.setText(model.title)
-            tvSubtitle.setText(model.subtitle)
         }
         val currentItem = vpOnboarding.currentItem
         if (currentItem <= models.size - IntConstants.ONE) {

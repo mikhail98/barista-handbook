@@ -38,7 +38,6 @@ class AppInfoActivity : BaseActivity<AppInfoViewModel, ActivityAppInfoBinding>()
         tvCreatedBy.text = getString(R.string.app_info_created_by).fromHtml()
         tvCreatedBy.setLinksClickable {
             analyticsManager.logEvent(AnalyticsEvents.click_app_info_developer_link)
-            //TODO open our website
         }
         clRateApp.setOnClickListener {
             analyticsManager.logEvent(AnalyticsEvents.click_app_info_rate_app)
@@ -46,7 +45,9 @@ class AppInfoActivity : BaseActivity<AppInfoViewModel, ActivityAppInfoBinding>()
         }
         clConnectWithUs.setOnClickListener {
             analyticsManager.logEvent(AnalyticsEvents.click_app_info_connect_with_us)
-            //TODO open gmail
+            val email = getString(R.string.app_info_email)
+            val subject = getString(R.string.app_info_email_subject)
+            globalNavigator.openEmailApp(this, email, subject, null)
         }
     }
 

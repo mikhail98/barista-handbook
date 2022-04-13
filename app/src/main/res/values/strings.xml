@@ -1,17 +1,9 @@
 <resources>
     <string name="app_name" translatable="false">Barrista</string>
 
-    <string name="onboarding_title_1">Title 1. Mega feature</string>
-    <string name="onboarding_title_2">Title 2. Mega feature</string>
-    <string name="onboarding_title_3">Title 3. Mega feature</string>
-    <string name="onboarding_title_4">Title 4. Mega feature</string>
-    <string name="onboarding_title_5">Title 5. Mega feature</string>
-
-    <string name="onboarding_description_1">Subtitle 1. Mega feature, i can\'t imagine how you lived without this awesome handbook!</string>
-    <string name="onboarding_description_2">Subtitle 2. Mega feature, i can\'t imagine how you lived without this awesome handbook!</string>
-    <string name="onboarding_description_3">Subtitle 3. Mega feature, i can\'t imagine how you lived without this awesome handbook!</string>
-    <string name="onboarding_description_4">Subtitle 4. Mega feature, i can\'t imagine how you lived without this awesome handbook!</string>
-    <string name="onboarding_description_5">Subtitle 5. Mega feature, i can\'t imagine how you lived without this awesome handbook!</string>
+    <string name="onboarding_title_1">Смотри рецепты кофейных напитков и сохраняй любимые</string>
+    <string name="onboarding_title_2">Информация о посуде в кофейнях и барах всегда под рукой</string>
+    <string name="onboarding_title_3">Будь в курсе новостей из кофейного мира</string>
 
     <string name="main_menu_news">News</string>
     <string name="main_menu_dishes">Dishes</string>
@@ -38,4 +30,12 @@
     <string name="app_info_connect_with_us">Connect with us</string>
     <string name="app_info_rate_at_google_play">Rate at Google Play</string>
     <string name="app_info_created_by">Created with love <![CDATA[<br>by <a href="https://google.com">WEB M.Y.</a>]]></string>
+    <string name="app_info_email" translatable="false">yrshvch.studio@gmail.com</string>
+    <string name="app_info_email_subject">Barrista Feedback</string>
+
+    <string name="app_smth_went_wrong">Something went wrong</string>
+
+    <string name="alert_under_construction_title">Oops…</string>
+    <string name="alert_under_construction_description">This screen in under construction</string>
+    <string name="app_ok" translatable="false">OK</string>
 </resources>

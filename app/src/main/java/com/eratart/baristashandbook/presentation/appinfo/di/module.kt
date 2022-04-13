@@ -8,7 +8,7 @@ import org.koin.dsl.module
 
 val appInfoModule = module {
     scope<AppInfoActivity> {
-        scoped { AppInfoViewModel(get()) }
+        scoped { AppInfoViewModel(get(), get()) }
         scoped<IShareTool> { ShareTool(get()) }
     }
 }

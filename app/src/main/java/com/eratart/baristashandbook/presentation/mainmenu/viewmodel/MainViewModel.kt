@@ -8,14 +8,16 @@ import com.eratart.baristashandbook.domain.interactor.tg.INewsInteractor
 import com.eratart.baristashandbook.domain.model.Dish
 import com.eratart.baristashandbook.domain.model.ItemCategory
 import com.eratart.baristashandbook.domain.preferences.IAppPreferences
+import com.eratart.baristashandbook.tools.resources.IResourceManager
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
 class MainViewModel(
     private val appCacheInteractor: IAppCacheInteractor,
+    resourceManager: IResourceManager,
     appPreferences: IAppPreferences
-) : BaseViewModel(appPreferences) {
+) : BaseViewModel(resourceManager, appPreferences) {
 
     private val _dishesFromCache = MutableLiveData<List<Dish>>()
     val dishesFromCache: LiveData<List<Dish>> = _dishesFromCache

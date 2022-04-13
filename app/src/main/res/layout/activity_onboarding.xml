@@ -9,63 +9,44 @@
     <androidx.viewpager2.widget.ViewPager2
         android:id="@+id/vpOnboarding"
         android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_marginTop="@dimen/small_margin"
+        android:layout_height="wrap_content"
         android:layout_marginBottom="@dimen/small_margin"
         android:overScrollMode="never"
-        app:layout_constraintBottom_toTopOf="@id/tvTitle"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <com.google.android.material.textview.MaterialTextView
         android:id="@+id/tvTitle"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="@dimen/default_margin"
         android:layout_marginEnd="@dimen/default_margin"
-        android:layout_marginBottom="@dimen/micro_margin"
-        android:fontFamily="@font/manrope_bold"
-        android:textAppearance="@style/TextAppearance.MaterialComponents.Headline5"
+        android:layout_marginBottom="@dimen/margin_24"
+        android:fontFamily="@font/manrope_extrabold"
+        android:textAppearance="@style/TextAppearance.MaterialComponents.Headline4"
         android:textColor="@color/eminem"
-        app:layout_constraintBottom_toTopOf="@id/tvSubtitle"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toTopOf="@id/btnNext"
         app:layout_constraintStart_toStartOf="parent"
         tools:text="Живые консультации" />
-
-    <com.google.android.material.textview.MaterialTextView
-        android:id="@+id/tvSubtitle"
-        android:layout_width="0dp"
-        android:layout_height="40dp"
-        android:layout_marginStart="@dimen/default_margin"
-        android:layout_marginTop="@dimen/default_margin"
-        android:layout_marginEnd="@dimen/default_margin"
-        android:layout_marginBottom="@dimen/margin_24"
-        android:fontFamily="@font/manrope_regular"
-        android:lineSpacingExtra="0dp"
-        android:maxLines="2"
-        android:textAppearance="@style/TextAppearance.MaterialComponents.Caption"
-        android:textColor="@color/gray_80"
-        app:layout_constraintBottom_toTopOf="@id/btnNext"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        tools:text="Подключённые к сервису сотрудники смогут продавать в онлайн лучше любого бота или алгоритма" />
 
     <com.tbuonomo.viewpagerdotsindicator.DotsIndicator
         android:id="@+id/tlDots"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="@dimen/default_margin"
-        app:dotsColor="@color/gray_28"
+        app:dotsColor="@color/gray_58"
         app:dotsCornerRadius="8dp"
-        app:dotsSize="8dp"
-        app:dotsSpacing="4dp"
+        app:dotsSize="4dp"
+        app:dotsSpacing="2dp"
         app:dotsWidthFactor="2.5"
         app:layout_constraintBottom_toBottomOf="@id/btnNext"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@id/btnNext"
         app:layout_goneMarginBottom="@dimen/small_margin"
         app:progressMode="true"
-        app:selectedDotColor="@color/accent" />
+        app:selectedDotColor="@color/eminem" />
 
     <ImageView
         android:id="@+id/btnNext"

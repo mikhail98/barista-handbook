@@ -6,6 +6,6 @@ import org.koin.dsl.module
 
 val itemsListModule = module {
     scope<ItemsListActivity> {
-        scoped { ItemsListViewModel(get()) }
+        scoped { ItemsListViewModel(get(), get()) }
     }
 }

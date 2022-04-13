@@ -102,4 +102,13 @@ class GlobalNavigator : IGlobalNavigator {
     override fun openInBrowser(activity: Activity, url: String) {
         activity.startActivity(Intent(Intent.ACTION_VIEW, Uri.parse(url)))
     }
+
+    override fun openEmailApp(activity: Activity, email: String, subject: String?, text: String?) {
+        Intent(Intent.ACTION_SENDTO).apply {
+            data = Uri.parse("mailto:$email")
+            putExtra(Intent.EXTRA_SUBJECT, subject)
+            putExtra(Intent.EXTRA_TEXT, text)
+            activity.startActivity(this)
+        }
+    }
 }

@@ -6,6 +6,6 @@ import org.koin.dsl.module
 
 val onboardingModule = module {
     scope<OnboardingActivity> {
-        scoped { OnboardingViewModel(get(), get()) }
+        scoped { OnboardingViewModel(get(), get(), get()) }
     }
 }

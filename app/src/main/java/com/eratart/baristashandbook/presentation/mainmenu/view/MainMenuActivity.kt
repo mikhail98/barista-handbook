@@ -2,17 +2,23 @@ package com.eratart.baristashandbook.presentation.mainmenu.view
 
 import com.eratart.baristashandbook.R
 import com.eratart.baristashandbook.baseui.activity.BaseActivity
+import com.eratart.baristashandbook.baseui.utils.AlertUtil
 import com.eratart.baristashandbook.core.ext.*
 import com.eratart.baristashandbook.databinding.ActivityMainMenuBinding
 import com.eratart.baristashandbook.domain.firebase.AnalyticsEvents
 import com.eratart.baristashandbook.domain.model.Dish
 import com.eratart.baristashandbook.domain.model.ItemCategory
 import com.eratart.baristashandbook.presentation.mainmenu.viewmodel.MainViewModel
+import com.eratart.baristashandbook.tools.customtabs.ICustomTabTool
+import org.koin.android.ext.android.inject
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class MainMenuActivity : BaseActivity<MainViewModel, ActivityMainMenuBinding>() {
 
+
     override val viewModel: MainViewModel by viewModel()
+    private val customTabTool: ICustomTabTool by inject()
+
     override val binding by lazy { ActivityMainMenuBinding.inflate(layoutInflater) }
     private val llMenu by lazy { binding.llMenu }
     private val itemNews by lazy { binding.itemNews }
@@ -52,8 +58,12 @@ class MainMenuActivity : BaseActivity<MainViewModel, ActivityMainMenuBinding>() 
             globalNavigator.startItemsCategoriesListActivity(this, itemCategories)
         }
         itemLatteArt.setOnClickListener {
-            //TODO Implement latte-art
             analyticsManager.logEvent(AnalyticsEvents.click_main_menu_latte_art)
+            AlertUtil.showOkAlert(
+                this,
+                R.string.alert_under_construction_title,
+                R.string.alert_under_construction_description
+            )
         }
         itemFavorites.setOnClickListener {
             analyticsManager.logEvent(AnalyticsEvents.click_main_menu_favorites)
@@ -63,8 +73,8 @@ class MainMenuActivity : BaseActivity<MainViewModel, ActivityMainMenuBinding>() 
             analyticsManager.logEvent(AnalyticsEvents.click_main_menu_app_info)
             globalNavigator.startAppInfoActivity(this)
         }
+        btnSettings.gone()
         btnSettings.setOnClickListener {
-            //TODO Implement settings
             analyticsManager.logEvent(AnalyticsEvents.click_main_menu_settings)
         }
     }

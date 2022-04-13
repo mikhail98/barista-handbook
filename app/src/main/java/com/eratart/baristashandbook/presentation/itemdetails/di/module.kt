@@ -10,7 +10,7 @@ import org.koin.dsl.module
 
 val itemDetailsModule = module {
     scope<ItemDetailsActivity> {
-        scoped { ItemDetailsViewModel(get(), get(), get()) }
+        scoped { ItemDetailsViewModel(get(), get(), get(), get()) }
         scoped<IShareTool> { ShareTool(get()) }
         scoped<IShareUtil> { ShareUtil(get(), get()) }
     }
