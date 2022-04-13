@@ -22,8 +22,8 @@ class NewsRepo(private val tgApi: TgApi) : INewsRepo {
     }
 
     override suspend fun getNews(): Flow<List<NewsBot>> {
-        return flow<TelegramUpdatesResponse> {
-            tgApi.getUpdates(TgApi.getUpdatesUrl(TG_BOT_TOKEN))
+        return flow {
+            emit(tgApi.getUpdates(TgApi.getUpdatesUrl(TG_BOT_TOKEN)))
         }
             .map { response ->
                 val news = mutableListOf<NewsBot>()

@@ -10,10 +10,7 @@ import com.eratart.baristashandbook.domain.interactor.tg.INewsInteractor
 import com.eratart.baristashandbook.domain.model.NewsBot
 import com.eratart.baristashandbook.domain.preferences.IAppPreferences
 import com.eratart.baristashandbook.tools.resources.IResourceManager
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.flow.flowOf
-import kotlinx.coroutines.withContext
-import okhttp3.Dispatcher
+import kotlinx.coroutines.delay
 
 class NewsListViewModel(
     private val newsInteractor: INewsInteractor,
@@ -30,7 +27,9 @@ class NewsListViewModel(
     }
 
     private fun fetchNews() {
+        setLoading(true)
         viewModelScope.launchFlow {
+            delay(500)
             newsInteractor.getNews()
                 .applyLoader()
                 .onNext { data -> handleData(data.asReversed()) }
