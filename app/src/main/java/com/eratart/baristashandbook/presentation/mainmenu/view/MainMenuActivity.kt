@@ -1,5 +1,7 @@
 package com.eratart.baristashandbook.presentation.mainmenu.view
 
+import android.view.View
+import androidx.constraintlayout.widget.ConstraintLayout
 import com.eratart.baristashandbook.R
 import com.eratart.baristashandbook.baseui.activity.BaseActivity
 import com.eratart.baristashandbook.baseui.utils.AlertUtil
@@ -9,15 +11,11 @@ import com.eratart.baristashandbook.domain.firebase.AnalyticsEvents
 import com.eratart.baristashandbook.domain.model.Dish
 import com.eratart.baristashandbook.domain.model.ItemCategory
 import com.eratart.baristashandbook.presentation.mainmenu.viewmodel.MainViewModel
-import com.eratart.baristashandbook.tools.customtabs.ICustomTabTool
-import org.koin.android.ext.android.inject
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class MainMenuActivity : BaseActivity<MainViewModel, ActivityMainMenuBinding>() {
 
-
     override val viewModel: MainViewModel by viewModel()
-    private val customTabTool: ICustomTabTool by inject()
 
     override val binding by lazy { ActivityMainMenuBinding.inflate(layoutInflater) }
     private val llMenu by lazy { binding.llMenu }
@@ -34,8 +32,20 @@ class MainMenuActivity : BaseActivity<MainViewModel, ActivityMainMenuBinding>() 
     private val itemCategories by lazy { mutableListOf<ItemCategory>() }
 
     override fun initView() {
+        initPaddings()
         initMenuLayout()
         initClickListeners()
+    }
+
+    private fun initPaddings() {
+        applyPaddings(btnInfo)
+        applyPaddings(btnSettings)
+    }
+
+    private fun applyPaddings(view: View) {
+        (view.layoutParams as ConstraintLayout.LayoutParams).apply {
+            setMargins(leftMargin, topMargin + getStatusBarHeight(), rightMargin, bottomMargin)
+        }
     }
 
     private fun initMenuLayout() {
