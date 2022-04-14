@@ -1,7 +1,10 @@
 package com.eratart.baristashandbook.presentation.mainmenu.view
 
+import android.view.View
+import androidx.constraintlayout.widget.ConstraintLayout
 import com.eratart.baristashandbook.R
 import com.eratart.baristashandbook.baseui.activity.BaseActivity
+import com.eratart.baristashandbook.baseui.utils.AlertUtil
 import com.eratart.baristashandbook.core.ext.*
 import com.eratart.baristashandbook.databinding.ActivityMainMenuBinding
 import com.eratart.baristashandbook.domain.firebase.AnalyticsEvents
@@ -13,6 +16,7 @@ import org.koin.androidx.viewmodel.ext.android.viewModel
 class MainMenuActivity : BaseActivity<MainViewModel, ActivityMainMenuBinding>() {
 
     override val viewModel: MainViewModel by viewModel()
+
     override val binding by lazy { ActivityMainMenuBinding.inflate(layoutInflater) }
     private val llMenu by lazy { binding.llMenu }
     private val itemNews by lazy { binding.itemNews }
@@ -28,8 +32,20 @@ class MainMenuActivity : BaseActivity<MainViewModel, ActivityMainMenuBinding>() 
     private val itemCategories by lazy { mutableListOf<ItemCategory>() }
 
     override fun initView() {
+        initPaddings()
         initMenuLayout()
         initClickListeners()
+    }
+
+    private fun initPaddings() {
+        applyPaddings(btnInfo)
+        applyPaddings(btnSettings)
+    }
+
+    private fun applyPaddings(view: View) {
+        (view.layoutParams as ConstraintLayout.LayoutParams).apply {
+            setMargins(leftMargin, topMargin + getStatusBarHeight(), rightMargin, bottomMargin)
+        }
     }
 
     private fun initMenuLayout() {
@@ -53,6 +69,11 @@ class MainMenuActivity : BaseActivity<MainViewModel, ActivityMainMenuBinding>() 
         }
         itemLatteArt.setOnClickListener {
             analyticsManager.logEvent(AnalyticsEvents.click_main_menu_latte_art)
+            AlertUtil.showOkAlert(
+                this,
+                R.string.alert_under_construction_title,
+                R.string.alert_under_construction_description
+            )
         }
         itemFavorites.setOnClickListener {
             analyticsManager.logEvent(AnalyticsEvents.click_main_menu_favorites)
@@ -60,7 +81,9 @@ class MainMenuActivity : BaseActivity<MainViewModel, ActivityMainMenuBinding>() 
         }
         btnInfo.setOnClickListener {
             analyticsManager.logEvent(AnalyticsEvents.click_main_menu_app_info)
+            globalNavigator.startAppInfoActivity(this)
         }
+        btnSettings.gone()
         btnSettings.setOnClickListener {
             analyticsManager.logEvent(AnalyticsEvents.click_main_menu_settings)
         }

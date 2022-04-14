@@ -6,6 +6,6 @@ import org.koin.dsl.module
 
 val artInstructionsModule = module {
     scope<ArtInstructionsActivity> {
-        scoped { ArtInstructionsViewModel(get()) }
+        scoped { ArtInstructionsViewModel(get(), get()) }
     }
 }

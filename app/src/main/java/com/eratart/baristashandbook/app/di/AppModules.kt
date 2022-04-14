@@ -29,6 +29,7 @@ import com.eratart.baristashandbook.domain.repository.IDishesRepo
 import com.eratart.baristashandbook.domain.repository.IItemCategoriesRepo
 import com.eratart.baristashandbook.domain.repository.IItemsRepo
 import com.eratart.baristashandbook.domain.repository.INewsRepo
+import com.eratart.baristashandbook.presentation.appinfo.di.appInfoModule
 import com.eratart.baristashandbook.presentation.artinstructions.di.artInstructionsModule
 import com.eratart.baristashandbook.presentation.dishdetails.di.dishDetailsModule
 import com.eratart.baristashandbook.presentation.disheslist.di.dishesListModule
@@ -44,6 +45,8 @@ import com.eratart.baristashandbook.presentation.routing.di.routingModule
 import com.eratart.baristashandbook.presentation.settings.di.settingsModule
 import com.eratart.baristashandbook.tools.navigator.GlobalNavigator
 import com.eratart.baristashandbook.tools.navigator.IGlobalNavigator
+import com.eratart.baristashandbook.tools.resources.IResourceManager
+import com.eratart.baristashandbook.tools.resources.ResourceManager
 import com.google.firebase.analytics.FirebaseAnalytics
 import org.koin.core.module.Module
 import org.koin.dsl.module
@@ -59,6 +62,7 @@ object AppModules {
         modulesList.add(interactorModule)
         modulesList.add(cacheModule)
 
+        modulesList.add(appInfoModule)
         modulesList.add(artInstructionsModule)
         modulesList.add(dishDetailsModule)
         modulesList.add(dishesListModule)
@@ -79,6 +83,7 @@ object AppModules {
 val appModule = module {
     single<IGlobalNavigator> { GlobalNavigator() }
     single<IRetrofitBuilder> { RetrofitBuilder() }
+    single<IResourceManager> { ResourceManager(get()) }
     single { get<IRetrofitBuilder>().getTgApi() }
 }
 

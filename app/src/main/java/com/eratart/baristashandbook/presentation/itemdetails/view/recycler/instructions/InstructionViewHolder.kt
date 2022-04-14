@@ -2,9 +2,14 @@ package com.eratart.baristashandbook.presentation.itemdetails.view.recycler.inst
 
 import com.eratart.baristashandbook.baseui.view.recyclerview.BaseRecyclerViewHolder
 import com.eratart.baristashandbook.core.constants.IntConstants
+import com.eratart.baristashandbook.core.util.TextViewUrlUtil.setLinksClickable
+import com.eratart.baristashandbook.core.util.markdown.MarkdownUtil.renderMD
 import com.eratart.baristashandbook.databinding.ItemInstructionBinding
 
-class InstructionViewHolder(private val binding: ItemInstructionBinding) :
+class InstructionViewHolder(
+    private val binding: ItemInstructionBinding,
+    private val listener: ILinkClickListener?
+) :
     BaseRecyclerViewHolder<String, ItemInstructionBinding>(binding) {
 
     private val tvInstructionIndex by lazy { binding.tvInstructionIndex }
@@ -14,6 +19,12 @@ class InstructionViewHolder(private val binding: ItemInstructionBinding) :
         super.bindItem(item)
         val position = adapterPosition + IntConstants.ONE
         tvInstructionIndex.text = position.toString()
-        tvInstruction.text = item
+
+        tvInstruction.renderMD(item)
+        tvInstruction.setLinksClickable { link -> listener?.onItemClick(link) }
+    }
+
+    interface ILinkClickListener {
+        fun onItemClick(itemId: String)
     }
 }

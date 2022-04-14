@@ -6,6 +6,6 @@ import org.koin.dsl.module
 
 val newsDetailsModule = module {
     scope<NewsDetailsActivity> {
-        scoped { NewsDetailsViewModel(get()) }
+        scoped { NewsDetailsViewModel(get(), get()) }
     }
 }

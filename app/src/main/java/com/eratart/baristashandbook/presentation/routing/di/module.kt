@@ -6,6 +6,6 @@ import org.koin.dsl.module
 
 val routingModule = module {
     scope<RoutingActivity> {
-        scoped { RoutingViewModel(get(), get(), get()) }
+        scoped { RoutingViewModel(get(), get(), get(), get()) }
     }
 }

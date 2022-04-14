@@ -8,12 +8,14 @@ import com.eratart.baristashandbook.domain.interactor.favorites.IFavoritesIntera
 import com.eratart.baristashandbook.domain.model.Item
 import com.eratart.baristashandbook.domain.model.ItemCategory
 import com.eratart.baristashandbook.domain.preferences.IAppPreferences
+import com.eratart.baristashandbook.tools.resources.IResourceManager
 
 class FavoritesViewModel(
     private val appCacheInteractor: IAppCacheInteractor,
     private val favoritesInteractor: IFavoritesInteractor,
+    resourceManager: IResourceManager,
     appPreferences: IAppPreferences
-) : BaseViewModel(appPreferences) {
+) : BaseViewModel(resourceManager, appPreferences) {
 
     private val _favoritesList = MutableLiveData<List<Item>>()
     val favoritesList: LiveData<List<Item>> = _favoritesList

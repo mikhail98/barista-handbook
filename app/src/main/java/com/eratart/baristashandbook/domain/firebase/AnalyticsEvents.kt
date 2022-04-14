@@ -34,10 +34,17 @@ object AnalyticsEvents {
     const val click_items_list_search = "click_items_list_search"
 
     const val click_item_details_favorites = "click_item_details_favorites"
+    const val click_item_details_hyperlink = "click_item_details_hyperlink"
     const val click_item_details_share = "click_item_details_share"
     const val click_item_details_dish = "click_item_details_dish"
 
     const val click_favorites_item = "click_favorites_item"
     const val click_favorites_search = "click_favorites_search"
     const val action_favorites_remove_swipe = "action_favorites_remove_swipe"
+
+    const val click_app_info_share = "click_app_info_share"
+    const val click_app_info_rate_app = "click_app_info_rate_app"
+    const val click_app_info_developer_link = "click_app_info_developer_link"
+    const val click_app_info_connect_with_us = "click_app_info_connect_with_us"
+
 }

@@ -31,6 +31,7 @@
         android:fontFamily="@font/manrope_medium"
         android:textAppearance="@style/TextAppearance.MaterialComponents.Body2"
         android:textColor="@color/gray_CF"
+        android:textColorLink="@color/eminem"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@id/tvInstructionIndex"

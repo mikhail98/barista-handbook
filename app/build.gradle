@@ -97,6 +97,7 @@ dependencies {
     implementation library.retrofit
     implementation library.retrofitConverter
     implementation library.okhttp
+    implementation library.customTab
 
     annotationProcessor library.glideAnnotationProcessor
 }

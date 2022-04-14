@@ -6,6 +6,6 @@ import org.koin.dsl.module
 
 val favoritesModule = module {
     scope<FavoritesActivity> {
-        scoped { FavoritesViewModel(get(), get(), get()) }
+        scoped { FavoritesViewModel(get(), get(), get(), get()) }
     }
 }

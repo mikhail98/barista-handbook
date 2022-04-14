@@ -5,8 +5,11 @@ import com.eratart.baristashandbook.domain.model.Dish
 import com.eratart.baristashandbook.domain.model.Item
 import com.eratart.baristashandbook.domain.model.ItemCategory
 import com.eratart.baristashandbook.domain.model.NewsBot
+import javax.security.auth.Subject
 
 interface IGlobalNavigator {
+
+    fun startAppInfoActivity(activity: Activity)
 
     fun startArtInstructionActivity(activity: Activity)
 
@@ -36,4 +39,5 @@ interface IGlobalNavigator {
 
     fun openInBrowser(activity: Activity, url: String)
 
+    fun openEmailApp(activity: Activity, email: String, subject: String?, text: String?)
 }

@@ -5,6 +5,8 @@ import java.io.File
 
 interface IShareTool {
 
+    fun shareApp()
+
     fun shareText(text: String, title: String?)
 
     fun shareImage(bitmap: Bitmap, text: String, title: String?)

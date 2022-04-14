@@ -1,5 +1,6 @@
 package com.eratart.baristashandbook.presentation.dishdetails.view
 
+import com.eratart.baristashandbook.R
 import com.eratart.baristashandbook.baseui.activity.BaseActivity
 import com.eratart.baristashandbook.core.ext.*
 import com.eratart.baristashandbook.core.util.TextViewUrlUtil.setLinksClickable
@@ -9,7 +10,8 @@ import com.eratart.baristashandbook.domain.firebase.AnalyticsEvents
 import com.eratart.baristashandbook.domain.model.Dish
 import com.eratart.baristashandbook.domain.model.Item
 import com.eratart.baristashandbook.presentation.dishdetails.viewmodel.DishDetailsViewModel
-import com.eratart.baristashandbook.presentationbase.sharebottomsheet.ShareBottomSheetDialogFragment
+import com.eratart.baristashandbook.tools.share.IShareUtil
+import org.koin.android.ext.android.inject
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class DishDetailsActivity : BaseActivity<DishDetailsViewModel, ActivityDishDetailsBinding>() {
@@ -18,6 +20,7 @@ class DishDetailsActivity : BaseActivity<DishDetailsViewModel, ActivityDishDetai
         const val EXTRAS_DISH = "DishDetailsActivity.EXTRAS_DISH"
     }
 
+    private val shareUtil: IShareUtil by inject()
     private val dish by lazy { intent.getParcelableExtra<Dish>(EXTRAS_DISH) }
     private val items by lazy { mutableListOf<Item>() }
 
@@ -32,9 +35,6 @@ class DishDetailsActivity : BaseActivity<DishDetailsViewModel, ActivityDishDetai
 
     override fun initView() {
         appBar.init(this)
-        appBar.initShareBtn(AnalyticsEvents.click_dish_details_share) {
-            ShareBottomSheetDialogFragment.show(supportFragmentManager, dish = dish)
-        }
 
         ivDish.setHeight(getScreenWidth())
 
@@ -44,14 +44,19 @@ class DishDetailsActivity : BaseActivity<DishDetailsViewModel, ActivityDishDetai
     }
 
     private fun initDish(dish: Dish) {
+        appBar.initShareBtn(AnalyticsEvents.click_dish_details_share) {
+            shareUtil.shareDishAsText(dish)
+        }
         if (dish.photos.isNotEmpty()) {
             ivDish.loadImageWithGlide(dish.photos.first())
+        } else {
+            ivDish.loadImageWithGlide(R.drawable.ic_placeholder)
         }
         tvDishTitle.text = dish.title
         tvVolume.text = dish.volume
         tvDishDescription.renderMD(dish.description)
         tvDishDescription.setLinksClickable { link ->
-            items.firstOrNull { item -> item.id.contains(link) }?.apply {
+            items.find { item -> item.id == link }?.apply {
                 analyticsManager.logEvent(AnalyticsEvents.click_dish_details_hyperlink)
                 globalNavigator.startItemDetailsActivity(this@DishDetailsActivity, this)
             }

@@ -20,8 +20,12 @@ class DishesMapper : ICsvMapper<Dish> {
                 val id = dish[0]
                 val title = dish[1]
                 val description = dish[2]
-                val photos = dish[3].split(StringConstants.NEW_LINE).map { path ->
-                    ImageUrlUtil.getDishesImageUrl(ImageUrlUtil.DISHES, id, path)
+                val photos = if (dish[3].isNotEmpty()) {
+                    dish[3].split(StringConstants.NEW_LINE).map { path ->
+                        ImageUrlUtil.getDishesImageUrl(ImageUrlUtil.DISHES, id, path)
+                    }
+                } else {
+                    listOf()
                 }
                 val volume = dish[4]
                 val item = Dish(id, title, description, photos, volume)

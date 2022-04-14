@@ -2,6 +2,7 @@ package com.eratart.baristashandbook.baseui.activity
 
 import android.os.Bundle
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.annotation.CallSuper
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
@@ -11,7 +12,6 @@ import com.eratart.baristashandbook.baseui.view.relativelayout.DefaultFullscreen
 import com.eratart.baristashandbook.baseui.viewmodel.BaseViewModel
 import com.eratart.baristashandbook.core.ext.gone
 import com.eratart.baristashandbook.core.ext.observe
-import com.eratart.baristashandbook.core.ext.setVisibleAlpha
 import com.eratart.baristashandbook.core.ext.visibleWithAlpha
 import com.eratart.baristashandbook.domain.firebase.IFirebaseAnalyticsManager
 import com.eratart.baristashandbook.tools.navigator.IGlobalNavigator
@@ -49,6 +49,7 @@ abstract class BaseActivity<VM : BaseViewModel, VB : ViewBinding> : AppCompatAct
 
         viewModel.apply {
             observe(isLoading, ::renderLoader)
+            observe(message, ::handleMessage)
             onCreate()
         }
 
@@ -78,10 +79,14 @@ abstract class BaseActivity<VM : BaseViewModel, VB : ViewBinding> : AppCompatAct
     }
 
     protected fun renderLoader(isVisible: Boolean) {
-        if(isVisible) {
+        if (isVisible) {
             loader.visibleWithAlpha()
         } else {
             loader.gone()
         }
+    }
+
+    private fun handleMessage(message: String) {
+        Toast.makeText(this, message, Toast.LENGTH_LONG).show()
     }
 }

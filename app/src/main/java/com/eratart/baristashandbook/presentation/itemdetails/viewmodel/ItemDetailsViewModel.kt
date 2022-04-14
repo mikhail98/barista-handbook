@@ -9,15 +9,28 @@ import com.eratart.baristashandbook.domain.model.Dish
 import com.eratart.baristashandbook.domain.model.Item
 import com.eratart.baristashandbook.domain.model.ItemCategory
 import com.eratart.baristashandbook.domain.preferences.IAppPreferences
+import com.eratart.baristashandbook.tools.resources.IResourceManager
 
 class ItemDetailsViewModel(
     private val appCacheInteractor: IAppCacheInteractor,
     private val favoritesInteractor: IFavoritesInteractor,
+    resourceManager: IResourceManager,
     appPreferences: IAppPreferences
-) : BaseViewModel(appPreferences) {
+) : BaseViewModel(resourceManager, appPreferences) {
 
     private val _initData = MutableLiveData<Triple<Boolean, Dish, ItemCategory>>()
     val initData: LiveData<Triple<Boolean, Dish, ItemCategory>> = _initData
+
+    private val _items = MutableLiveData<List<Item>>()
+    val items: LiveData<List<Item>> = _items
+
+    override fun onCreate() {
+        fetchItems()
+    }
+
+    private fun fetchItems() {
+        _items.postValue(appCacheInteractor.getItems())
+    }
 
     fun fetchIsFavorite(item: Item?) {
         item ?: return
