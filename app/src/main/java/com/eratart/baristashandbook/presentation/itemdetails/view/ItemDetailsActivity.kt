@@ -4,6 +4,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.eratart.baristashandbook.R
 import com.eratart.baristashandbook.baseui.activity.BaseActivity
 import com.eratart.baristashandbook.baseui.utils.PluralsUtil
+import com.eratart.baristashandbook.core.constants.IntConstants
 import com.eratart.baristashandbook.core.constants.StringConstants
 import com.eratart.baristashandbook.core.ext.*
 import com.eratart.baristashandbook.databinding.ActivityItemDetailsBinding
@@ -57,7 +58,7 @@ class ItemDetailsActivity : BaseActivity<ItemDetailsViewModel, ActivityItemDetai
         viewModel.fetchIsFavorite(item)
     }
 
-    private fun handleInitData(initData: Triple<Boolean, Dish, ItemCategory>) {
+    private fun handleInitData(initData: Triple<Boolean, Dish, List<ItemCategory>>) {
         item?.apply {
             initItem(this, initData)
         }
@@ -67,21 +68,30 @@ class ItemDetailsActivity : BaseActivity<ItemDetailsViewModel, ActivityItemDetai
         this.items.replaceAllWith(items)
     }
 
-    private fun initItem(item: Item, data: Triple<Boolean, Dish, ItemCategory>) {
+    private fun initItem(item: Item, data: Triple<Boolean, Dish, List<ItemCategory>>) {
         appBar.initShareBtn(AnalyticsEvents.click_item_details_share) {
             shareUtil.shareItemAsText(item)
         }
         if (item.photos.isNotEmpty()) {
             ivDrink.loadImageWithGlide(item.photos.first())
         } else {
-            ivDrink.loadImageWithGlide(R.drawable.ic_placeholder)
+            ivDrink.loadImageWithGlide(R.drawable.ic_drink_placeholder)
         }
         tvDrinkTitle.text = item.title
+        var categoriesTitle = StringConstants.EMPTY
+        data.third.forEachIndexed { index, category ->
+            if (index != IntConstants.ZERO) {
+                categoriesTitle += StringConstants.SPACE.plus(StringConstants.SLASH)
+                    .plus(StringConstants.SPACE)
+            }
+            categoriesTitle += category.title
+        }
+
         tvDrinkSubtitle.text = getString(R.string.main_menu_drinks)
             .plus(StringConstants.SPACE)
             .plus(StringConstants.BIG_DOT)
             .plus(StringConstants.SPACE)
-            .plus(data.third.title)
+            .plus(categoriesTitle)
 
         tvPortions.text = PluralsUtil.getQuantityString(
             context = this,

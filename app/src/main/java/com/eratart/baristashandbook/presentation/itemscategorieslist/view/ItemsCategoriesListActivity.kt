@@ -26,19 +26,24 @@ class ItemsCategoriesListActivity : BaseItemsListActivity<ItemsCategoriesListVie
             val filteredList = mutableListOf<Any>()
             sourceList.filterIsInstance<ItemCategory>().forEach { category ->
                 if (category.title.contains(searchString, true)) {
-                    filteredList.add(category)
+                    if (!filteredList.filterIsInstance<ItemCategory>().map { it.id }
+                            .contains(category.id)) {
+                        filteredList.add(category)
+                    }
                 }
             }
             sourceList.filterIsInstance<ItemCategory>().forEach { category ->
                 category.drinks.forEach { drink ->
                     if (drink.title.contains(searchString, true)) {
-                        filteredList.add(drink)
+                        if (!filteredList.filterIsInstance<Item>().map { it.id }
+                                .contains(drink.id)) {
+                            filteredList.add(drink)
+                        }
                     }
                 }
             }
             showContent(filteredList)
         }
-
     }
 
     override fun onItemClick(item: Any, pos: Int) {

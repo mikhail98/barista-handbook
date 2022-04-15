@@ -45,7 +45,9 @@ class AppCache(
         val drinks = getItems()
 
         val newCategoriesList = list.map { itemCategory ->
-            val categoryDrinks = drinks.filter { drink -> drink.categoryId == itemCategory.id }
+            val categoryDrinks = drinks
+                .filter { drink -> drink.categoryIdList.contains(itemCategory.id) }
+                .sortedBy { it.title }
             ItemCategory(itemCategory.id, itemCategory.title, categoryDrinks)
         }
 

@@ -13,9 +13,9 @@
         android:layout_width="match_parent"
         android:layout_height="@dimen/list_item_news_image_size"
         android:scaleType="centerCrop"
-        android:src="@drawable/ic_placeholder"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        tools:src="@drawable/ic_placeholder" />
 
     <com.google.android.material.textview.MaterialTextView
         android:id="@+id/tvNewsDate"

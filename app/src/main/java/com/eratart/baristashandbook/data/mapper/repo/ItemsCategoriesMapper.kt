@@ -11,7 +11,7 @@ import com.eratart.baristashandbook.domain.model.ItemCategory
 class ItemsCategoriesMapper : ICsvMapper<ItemCategory> {
 
     companion object {
-        private const val MIN_LINE_SIZE = 3
+        private const val MIN_LINE_SIZE = 2
     }
 
     override fun mapFromCsvLine(inputList: List<Array<String>>): List<ItemCategory> {
@@ -22,10 +22,7 @@ class ItemsCategoriesMapper : ICsvMapper<ItemCategory> {
                 val id = itemCategory[0]
                 if (id.isNotEmpty()) {
                     val title = itemCategory[1]
-                    val drinks = itemCategory[2].split(NEW_LINE).map { drink ->
-                        Item(drink, EMPTY, EMPTY, listOf(), listOf(), listOf(), EMPTY, ZERO, EMPTY)
-                    }
-                    val item = ItemCategory(id, title, drinks)
+                    val item = ItemCategory(id, title, listOf())
                     newList.add(item)
                 }
             }

@@ -18,8 +18,8 @@ class ItemDetailsViewModel(
     appPreferences: IAppPreferences
 ) : BaseViewModel(resourceManager, appPreferences) {
 
-    private val _initData = MutableLiveData<Triple<Boolean, Dish, ItemCategory>>()
-    val initData: LiveData<Triple<Boolean, Dish, ItemCategory>> = _initData
+    private val _initData = MutableLiveData<Triple<Boolean, Dish, List<ItemCategory>>>()
+    val initData: LiveData<Triple<Boolean, Dish, List<ItemCategory>>> = _initData
 
     private val _items = MutableLiveData<List<Item>>()
     val items: LiveData<List<Item>> = _items
@@ -38,7 +38,7 @@ class ItemDetailsViewModel(
         val dish = appCacheInteractor.getDishes()
             .find { dish -> dish.id == item.dishId } ?: return
         val category = appCacheInteractor.getItemCategories()
-            .find { category -> category.id == item.categoryId } ?: return
+            .filter { category -> item.categoryIdList.contains(category.id) }
         _initData.postValue(Triple(isFavorite, dish, category))
     }
 

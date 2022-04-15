@@ -39,9 +39,10 @@ class ItemsMapper : ICsvMapper<Item> {
                 }
                 val instructions = drink[5].split(StringConstants.NEW_LINE)
                 val portionsAmount = drink[7].toIntOrNull() ?: IntConstants.ONE
+                val categoriesIdList = drink[8].split(StringConstants.NEW_LINE)
                 val item = Item(
                     id, drink[1], drink[2], photos, ingredients,
-                    instructions, drink[6], portionsAmount, drink[8]
+                    instructions, drink[6], portionsAmount, categoriesIdList
                 )
                 newList.add(item)
             }

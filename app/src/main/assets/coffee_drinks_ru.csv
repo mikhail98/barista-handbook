@@ -1,12 +1,384 @@
-id,title,description,photos,ingredients,instructions,dish_id,portionsAmount,category_id
-arab,Кофе Араб,,,,,espresso,1,black
-damian,Кофе Дамиана,,,,,highball_glass,1,black
-black,Черный кофе,,,,,espresso,4,black
-black_double,Черный кофе двойной,,,,,espresso,4,black
-fon_libih,Рецепт фон-Либиха,,,,,americano,4,black
-black_home,Черный домашний кофе,,,,,espresso,1,black
-black_bird,Кофе Черный дрозд,,,,,cappucino,2,black
-black_regular,Черный обычный кофе,,,,,espresso,2,black
-mokko_arabic,Мокко по-арабски,,,,,espresso,4,black
-secret_old_mavr,Секрет старого мавра,,,,,espresso,1,black
-from_termos,Кофе из термоса,,,,,espresso,5,black
+id,title,description,photos,ingredients,instructions,dish_id,portions,category_id
+arab,Кофе Арабский,,black.jpg,"Мелко молотый кофе::10 г
+Вода::75 мл
+Сахар::1 ч. ложка","Высыпать сахар на дно турки
+Поставить турку на медленный огонь
+После того, как сахар начнет карамелизироваться (приобретать коричневый оттенок), долить воду и довести до кипения
+Снять с огня, высыпать кофе, поставить на огонь
+Снова довести до кипения, и после этого сразу разлить по чашкам",espresso,1,"black
+contries"
+damian,Кофе Дамиана,,black.jpg,"Крепкий кофе::50 мл
+Крепчий чай::50 мл
+Сахар-рафинад::15 г","Смешать кофе и чай
+Отдельно подать сахар",highball_glass,1,black
+black,Черный кофе,,black.jpg,"Молотый кофе::4 ч. ложки
+Вода::400 мл
+Сахар::по вкусу
+Лимон::по вкусу
+Коньяк или ликёр::по вкусу","Положить кофе в кофейник и залить холодной водой
+Довести до кипения на медленном огне, но не кипятить
+Разлить по чашкам и отдельно подать сахар, лимон и коньяк или ликёр",espresso,4,black
+black_double,Двойной черный кофе,,black.jpg,"Молотый кофе::8 ч. ложек
+Вода::400 мл
+Сахар::по вкусу
+Лимон::по вкусу
+Коньяк или ликёр::по вкусу","Положить кофейник 4 ч. ложки кофе и залить холодной водой
+Довести до кипения на медленном огне, но не кипятить
+Снять с огня, всыпать оставшийся молотый кофе
+Снова довести до кипения на медленном огне
+Разлить по чашкам и отдельно подать сахар, лимон и коньяк или ликёр",espresso,4,black
+fon_libih,Рецепт фон-Либиха,,fon_libih.jpg,"Вода::4 стакана 
+Молотый кофе::60 гр
+Сахар::по вкусу","Половину порции кофе засыпать в горячую воду
+Быстро довести до кипения и кипятить 5 минут
+Всыпать вторую половину кофе, держать на слабом огне минуту, постоянно помешивая
+Переливать напиток несколько раз из чашки в чашку и пить",americano,4,black
+black_home,Черный домашний кофе,,black_home.jpg,"Кофе крупного помола::1 ч. ложка
+Вода::100 мл","Кофе залить кипятком и выдержать 5-10 минут
+Процедить через фильтровочную бумагу или через марлевое ситечко
+Поставить кофейник на небольшое блюдечко
+Рядом поставить чашки на маленьких блюдцах и стаканы с холодной водой",espresso,1,black
+black_bird,Кофе Черный дрозд,,black.jpg,"Молотый кофе::2 ч. ложки
+Вода::1 стакан
+Цикорий::на кончике чайной ложки","Подогреть кофейник, сполоснув его горячей водой
+Засыпать кофе, залить кипятком, добавить цикорий
+Поставить кофейник на огонь, довести до кипения, но не кипятить
+Снять с огня сразу после появления пены
+Оставьте на 5 минут
+Подать, разлив по чашкам",cappucino,2,black
+black_regular,Черный обычный кофе,,black.jpg,"Молотый кофе::2 ч. ложки
+Вода::1 стакан
+Сахар::по вкусу","Подогреть кофейник, сполоснув его горячей водой
+Залить воду и поставить на огонь
+Когда вода нагреется, положить на фильтр мелко молотый кофе
+Довести до кипения, снять с огня и дать отстояться 5-10 минут
+Разлить по чашкам и отдельно подать сахар",espresso,2,black
+mokko_arabic,Мокко по-арабски,,black.jpg,"Кофе мелкого помола::6 ч. ложек
+Сахар::3 ч. ложки","В горячую воду насыпать кофе и сахар, поставить на огонь
+Довести до кипения, снять, через несколько секунд поставить обратно
+Повторить предыдущий шаг 2 раза
+Получившийся напиток сбрызнуть небольшим количеством холодной воды
+После отстоя гущи размешать и разлить по чашкам
+Подать кофе вместе с холодной водой в стаканах",espresso,4,"black
+countries"
+secret_old_mavr,Секрет старого мавра,,old_mavr.jpg,"Свежемолотый кофе::1 ч. ложка
+Сахар::1.5 ч. ложки
+Вода::80. мл
+Тончайшая пластинка чеснока::1 шт","Поставить турку на угли мангала
+Насыпать в нее сахар и свежемолотый кофе
+Залить бурлящий кипяток
+Добавить пластинку чеснока и подать",espresso,1,black
+from_termos,Кофе из термоса,,thermos.jpg,"Вода::1 литр
+Молотый кофе::10-12 ч. ложек","В чистый термос налить немного кипятка, оставить на 5 минут
+Засыпать кофе, долить кипяток и оставить еще на 5 минут
+После этого сразу разлить в нагретые чашки",espresso,5,black
+,,,,,,,,
+vanilla,Ванильный кофе,,,,,cappucino,1,souble
+cold_mokko,Ледяной мокко,,,,,cappucino,1,souble
+netherland_with_nuts,Голландский кофе с орехами,,,,,americano,1,souble
+vanilla_smoke,Ванильный дурман,,,,,americano,1,souble
+daughter_of_ leader,Дочь вождя,,,,,espresso,3,souble
+zerminal,Жерминаль,,,,,espresso,2,souble
+indira,Индира,,,,,americano,1,souble
+seller,Купец,,,,,espresso,1,souble
+bless_you,На Здоровье,,,,,americano,1,souble
+tenderness,Нежность,,,,,americano,1,souble
+fire,Огонёк,,,,,americano,1,souble
+under_the_cover,Под шубой,,,,,cappucino,1,souble
+sweet_fun,Пряная радость,,,,,cappucino,2,souble
+robinson,Робинзон,,,,,americano,2,souble
+pine_forest,Сосновый бор,,,,,americano,1,souble
+urals,Уралочка,,,,,americano,1,souble
+eleonora,Элеонора,,,,,americano,1,souble
+good_morning,С добрым утром,,,,,cappucino,1,souble
+adriano_chelentano,Укрощение строптивой,,,,,americano,1,souble
+chery,Коктейль Вишенка,,,,,americano,1,souble
+nettle,Кофейный Крапивник,,,,,hurricane_glass,1,souble
+souble,Растворимый кофе,,,,,americano,1,souble
+,,,,,,,,
+english_coffee_drink,Английский кофейный напиток,,,,,hurricane_glass,2,with_milk
+white_coffee,Белый кофе,,,,,americano,2,with_milk
+white_coffee_italian,Белый итальянский кофе,,,,,cappucino,4,with_milk
+white_coffee_french,Белый французский кофе,,,,,espresso,1,with_milk
+big_ben,Биг-Бен,,,,,hurricane_glass,4,with_milk
+bon_bon_spanish,Испанский кофе бон-бон,,,,,irish_coffee_cup,1,with_milk
+capucino_with_cream,Капучино сливочный,,,,,cappucino,1,with_milk
+milk_coffee,Кофе молочный,,,,,cappucino,4,with_milk
+coffee_on_milk,Кофе на молоке,,,,,cappucino,4,with_milk
+coffe_on_condensed_milk,Кофе на сгущёном молоке,,,,,americano,5,with_milk
+pannochka,Кофе Панночка,,,,,cappucino,1,with_milk
+coffee_januaru,Кофе по-январски,,,,,cappucino,1,with_milk
+coffee_sugar_enjoyer,Кофе Сладкоежка,,,,,cappucino,1,with_milk
+coffe_with_ice_cream,Кофе с мороженым,,,,,hurricane_glass,2,with_milk
+coffee_secret,Кофе Секрет,,,,,cappucino,4,with_milk
+coffee_with_cream,Кофе со сливками,,,,,cappucino,2,with_milk
+coffe_with_sour_cream,Кофе со сметанным кремом,,,,,cappucino,5,with_milk
+coffe_to_breakfast,Кофе к завтраку,,,,,americano,2,with_milk
+cold_coffee_with_milk,Кофе холодный с молоком,,,,,irish_coffee_cup,2,with_milk
+black_coffee_with_milk,Черный кофе с молоком,,,,,cappucino,1,with_milk
+black_coffee_with_milk_or_cream,Черный кофе с молоком или сливками,,,,,cappucino,2,with_milk
+coffee_shtrauss,Кофе Штраусс,,,,,americano,1,with_milk
+coffee_drink,Кофейный напиток,,,,,americano,1,with_milk
+long_makiato,Лонг макиато,,,,,cappucino,1,with_milk
+melanzh_venician,Меланж по-венски,,,,,cappucino,4,with_milk
+marble_coffee,Мраморный кофе,,,,,cappucino,2,with_milk
+swiss_hot_mokko,Швейцарский горячий мокко,,,,,cappucino,2,with_milk
+swiss_cold_mokko,Швейцарский холодный мокко,,,,,hurricane_glass,2,with_milk
+espresso_makiato,Эспрессо макиато,,,,,espresso,1,with_milk
+,,,,,,,,
+capucino_with_cinnamon,Капучино с корицей,,,,,cappucino,1,with_spices
+coffe_brahmaputra,Кофе Брахмапутра,,,,,espresso,4,with_spices
+coffe_gloria,Кофе Глория,,,,,espresso,4,with_spices
+coffe_netherland_with_cinnamon,Кофе голландский с корицей,,,,,cappucino,1,"with_spices
+countries"
+coffe_india,Кофе Индия,,,,,americano,4,"with_spices
+countries"
+coffe_iemen_with_giger,Кофе йеменский с имбирем,,,,,espresso,3,with_spices
+coffe_pleasure,Кофе Наслаждение,,,,,cappucino,2,with_spices
+coffe_with_spice,Кофе с пряностями,,,,,espresso,5,with_spices
+coffe_chicory,Кофе с цикорием,,,,,espresso,1,with_spices
+coffe_fairy,Кофе Фея,,,,,latte_glass,5,with_spices
+coffe_ekstract,Кофе Экстракт,,,,,espresso,3,with_spices
+latte_with_cinnamon_1,Латте с корицей (рецепт 1),,,,,irish_coffee_cup,1,"with_spices
+with_milk"
+latte_with_cinnamon_2,Латте с корицей (рецепт 2),,,,,irish_coffee_cup,1,"with_spices
+with_milk"
+livian_kvahva,Ливийская квахва,,,,,espresso,1,"with_spices
+countries"
+marocco_fire_coffee,Марокканский горящий кофе,,,,,cappucino,1,"with_spices
+countries"
+mokko_in_cloud,Мокко в облаке,,,,,cappucino,2,with_spices
+mokko_of_king,Мокко шейха,,,,,espresso,4,with_spices
+midterrian_sea_coffee,Средиземноморский кофе,,,,,americano,4,"with_spices
+countries"
+monkey_tail_coffee,Кофе хвост обезьяны,,,,,irish_coffee_cup,1,with_spices
+,,,,,,,,
+,,,,,,,,
+turin,Туринский кофе,,,,,irish_coffee_cup,1,"with_chocolate_and_cocoa
+countries"
+mokkachino,Моккачино,,,,,irish_coffee_cup,1,with_chocolate_and_cocoa
+hot_chocolate,Горячий шоколад,,,,,cappucino,1,with_chocolate_and_cocoa
+hot_chocolate_with_cinnamon,Горячий шоколад с корицей,,,,,cappucino,2,with_chocolate_and_cocoa
+chocolate_coffee,Шоколадный кофе,,,,,americano,4,with_chocolate_and_cocoa
+borjia,Кофе Борджиа,,,,,cappucino,4,with_chocolate_and_cocoa
+indonesia,Кофе Индонезия,,,,,espresso,3,"with_chocolate_and_cocoa
+countries"
+latte_with_hot_chocolate,Латте с горячим шоколадом,,,,,irish_coffee_cup,1,with_chocolate_and_cocoa
+slaviq_squad,Песня славянки,,,,,espresso,2,with_chocolate_and_cocoa
+fairytale,Сказка,,,,,espresso,2,with_chocolate_and_cocoa
+italia_with_chocolate,По-итальянски с шоколадом,,,,,cappucino,1,"with_chocolate_and_cocoa
+countries"
+,,,,,,,,
+fire_coffee,Горящий кофе,,,,,americano,4,with_alcohol
+venice_coffee,Венецианский кофе,,,,,irish_coffee_cup,1,"with_alcohol
+countries"
+glasse_rum,Гляссе с ромом,,,,,irish_coffee_cup,1,with_alcohol
+coffe_with_cola_and_vodka,Кофе с колой и водкой,,,,,highball_glass,1,with_alcohol
+coffe_amsterdam,Кофе Амстердам,,,,,irish_coffee_cup,1,"with_alcohol
+countries"
+coffe_dessert,Кофе Десертный,,,,,cappucino,2,with_alcohol
+coffe_don_zhuan,Кофе Дон Жуан,,,,,latte_glass,2,with_alcohol
+coffe_irish,Кофе Ирландский,,,,,irish_coffee_cup,1,"with_alcohol
+countries"
+coffe_napoleon,Кофе Наполеон,,,,,espresso,2,with_alcohol
+coffe_oflameron,Кофе Офламерон,,,,,cappucino,2,with_alcohol
+coffe_warming,Кофе согревающий,,,,,irish_coffee_cup,1,with_alcohol
+coffe_royal,Кофе Роял,,,,,espresso,1,with_alcohol
+coffe_rudesshimer,Кофе Рюдессхаймер,,,,,americano,1,with_alcohol
+coffe_with_coniaq,Кофе с коньяком,,,,,espresso,1,with_alcohol
+coffe_with_liquor,Кофе с ликером,,,,,cappucino,2,with_alcohol
+coffe_with_rum_1,Кофе с ромом (Рецепт 1),,,,,espresso,1,with_alcohol
+coffe_with_rum_2,Кофе с ромом (Рецепт 2),,,,,americano,4,with_alcohol
+coffe_with_tekila,Кофе с текилой,,,,,espresso,1,with_alcohol
+coffe_jamaika,Кофе Ямайка,,,,,cappucino,2,"with_alcohol
+countries"
+coffe_solemn,Кофейный напиток Торжественный,,,,,espresso,4,with_alcohol
+coffee_flip_portugal,Кофейный флип по-португальски,,,,,highball_glass,1,"with_alcohol
+countries"
+mokko_turkish,Мокко по-турецки,,,,,irish_coffee_cup,1,"with_alcohol
+countries"
+fire_coffee_2,Пылающий кофе,,,,,espresso,5,with_alcohol
+black_coffee_with_cconiaq,Черный кофе с коньяком,,,,,espresso,4,"with_alcohol
+black"
+jamaika_black_coffee,Ямайский черный кофе,,,,,americano,2,"with_alcohol
+countries
+black"
+,,,,,,,,
+ice_coffee_with_juice,Айс-кофе с соком,,,,,hurricane_glass,4,with_fruits
+bask_with_prunes,Баскский кофе с черносливом,,,,,irish_coffee_cup,2,"with_fruits
+countries"
+coffe_africa_1,Кофе Африка (Рецепт 1),,,,,americano,3,"with_fruits
+countries"
+coffe_africa_2,Кофе Африка (Рецепт 2),,,,,americano,4,"with_fruits
+countries"
+coffe_africa_3,Кофе Африка (Рецепт 3),,,,,americano,2,"with_fruits
+countries"
+coffee_with_orange_juice,Кофе с апельсиновым соком,,,,,americano,2,with_fruits
+coffee_with_lemon_juice,Кофе с лимонным соком,,,,,espresso,1,with_fruits
+coffe_with_lemon,Кофе с лимоном,,,,,espresso,5,with_fruits
+coffee_drink_exotic,Кофейный напиток Экзотика,,,,,americano,2,with_fruits
+coffe_drink_with_cherry_juice,Кофейный напиток с вишнёвым соком,,,,,americano,3,with_fruits
+coffe_drink_lahta,Кофейный напиток Лахта,,,,,hurricane_glass,2,with_fruits
+peach_cold_coffee,Персиковый холодный кофе,,,,,highball_glass,2,"with_fruits
+cold"
+morning_english_coffee,Утренний английский кофе,,,,,espresso,8,"with_fruits
+countries"
+black_coffee_forest,Черный кофе лесной,,,,,irish_coffee_cup,1,"with_fruits
+black"
+espresso_romano,Эспресо Романо,,,,,americano,1,with_fruits
+peach_cocktail,Персиковый коктейль,,,,,irish_coffee_cup,1,with_fruits
+,,,,,,,,
+home_coffee_drink,Домашний кофейный напиток,,,,,americano,5,with_honey
+honey_coffee,Медовый кофе,,,,,highball_glass,2,with_honey
+orient,Кофе Ориент,,,,,espresso,4,with_honey
+black_coffee_with_honey,Черный кофе с мёдом,,,,,margarita_glass,2,with_honey
+mokko_active,Мокко-актив,,,,,americano,4,with_honey
+,,,,,,,,
+ice_latte,Айс-латте,,,,,irish_coffee_cup,1,"with_syrops
+cold"
+ice_mokko_1,Айс мокко (Рецепт 1),,,,,hurricane_glass,4,"with_syrops
+cold"
+ice_mokko_2,Айс мокко (Рецепт 2),,,,,hurricane_glass,1,"with_syrops
+cold"
+vanilla_ice_coffe,Ванильный холодный кофе,,,,,irish_coffee_cup,1,"with_syrops
+cold"
+capucino_italian_caramel,Капучино Итальянская карамель,,,,,cappucino,1,"with_syrops
+with_milk"
+caramel_cold_coffee,Карамельный холодный кофе,,,,,hurricane_glass,1,"with_syrops
+cold"
+cocktail_bumble,Коктейль Бамбл,,,,,highball_glass,1,with_syrops
+coccktail_mirage,Коктейль Мираж,,,,,highball_glass,1,with_syrops
+cocktail_fidel,Коктейль Фидель,,,,,irish_coffee_cup,1,with_syrops
+coffe_with_character,Кофе с характером,,,,,americano,2,with_syrops
+latte_with_syrop,Латте с сиропом,,,,,irish_coffee_cup,1,"with_syrops
+with_milk"
+makkiato_with_syrop,Маккиато с сиропом,,,,,cappucino,1,with_syrops
+mokko_with_syrop,Мокко с сиропом,,,,,irish_coffee_cup,1,with_syrops
+mokko_frappe,Мокко фраппе,,,,,irish_coffee_cup,1,with_syrops
+cold_peanut_coffee,Холодный ореховый кофе,,,,,highball_glass,2,"with_syrops
+cold"
+,,,,,,,,
+bavarian_coffe,Баварский кофе,,,,,americano,1,"with_egg
+countries"
+belgian_coffee_lyezhua,Бельгийский кофе Льежуа,,,,,americano,2,"with_egg
+countries"
+coffe_bodrost,Кофе Бодрость,,,,,highball_glass,3,with_egg
+coffe_winter,Кофе Зима,,,,,cappucino,2,with_egg
+coffee_royal,Королевский кофе,,,,,cappucino,4,with_egg
+coffee_liverpool,Кофе Ливерпуль,,,,,cappucino,4,"with_egg
+countries"
+coffe_melanzh_leiptsig,Меланж по-лейпцигски,,,,,irish_coffee_cup,4,"with_egg
+countries"
+coffe_calories,Кофе питательный,,,,,cappucino,4,with_egg
+coffe_turkish_with_egg,Кофе по-турецки с яичным желтком,,,,,espresso,1,"with_egg
+countries"
+coffee_ruta,Кофе Рута,,,,,cappucino,2,with_egg
+coffee_with_gogol_mogol,Кофе с гоголь-моголем,,,,,americano,1,with_egg
+coffee_with_egg_yellow,Кофе с желтком,,,,,cappucino,1,with_egg
+coffe_with_egg,Кофе с яйцом,,,,,highball_glass,1,with_egg
+surrogate_coffe_for_recoverers,Суррогатный кофе для выздоравливающих,,,,,highball_glass,5,with_egg
+mokko_flip,Мокко флип,,,,,irish_coffee_cup,1,with_egg
+elixir_from_coffe,Эликсир из кофе,,,,,americano,4,with_egg
+,,,,,,,,
+ice_coffee_english,Айс-кофе по-английски,,,,,irish_coffee_cup,4,countries
+ice_coffee_vienn,Айс-кофе по-венски,,,,,hurricane_glass,4,countries
+ice_coffee_indian,Айс-кофе по-индийски,,,,,hurricane_glass,3,countries
+ice_coffee_lithuanian,Айс-кофе по-литовски,,,,,hurricane_glass,4,countries
+mokko_arabic,Мокко по-арабски,,,,,espresso,4,countries
+mokko_turkish,Мокко по-турецки,,,,,espresso,1,countries
+coffe_ausrian,Кофе по-австрийски,,,,,espresso,1,countries
+coffe_algirian,Кофе по-алжирски,,,,,espresso,1,countries
+coffe_berlin,Кофе по-берлински,,,,,highball_glass,1,countries
+coffe_brasilian,Кофе по-бразильски,,,,,americano,1,countries
+coffe_warsaw,Кофе по-варшавски,,,,,americano,4,countries
+coffe_hungarian,Кофе по-венгерски,,,,,espresso,1,countries
+coffe_vienn_1,Кофе по-венски (Рецепт 1),,,,,cappucino,2,countries
+coffe_vienn_2,Кофе по-венски (Рецепт 2),,,,,cappucino,4,countries
+coffe_vienn_spice,Кофе по-венски с пряностями,,,,,americano,4,countries
+coffe_vienn_farsi_1,Кофе по-венски Фарсией (Рецепт 1),,,,,irish_coffee_cup,1,countries
+coffe_vienn_farsi_2,Кофе по-венски Фарсией (Рецепт 2),,,,,irish_coffee_cup,1,countries
+coffe_eastern_chocolate,Кофе по-восточному с шоколадом,,,,,cappucino,1,"countries
+with_chocolate_and_cocoa"
+coffe_netherlands,Кофе по-голландски,,,,,americano,1,countries
+coffe_greece,Кофе по-гречески,,,,,espresso,1,countries
+coffe_egyptian,Кофе по-египетски,,,,,espresso,1,countries
+coffe_irish,Кофе по-ирландски,,,,,irish_coffee_cup,1,countries
+coffe_italian,Кофе по-итальянски,,,,,irish_coffee_cup,1,countries
+coffe_kazah,Кофе по-казацки,,,,,americano,4,countries
+coffe_mavritanian,Кофе по-мавритански,,,,,cappucino,2,countries
+coffe_mexiccacn,Кофе по-мексикански,,,,,americano,4,countries
+coffe_german,Кофе по-немецки,,,,,cappucino,2,countries
+coffe_pyshtian,Кофе по-пуштински,,,,,hurricane_glass,4,countries
+coffe_romanian,Кофе по-римски,,,,,latte_glass,4,countries
+coffe_rumynian,Кофе по-румынски,,,,,cappucino,4,countries
+coffe_russian,Кофе по-русски,,,,,cappucino,2,countries
+coffe_north_american,Кофе по-североамерикански,,,,,espresso,3,countries
+coffe_serbian,Кофе по-сербски,,,,,espresso,1,countries
+coffe_sicillian,Кофе по-сицилийски,,,,,espresso,4,countries
+coffe_turkish,Кофе по-турецки,,,,,espresso,1,countries
+coffe_finnish,Кофе по-фински,,,,,americano,4,countries
+coffe_french,Кофе по-французски,,,,,espresso,4,countries
+coffe_chezch,Кофе по-чешски,,,,,cappucino,1,countries
+coffe_shvartsevald,Кофе по-шварцвальдски,,,,,highball_glass,1,countries
+coffe_scottish,Кофе по-шотландски,,,,,highball_glass,1,countries
+cream_coffe_bavarian,Крем-кофе по-баварски,,,,,margarita_glass,2,countries
+,,,,,,,,
+ice_coffe_special,Айс-кофе особый,,,,,irish_coffee_cup,3,cold
+ice_coffe_cinnamon,Айс-кофе с корицей,,,,,hurricane_glass,3,"cold
+with_spices"
+ice_coffe_cream,Айс-кофе со сливками,,,,,margarita_glass,4,"cold
+with_milk"
+ice_coffe_chocolate,Айс-кофе шоколадный,,,,,hurricane_glass,4,"cold
+with_chocolate_and_cocoa"
+coffe_amaretto,Кофе Амаретто,,,,,hurricane_glass,1,cold
+orange_cold_coffee,Апельсиновый холодный кофе,,,,,highball_glass,1,"cold
+with_fruits"
+granita_di_coffee_con_panno,Гранита ди Кофе кон Панно,,,,,highball_glass,4,cold
+freezed_coffee,Замороженный кофе,,,,,espresso,1,cold
+cocktail_winter_cherry,Коктейль Зимняя вишня,,,,,highball_glass,1,"cold
+with_fruits"
+cokctail_cola,Коктейль Кола,,,,,highball_glass,1,cold
+coctail_shokoffee,Коктейль Шокофе,,,,,hurricane_glass,1,cold
+coffe_alexander,Кофе Александр,,,,,hurricane_glass,2,cold
+coffee_bahams,Кофе Багамы,,,,,hurricane_glass,2,cold
+coffee_strawberry_cold,Кофе Клубничный холодный,,,,,irish_coffee_cup,6,"cold
+with_fruits"
+coffee_porto,Кофе Порто,,,,,hurricane_glass,2,cold
+coffe_glasse,Кофе гляссе,,,,,hurricane_glass,1,cold
+granita_di_cafe_soda,Гранита ди Кафе-Сода,,,,,irish_coffee_cup,9,cold
+coffee_milk_zhannet,Кофе молочный Жаннет,,,,,irish_coffee_cup,2,"cold
+with_milk"
+coffee_with_mineral_water,Кофе с минеральной водой,,,,,americano,2,cold
+coffe_with_chocolate,Кофе с шоколадом,,,,,americano,3,cold
+coffee_fresh,Кофе Свежесть,,,,,irish_coffee_cup,4,cold
+coffe_serenade,Кофе Серенада,,,,,irish_coffee_cup,4,cold
+coffee_sport,Кофе Спорт,,,,,hurricane_glass,3,cold
+coffe_tihane,Кофе Тихане,,,,,irish_coffee_cup,4,cold
+coffee_eskimo,Кофе Эскимо,,,,,hurricane_glass,2,cold
+coffee_south,Кофе Южный,,,,,irish_coffee_cup,4,cold
+coffee_cocktail_nothhlady,Кофейный коктейль Снегурочка,,,,,irish_coffee_cup,4,cold
+egg_cold_coffee,Яичный холодный кофе,,,,,irish_coffee_cup,2,"cold
+with_egg"
+,,,,,,,,
+drop_coffee,Капельный кофе,,,,,americano,4,machie
+hot_chocolate,Горячий шоколад,,,,,cappucino,1,"machie
+with_chocolate_and_cocoa"
+espress_double,Эспрессо двойной,,,,,espresso,1,machie
+capuccino,Капучино,,,,,cappucino,1,"machie
+with_milk"
+classic_makkiato,Класссический макиато,,,,,cappucino,1,machie
+espresso_classic,Эспрессо классический,,,,,espresso,1,machie
+mokko_white,Мокко белый,,,,,irish_coffee_cup,1,machie
+cockochino,Кокочино,,,,,cappucino,1,machie
+coretto,Коретто,,,,,espresso,1,machie
+mokkochino,Моккочино,,,,,espresso,1,machie
+chokkochino,Шокочино,,,,,espresso,1,machie
+espresso_ameriacno,Эспрессо Американо,,,,,espresso,1,machie
+espresso_italiano,Эспрессо Итальяно,,,,,americano,2,machie
+espress_con_panna,Эспрессо Кон Панна,,,,,cappucino,1,machie
+cocktail_vagabung,Коктейль Кочевник,,,,,irish_coffee_cup,1,machie
+cocktail_pirate_dream,Коктейль Сон пирата,,,,,irish_coffee_cup,1,machie
+latte,Латте,,Frame%201.jpg,,,latte_glass,1,"machie
+with_milk"
+latte_makkiato,Латте маккиато,,,,,irish_coffee_cup,1,"machie
+with_milk"

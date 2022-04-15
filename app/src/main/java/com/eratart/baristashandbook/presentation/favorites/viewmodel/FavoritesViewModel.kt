@@ -11,7 +11,6 @@ import com.eratart.baristashandbook.domain.preferences.IAppPreferences
 import com.eratart.baristashandbook.tools.resources.IResourceManager
 
 class FavoritesViewModel(
-    private val appCacheInteractor: IAppCacheInteractor,
     private val favoritesInteractor: IFavoritesInteractor,
     resourceManager: IResourceManager,
     appPreferences: IAppPreferences
@@ -20,15 +19,8 @@ class FavoritesViewModel(
     private val _favoritesList = MutableLiveData<List<Item>>()
     val favoritesList: LiveData<List<Item>> = _favoritesList
 
-    private val _itemCategoriesFromCache = MutableLiveData<List<ItemCategory>>()
-    val itemCategoriesFromCache: LiveData<List<ItemCategory>> = _itemCategoriesFromCache
-
     override fun onCreate() {
         fetchFavorites()
-    }
-
-    private fun fetchCategories() {
-        _itemCategoriesFromCache.postValue(appCacheInteractor.getItemCategories())
     }
 
     fun fetchFavorites() {
