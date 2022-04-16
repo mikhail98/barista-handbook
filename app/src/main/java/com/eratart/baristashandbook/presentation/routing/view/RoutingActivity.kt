@@ -30,14 +30,14 @@ class RoutingActivity : BaseActivity<RoutingViewModel, ActivityRoutingBinding>()
 
     override fun initViewModel() {
         viewModel.apply {
-            observe(showOnboarding, ::handleOnboardingShown)
+            observe(data, ::handleData)
         }
     }
 
-    private fun handleOnboardingShown(isShown: Boolean) {
+    private fun handleData(data: Pair<Boolean, Boolean>) {
         postDelayed(1500) {
             globalNavigator.startMainMenuActivity(this)
-            if (!isShown) {
+            if (!data.first) {
                 globalNavigator.startOnboardingActivity(this)
             }
             overrideAnimationAndClose()

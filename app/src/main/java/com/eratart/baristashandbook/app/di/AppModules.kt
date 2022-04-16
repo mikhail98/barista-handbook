@@ -100,7 +100,7 @@ val repoModule = module {
 }
 
 val cacheModule = module {
-    single<IAppCache> { AppCache(get(), get(), get()) }
+    single<IAppCache> { AppCache(get(),get(), get(), get()) }
 }
 
 val interactorModule = module {

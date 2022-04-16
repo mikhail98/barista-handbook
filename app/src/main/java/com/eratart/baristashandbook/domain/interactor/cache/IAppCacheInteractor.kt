@@ -3,6 +3,8 @@ package com.eratart.baristashandbook.domain.interactor.cache
 import com.eratart.baristashandbook.domain.model.Dish
 import com.eratart.baristashandbook.domain.model.Item
 import com.eratart.baristashandbook.domain.model.ItemCategory
+import com.eratart.baristashandbook.domain.model.NewsBot
+import kotlinx.coroutines.flow.Flow
 
 interface IAppCacheInteractor {
     fun getItemCategories(): List<ItemCategory>
@@ -11,7 +13,9 @@ interface IAppCacheInteractor {
 
     fun getItems(): List<Item>
 
-    fun initCache()
+    fun getNews(): List<NewsBot>
+
+    suspend fun initCache(): Flow<Boolean>
 
     fun clearCache()
 }

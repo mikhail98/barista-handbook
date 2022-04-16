@@ -5,19 +5,28 @@ import com.eratart.baristashandbook.domain.cache.IAppCache
 import com.eratart.baristashandbook.domain.model.Dish
 import com.eratart.baristashandbook.domain.model.Item
 import com.eratart.baristashandbook.domain.model.ItemCategory
+import com.eratart.baristashandbook.domain.model.NewsBot
 import com.eratart.baristashandbook.domain.repository.IDishesRepo
 import com.eratart.baristashandbook.domain.repository.IItemCategoriesRepo
 import com.eratart.baristashandbook.domain.repository.IItemsRepo
+import com.eratart.baristashandbook.domain.repository.INewsRepo
+import kotlinx.coroutines.flow.*
 
 class AppCache(
     private val dishesRepo: IDishesRepo,
+    private val newsRepo: INewsRepo,
     private val itemsRepo: IItemsRepo,
     private val itemsCategoriesRepo: IItemCategoriesRepo
 ) : IAppCache {
 
-    private val cachedDishes = mutableListOf<Dish>()
     private val cachedItems = mutableListOf<Item>()
+    private val cachedDishes = mutableListOf<Dish>()
+    private val cachedNews = mutableListOf<NewsBot>()
     private val cachedCategories = mutableListOf<ItemCategory>()
+
+    override fun getNews(): List<NewsBot> {
+        return cachedNews
+    }
 
     override fun getDishes(): List<Dish> {
         if (cachedDishes.isEmpty()) {
@@ -62,15 +71,29 @@ class AppCache(
         cachedItems.replaceAllWith(list)
     }
 
+    override fun storeNews(list: List<NewsBot>) {
+        cachedNews.replaceAllWith(list)
+    }
+
     override fun clearCache() {
+        cachedNews.replaceAllWith(emptyList())
         cachedItems.replaceAllWith(emptyList())
         cachedDishes.replaceAllWith(emptyList())
         cachedCategories.replaceAllWith(emptyList())
     }
 
-    override fun initCache() {
+    override suspend fun initCache(): Flow<Boolean> {
         getDishes()
         getItems()
         getItemsCategories()
+
+        return newsRepo.getNews()
+            .map { list ->
+                storeNews(list)
+                true
+            }
+            .catch {
+                emit(false)
+            }
     }
 }
