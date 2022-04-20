@@ -19,6 +19,7 @@ import com.eratart.baristashandbook.core.ext.loadImageWithGlide
 import com.eratart.baristashandbook.core.ext.visible
 import com.google.android.material.textview.MaterialTextView
 import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.FlowPreview
 import kotlinx.coroutines.channels.awaitClose
@@ -141,7 +142,7 @@ class AppBar(context: Context, attributeSet: AttributeSet? = null) :
             }
         }.debounce(searchDebounce)
             .onEach { listener.invoke(it) }
-            .launchIn(activity as CoroutineScope)
+            .launchIn(CoroutineScope(Dispatchers.Main))
     }
 
     private fun initBackBtn() {

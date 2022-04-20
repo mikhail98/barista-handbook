@@ -15,15 +15,13 @@ import com.eratart.baristashandbook.core.ext.observe
 import com.eratart.baristashandbook.core.ext.visibleWithAlpha
 import com.eratart.baristashandbook.domain.firebase.IFirebaseAnalyticsManager
 import com.eratart.baristashandbook.tools.navigator.IGlobalNavigator
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers
 import org.koin.android.ext.android.inject
 import org.koin.android.scope.AndroidScopeComponent
 import org.koin.androidx.scope.activityScope
 import org.koin.core.scope.Scope
 
 abstract class BaseActivity<VM : BaseViewModel, VB : ViewBinding> : AppCompatActivity(),
-    AndroidScopeComponent, CoroutineScope {
+    AndroidScopeComponent {
 
     abstract val binding: VB?
     abstract val viewModel: VM
@@ -31,7 +29,6 @@ abstract class BaseActivity<VM : BaseViewModel, VB : ViewBinding> : AppCompatAct
     abstract fun initView()
     abstract fun initViewModel()
 
-    override val coroutineContext = Dispatchers.Main
     override val scope: Scope by activityScope()
     protected val globalNavigator: IGlobalNavigator by inject()
     val analyticsManager: IFirebaseAnalyticsManager by inject()
