@@ -70,7 +70,7 @@ class ItemDetailsActivity : BaseActivity<ItemDetailsViewModel, ActivityItemDetai
 
     private fun initItem(item: Item, data: Triple<Boolean, Dish, List<ItemCategory>>) {
         appBar.initShareBtn(AnalyticsEvents.click_item_details_share) {
-            shareUtil.shareItemAsText(item)
+            shareUtil.shareItemAsText(item, data.second)
         }
         if (item.photos.isNotEmpty()) {
             ivDrink.loadImageWithGlide(item.photos.first())
