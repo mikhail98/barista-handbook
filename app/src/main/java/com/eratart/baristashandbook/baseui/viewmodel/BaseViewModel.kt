@@ -8,16 +8,20 @@ import com.eratart.baristashandbook.core.ext.applyBeforeAfter
 import com.eratart.baristashandbook.core.ext.printError
 import com.eratart.baristashandbook.domain.preferences.IAppPreferences
 import com.eratart.baristashandbook.tools.resources.IResourceManager
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.cancelChildren
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.catch
 
 abstract class BaseViewModel(
     protected val resourceManager: IResourceManager,
     protected val appPreferences: IAppPreferences
-) : ViewModel() {
+) : ViewModel(), CoroutineScope {
 
     open fun onCreate() {}
 
+    override val coroutineContext by lazy { Dispatchers.IO }
     private val _isLoading = MutableLiveData<Boolean>()
     val isLoading: LiveData<Boolean> = _isLoading
 
@@ -26,6 +30,10 @@ abstract class BaseViewModel(
 
     fun setLoading(value: Boolean) {
         _isLoading.postValue(value)
+    }
+
+    open fun onDestroy() {
+        coroutineContext.cancelChildren()
     }
 
     protected fun <T> Flow<T>.applyLoader(): Flow<T> {

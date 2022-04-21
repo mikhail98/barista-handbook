@@ -86,4 +86,9 @@ abstract class BaseActivity<VM : BaseViewModel, VB : ViewBinding> : AppCompatAct
     private fun handleMessage(message: String) {
         Toast.makeText(this, message, Toast.LENGTH_LONG).show()
     }
+
+    override fun onDestroy() {
+        viewModel.onDestroy()
+        super.onDestroy()
+    }
 }

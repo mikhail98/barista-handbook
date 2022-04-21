@@ -2,7 +2,6 @@ package com.eratart.baristashandbook.presentation.routing.viewmodel
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.viewModelScope
 import com.eratart.baristashandbook.baseui.viewmodel.BaseViewModel
 import com.eratart.baristashandbook.core.ext.launchFlow
 import com.eratart.baristashandbook.core.ext.onNext
@@ -26,7 +25,7 @@ class RoutingViewModel(
     }
 
     private fun loadDataToCache() {
-        viewModelScope.launchFlow {
+        launchFlow {
             appCacheInteractor.initCache()
                 .onNext { data ->
                     _data.postValue(Pair(onboardingPreferences.isStartupOnboardingShown(), data))
