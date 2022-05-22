@@ -14,6 +14,7 @@ import com.eratart.baristashandbook.data.repository.DishesRepo
 import com.eratart.baristashandbook.data.repository.ItemCategoriesRepo
 import com.eratart.baristashandbook.data.repository.ItemsRepo
 import com.eratart.baristashandbook.data.repository.NewsRepo
+import com.eratart.baristashandbook.data.repository.base.BaseDBRepo
 import com.eratart.baristashandbook.domain.cache.IAppCache
 import com.eratart.baristashandbook.domain.firebase.IFirebaseAnalyticsManager
 import com.eratart.baristashandbook.domain.interactor.cache.AppCacheInteractor
@@ -34,6 +35,7 @@ import com.eratart.baristashandbook.tools.navigator.IGlobalNavigator
 import com.eratart.baristashandbook.tools.resources.IResourceManager
 import com.eratart.baristashandbook.tools.resources.ResourceManager
 import com.google.firebase.analytics.FirebaseAnalytics
+import com.google.firebase.database.FirebaseDatabase
 import org.koin.core.module.Module
 import org.koin.dsl.module
 
@@ -42,6 +44,7 @@ object AppModules {
         val modulesList = mutableListOf<Module>()
         modulesList.add(appModule)
         modulesList.add(analyticsModule)
+        modulesList.add(databaseModule)
 
         modulesList.add(repoModule)
         modulesList.add(preferencesModule)
@@ -64,6 +67,10 @@ val analyticsModule = module {
     single<IFirebaseAnalyticsManager> { FirebaseAnalyticsManager(get()) }
 }
 
+val databaseModule = module {
+    single { FirebaseDatabase.getInstance(BaseDBRepo.DATABASE) }
+}
+
 val repoModule = module {
     single<IItemCategoriesRepo> { ItemCategoriesRepo(get()) }
     single<IDishesRepo> { DishesRepo(get()) }
@@ -72,7 +79,7 @@ val repoModule = module {
 }
 
 val cacheModule = module {
-    single<IAppCache> { AppCache(get(), get(), get(), get()) }
+    single<IAppCache> { AppCache(get(), get(), get(), get(), get()) }
 }
 
 val interactorModule = module {

@@ -73,7 +73,7 @@ class ItemDetailsActivity : BaseActivity<ItemDetailsViewModel, ActivityItemDetai
     }
 
     private fun initItem(item: Item, data: Triple<Boolean, Dish, List<ItemCategory>>) {
-        this.itemData = itemData
+        this.itemData = data
         appBar.initShareBtn(AnalyticsEvents.click_item_details_share) {
             shareUtil.shareItemAsText(item, data.second)
         }

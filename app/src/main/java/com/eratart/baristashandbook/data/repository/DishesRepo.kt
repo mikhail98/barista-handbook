@@ -1,20 +1,13 @@
 package com.eratart.baristashandbook.data.repository
 
-import android.content.Context
-import com.eratart.baristashandbook.core.constants.StringConstants
-import com.eratart.baristashandbook.data.mapper.repo.DishesMapper
-import com.eratart.baristashandbook.domain.model.Dish
+import com.eratart.baristashandbook.data.mapper.repo.DishesDBMapper
+import com.eratart.baristashandbook.data.repository.base.BaseDBRepo
 import com.eratart.baristashandbook.domain.repository.IDishesRepo
+import com.google.firebase.database.FirebaseDatabase
 
-class DishesRepo(context: Context) : BaseRepo(context), IDishesRepo {
+class DishesRepo(database: FirebaseDatabase) : BaseDBRepo(database), IDishesRepo {
 
-    companion object {
-        private const val TABLE_PREFIX = "dishes".plus(StringConstants.UNDERLINE)
-    }
+    override val databasePostfix = "1EzzVuFtO9HsD1z7pencFROPtnrdgMzperQ7Pb02jfTw/ru"
 
-    private val dishesMapper by lazy { DishesMapper() }
-
-    override fun getDishes(): List<Dish> {
-        return getDataFromTable(TABLE_PREFIX, dishesMapper)
-    }
+    override fun getDishes() = getDataFlowFromDatabase(DishesDBMapper())
 }

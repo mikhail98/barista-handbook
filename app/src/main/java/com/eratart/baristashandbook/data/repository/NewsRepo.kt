@@ -34,7 +34,7 @@ class NewsRepo(private val tgApi: TgApi) : INewsRepo {
                                 Gson().fromJson(message.text, NewsBotResponse::class.java)
                             news.add(NewsFromBotMapper(message).mapFrom(newsResponse))
                         } catch (e: Exception) {
-                            e.printError()
+                            //e.printError()
                         }
                     }
                 news.sortedBy { item -> item.date }.asReversed()

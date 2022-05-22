@@ -30,7 +30,7 @@ class AppCacheInteractor(private val appCache: IAppCache) : IAppCacheInteractor 
     }
 
     override suspend fun initCache(): Flow<Boolean> {
-        return appCache.initCache()
+        return appCache.initCache().flowOn(Dispatchers.IO)
     }
 
     override fun clearCache() {

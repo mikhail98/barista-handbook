@@ -10,13 +10,15 @@ import com.eratart.baristashandbook.domain.repository.IDishesRepo
 import com.eratart.baristashandbook.domain.repository.IItemCategoriesRepo
 import com.eratart.baristashandbook.domain.repository.IItemsRepo
 import com.eratart.baristashandbook.domain.repository.INewsRepo
+import com.google.firebase.database.FirebaseDatabase
 import kotlinx.coroutines.flow.*
 
 class AppCache(
     private val dishesRepo: IDishesRepo,
     private val newsRepo: INewsRepo,
     private val itemsRepo: IItemsRepo,
-    private val itemsCategoriesRepo: IItemCategoriesRepo
+    private val itemsCategoriesRepo: IItemCategoriesRepo,
+    private val firebaseDatabase: FirebaseDatabase
 ) : IAppCache {
 
     private val cachedItems = mutableListOf<Item>()
@@ -29,24 +31,14 @@ class AppCache(
     }
 
     override fun getDishes(): List<Dish> {
-        if (cachedDishes.isEmpty()) {
-            storeDishes(dishesRepo.getDishes())
-        }
         return cachedDishes
     }
 
     override fun getItems(): List<Item> {
-        if (cachedItems.isEmpty()) {
-            storeItems(itemsRepo.getItems())
-        }
         return cachedItems
     }
 
     override fun getItemsCategories(): List<ItemCategory> {
-        if (cachedCategories.isEmpty()) {
-            storeItemsCategories(itemsCategoriesRepo.getItemCategories())
-        }
-
         return cachedCategories
     }
 
@@ -83,15 +75,26 @@ class AppCache(
     }
 
     override suspend fun initCache(): Flow<Boolean> {
-        getDishes()
-        getItems()
-        getItemsCategories()
+        val zip1 = newsRepo.getNews()
+            .zip(dishesRepo.getDishes()) { news, dishes ->
+                Pair(news, dishes)
+            }
 
-        return newsRepo.getNews()
-            .map { list ->
-                storeNews(list)
+        val zip2 = itemsRepo.getItems()
+            .zip(itemsCategoriesRepo.getItemCategories()) { items, itemCategories ->
+                Pair(items, itemCategories)
+            }
+        return zip1.zip(zip2) { data1, data2 ->
+            Pair(data1, data2)
+        }
+            .map { data ->
+                storeNews(data.first.first)
+                storeDishes(data.first.second)
+                storeItems(data.second.first)
+                storeItemsCategories(data.second.second)
                 true
             }
+            .onCompletion { firebaseDatabase.goOffline() }
             .catch {
                 emit(false)
             }

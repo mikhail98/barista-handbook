@@ -38,12 +38,14 @@ class RoutingActivity : BaseActivity<RoutingViewModel, ActivityRoutingBinding>()
     }
 
     private fun handleData(data: Pair<Boolean, Boolean>) {
-        postDelayed(1500) {
-            globalNavigator.startMainMenuActivity(this)
-            if (!data.first) {
-                globalNavigator.startOnboardingActivity(this)
+        if (data.second) {
+            postDelayed(1500) {
+                globalNavigator.startMainMenuActivity(this)
+                if (!data.first) {
+                    globalNavigator.startOnboardingActivity(this)
+                }
+                overrideAnimationAndClose()
             }
-            overrideAnimationAndClose()
         }
     }
 
