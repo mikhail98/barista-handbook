@@ -1,7 +1,7 @@
 apply from: "dependencies.gradle"
 
 ext.appVersion = [
-        versionCode: sdk.majorVersion * 10000 + sdk.minorVersion * 1000 + sdk.patchVersion,
+        versionCode: sdk.majorVersion * 10000 + sdk.minorVersion * 1000 + sdk.patchVersion * 10 + sdk.buildVersion,
         versionName: "v$sdk.majorVersion.$sdk.minorVersion.$sdk.patchVersion"
 ]
 
