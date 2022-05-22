@@ -49,7 +49,7 @@ class ShareTool(private val activity: Activity) : IShareTool {
     override fun shareImage(bitmap: Bitmap, text: String, title: String?) {
         if (isMoreThanQ() || permissionsManager.checkWritePermissions()) {
             val textToShare = text.plus(getAppUrlSuffix(true))
-            val bitmapUri = Uri.parse(saveBitmap(bitmap))
+            val bitmapUri = getBitmapUri(bitmap)
             val sendIntent = Intent().apply {
                 putExtra(Intent.EXTRA_TEXT, textToShare)
                 putExtra(Intent.EXTRA_STREAM, bitmapUri)
@@ -58,20 +58,22 @@ class ShareTool(private val activity: Activity) : IShareTool {
         }
     }
 
-    private fun saveBitmap(bitmap: Bitmap): String {
+    private fun getBitmapUri(bitmap: Bitmap): Uri {
         return if (isMoreThanQ()) {
-            MediaStore.Images.Media.insertImage(
+            val path = MediaStore.Images.Media.insertImage(
                 activity.contentResolver, bitmap, IMAGE_TMP, null
             )
+            Uri.parse(path)
         } else {
-            val imagesDir =
-                Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_PICTURES)
-            val image = File(imagesDir, System.currentTimeMillis().toString())
+            val imagesDir = activity.getExternalFilesDir(Environment.DIRECTORY_PICTURES)
+            val image = File(imagesDir, System.currentTimeMillis().toString().plus(".jpeg"))
 
-            FileOutputStream(image).use {
+            val fos = FileOutputStream(image)
+            fos.use {
                 bitmap.compress(Bitmap.CompressFormat.JPEG, 100, it)
             }
-            image.absolutePath
+            fos.close()
+            getUriForFile(image)
         }
     }
 
@@ -80,14 +82,18 @@ class ShareTool(private val activity: Activity) : IShareTool {
     }
 
     override fun sharePdf(file: File, title: String?) {
-        val imageUri = FileProvider.getUriForFile(
-            activity, BuildConfig.APPLICATION_ID.plus(PROVIDER_SUFFIX), file
-        )
+        val imageUri = getUriForFile(file)
         val sendIntent = Intent().apply {
             putExtra(Intent.EXTRA_TEXT, getAppUrlSuffix(false))
             putExtra(Intent.EXTRA_STREAM, imageUri)
         }
         startActivity(sendIntent, TYPE_PDF, title)
+    }
+
+    private fun getUriForFile(file: File): Uri {
+        return FileProvider.getUriForFile(
+            activity, BuildConfig.APPLICATION_ID.plus(PROVIDER_SUFFIX), file
+        )
     }
 
     private fun startActivity(intent: Intent, extraType: String, title: String?) {
@@ -114,5 +120,4 @@ class ShareTool(private val activity: Activity) : IShareTool {
             .plus(BuildConfig.APP_URL_GOOGLE)
         return string
     }
-
 }
