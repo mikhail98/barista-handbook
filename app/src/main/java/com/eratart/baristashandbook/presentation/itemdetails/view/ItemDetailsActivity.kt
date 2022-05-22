@@ -12,6 +12,7 @@ import com.eratart.baristashandbook.domain.firebase.AnalyticsEvents
 import com.eratart.baristashandbook.domain.model.Dish
 import com.eratart.baristashandbook.domain.model.Item
 import com.eratart.baristashandbook.domain.model.ItemCategory
+import com.eratart.baristashandbook.presentation.itemdetails.di.itemDetailsModule
 import com.eratart.baristashandbook.presentation.itemdetails.view.recycler.ingredients.IngredientAdapter
 import com.eratart.baristashandbook.presentation.itemdetails.view.recycler.instructions.InstructionAdapter
 import com.eratart.baristashandbook.presentation.itemdetails.view.recycler.instructions.InstructionViewHolder
@@ -33,6 +34,7 @@ class ItemDetailsActivity : BaseActivity<ItemDetailsViewModel, ActivityItemDetai
     private val shareUtil: IShareUtil by inject()
     override val viewModel: ItemDetailsViewModel by viewModel()
     override val binding by lazy { ActivityItemDetailsBinding.inflate(layoutInflater) }
+    override val koinModules = listOf(itemDetailsModule)
 
     private val appBar by lazy { binding.appBar }
     private val ivDrink by lazy { binding.ivDrink }
@@ -43,6 +45,8 @@ class ItemDetailsActivity : BaseActivity<ItemDetailsViewModel, ActivityItemDetai
     private val tvDish by lazy { binding.tvDish }
     private val rvIngredients by lazy { binding.rvIngredients }
     private val rvInstructions by lazy { binding.rvInstructions }
+
+    private var itemData: Triple<Boolean, Dish, List<ItemCategory>>? = null
 
     override fun initView() {
         appBar.init(this)
@@ -69,6 +73,7 @@ class ItemDetailsActivity : BaseActivity<ItemDetailsViewModel, ActivityItemDetai
     }
 
     private fun initItem(item: Item, data: Triple<Boolean, Dish, List<ItemCategory>>) {
+        this.itemData = itemData
         appBar.initShareBtn(AnalyticsEvents.click_item_details_share) {
             shareUtil.shareItemAsText(item, data.second)
         }
@@ -123,6 +128,14 @@ class ItemDetailsActivity : BaseActivity<ItemDetailsViewModel, ActivityItemDetai
             layoutManager = LinearLayoutManager(context)
             adapter = InstructionAdapter(item.instructions.toMutableList()).apply {
                 setLinkClickListener(this@ItemDetailsActivity)
+            }
+        }
+    }
+
+    override fun onWritePermissionsGranted() {
+        item?.run {
+            itemData?.second?.let { dish ->
+                shareUtil.shareItemAsText(this@run, dish)
             }
         }
     }

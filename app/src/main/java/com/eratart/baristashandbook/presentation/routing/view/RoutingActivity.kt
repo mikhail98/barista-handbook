@@ -8,6 +8,7 @@ import com.eratart.baristashandbook.baseui.activity.BaseActivity
 import com.eratart.baristashandbook.core.ext.observe
 import com.eratart.baristashandbook.core.ext.postDelayed
 import com.eratart.baristashandbook.databinding.ActivityRoutingBinding
+import com.eratart.baristashandbook.presentation.routing.di.routingModule
 import com.eratart.baristashandbook.presentation.routing.viewmodel.RoutingViewModel
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
@@ -15,6 +16,8 @@ class RoutingActivity : BaseActivity<RoutingViewModel, ActivityRoutingBinding>()
 
     override val viewModel: RoutingViewModel by viewModel()
     override val binding by lazy { ActivityRoutingBinding.inflate(layoutInflater) }
+
+    override val koinModules = listOf(routingModule)
 
     override fun onCreate(savedInstanceState: Bundle?) {
         installSplashScreen()

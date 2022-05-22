@@ -29,20 +29,6 @@ import com.eratart.baristashandbook.domain.repository.IDishesRepo
 import com.eratart.baristashandbook.domain.repository.IItemCategoriesRepo
 import com.eratart.baristashandbook.domain.repository.IItemsRepo
 import com.eratart.baristashandbook.domain.repository.INewsRepo
-import com.eratart.baristashandbook.presentation.appinfo.di.appInfoModule
-import com.eratart.baristashandbook.presentation.artinstructions.di.artInstructionsModule
-import com.eratart.baristashandbook.presentation.dishdetails.di.dishDetailsModule
-import com.eratart.baristashandbook.presentation.disheslist.di.dishesListModule
-import com.eratart.baristashandbook.presentation.favorites.di.favoritesModule
-import com.eratart.baristashandbook.presentation.itemdetails.di.itemDetailsModule
-import com.eratart.baristashandbook.presentation.itemscategorieslist.di.itemsCategoriesListModule
-import com.eratart.baristashandbook.presentation.itemslist.di.itemsListModule
-import com.eratart.baristashandbook.presentation.mainmenu.di.mainMenuModule
-import com.eratart.baristashandbook.presentation.news_details.di.newsDetailsModule
-import com.eratart.baristashandbook.presentation.news_list.di.newsListModule
-import com.eratart.baristashandbook.presentation.onboarding.di.onboardingModule
-import com.eratart.baristashandbook.presentation.routing.di.routingModule
-import com.eratart.baristashandbook.presentation.settings.di.settingsModule
 import com.eratart.baristashandbook.tools.navigator.GlobalNavigator
 import com.eratart.baristashandbook.tools.navigator.IGlobalNavigator
 import com.eratart.baristashandbook.tools.resources.IResourceManager
@@ -62,20 +48,6 @@ object AppModules {
         modulesList.add(interactorModule)
         modulesList.add(cacheModule)
 
-        modulesList.add(appInfoModule)
-        modulesList.add(artInstructionsModule)
-        modulesList.add(dishDetailsModule)
-        modulesList.add(dishesListModule)
-        modulesList.add(favoritesModule)
-        modulesList.add(itemDetailsModule)
-        modulesList.add(itemsCategoriesListModule)
-        modulesList.add(itemsListModule)
-        modulesList.add(mainMenuModule)
-        modulesList.add(newsListModule)
-        modulesList.add(newsDetailsModule)
-        modulesList.add(onboardingModule)
-        modulesList.add(settingsModule)
-        modulesList.add(routingModule)
         return modulesList
     }
 }
@@ -100,7 +72,7 @@ val repoModule = module {
 }
 
 val cacheModule = module {
-    single<IAppCache> { AppCache(get(),get(), get(), get()) }
+    single<IAppCache> { AppCache(get(), get(), get(), get()) }
 }
 
 val interactorModule = module {

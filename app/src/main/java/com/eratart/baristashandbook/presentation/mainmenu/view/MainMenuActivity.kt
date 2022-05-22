@@ -11,12 +11,14 @@ import com.eratart.baristashandbook.databinding.ActivityMainMenuBinding
 import com.eratart.baristashandbook.domain.firebase.AnalyticsEvents
 import com.eratart.baristashandbook.domain.model.Dish
 import com.eratart.baristashandbook.domain.model.ItemCategory
+import com.eratart.baristashandbook.presentation.mainmenu.di.mainMenuModule
 import com.eratart.baristashandbook.presentation.mainmenu.viewmodel.MainViewModel
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class MainMenuActivity : BaseActivity<MainViewModel, ActivityMainMenuBinding>() {
 
     override val viewModel: MainViewModel by viewModel()
+    override val koinModules = listOf(mainMenuModule)
 
     override val binding by lazy { ActivityMainMenuBinding.inflate(layoutInflater) }
     private val llMenu by lazy { binding.llMenu }

@@ -9,15 +9,18 @@ import com.eratart.baristashandbook.core.ext.setHeight
 import com.eratart.baristashandbook.core.util.TextViewUrlUtil.setLinksClickable
 import com.eratart.baristashandbook.databinding.ActivityAppInfoBinding
 import com.eratart.baristashandbook.domain.firebase.AnalyticsEvents
+import com.eratart.baristashandbook.presentation.appinfo.di.appInfoModule
 import com.eratart.baristashandbook.presentation.appinfo.viewmodel.AppInfoViewModel
 import com.eratart.baristashandbook.tools.share.IShareTool
 import org.koin.android.ext.android.inject
 import org.koin.androidx.viewmodel.ext.android.viewModel
+import org.koin.core.module.Module
 
 class AppInfoActivity : BaseActivity<AppInfoViewModel, ActivityAppInfoBinding>() {
 
     private val shareTool: IShareTool by inject()
     override val viewModel: AppInfoViewModel by viewModel()
+    override val koinModules = listOf(appInfoModule)
 
     override val binding by lazy { ActivityAppInfoBinding.inflate(layoutInflater) }
     private val appBar by lazy { binding.appBar }

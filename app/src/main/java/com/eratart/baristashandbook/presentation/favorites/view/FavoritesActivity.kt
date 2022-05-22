@@ -5,6 +5,7 @@ import com.eratart.baristashandbook.core.ext.observe
 import com.eratart.baristashandbook.core.ext.replaceAllWith
 import com.eratart.baristashandbook.domain.firebase.AnalyticsEvents
 import com.eratart.baristashandbook.domain.model.Item
+import com.eratart.baristashandbook.presentation.favorites.di.favoritesModule
 import com.eratart.baristashandbook.presentation.favorites.viewmodel.FavoritesViewModel
 import com.eratart.baristashandbook.presentationbase.itemslistactivity.BaseItemsListActivity
 import org.koin.androidx.viewmodel.ext.android.viewModel
@@ -14,6 +15,7 @@ class FavoritesActivity : BaseItemsListActivity<FavoritesViewModel>() {
     override val titleRes = R.string.main_menu_favorites
     override var swipeEnabled = true
     override val viewModel: FavoritesViewModel by viewModel()
+    override val koinModules = listOf(favoritesModule)
 
     override val searchAnalyticsEvent by lazy { AnalyticsEvents.click_favorites_search }
 

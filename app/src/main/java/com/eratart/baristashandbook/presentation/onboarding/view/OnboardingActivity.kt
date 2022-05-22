@@ -11,6 +11,7 @@ import com.eratart.baristashandbook.core.ext.setTextAnimation
 import com.eratart.baristashandbook.core.ext.setViewPageScroller
 import com.eratart.baristashandbook.databinding.ActivityOnboardingBinding
 import com.eratart.baristashandbook.domain.firebase.AnalyticsEvents
+import com.eratart.baristashandbook.presentation.onboarding.di.onboardingModule
 import com.eratart.baristashandbook.presentation.onboarding.model.AnalyticsData
 import com.eratart.baristashandbook.presentation.onboarding.model.OnboardingModel
 import com.eratart.baristashandbook.presentation.onboarding.model.OnboardingModelsUtil
@@ -33,6 +34,8 @@ class OnboardingActivity : BaseActivity<OnboardingViewModel, ActivityOnboardingB
     private val pagerAdapter by lazy { OnboardingViewPagerAdapter(this, models) }
 
     private var isAfterClick = false
+
+    override val koinModules = listOf(onboardingModule)
 
     override fun initView() {
         vpOnboarding.apply {

@@ -3,6 +3,7 @@ package com.eratart.baristashandbook.presentation.itemslist.view
 import com.eratart.baristashandbook.R
 import com.eratart.baristashandbook.domain.firebase.AnalyticsEvents
 import com.eratart.baristashandbook.domain.model.Item
+import com.eratart.baristashandbook.presentation.itemslist.di.itemsListModule
 import com.eratart.baristashandbook.presentation.itemslist.viewmodel.ItemsListViewModel
 import com.eratart.baristashandbook.presentationbase.itemslistactivity.BaseItemsListActivity
 import org.koin.androidx.viewmodel.ext.android.viewModel
@@ -11,6 +12,7 @@ class ItemsListActivity : BaseItemsListActivity<ItemsListViewModel>() {
 
     override val titleRes = R.string.main_menu_drinks
     override val viewModel: ItemsListViewModel by viewModel()
+    override val koinModules = listOf(itemsListModule)
 
     override val searchAnalyticsEvent by lazy { AnalyticsEvents.click_items_list_search }
 

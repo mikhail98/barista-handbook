@@ -4,12 +4,17 @@ import android.app.Activity
 import android.content.Intent
 import android.graphics.Bitmap
 import android.net.Uri
+import android.os.Build
+import android.os.Environment
 import android.provider.MediaStore
 import androidx.core.content.FileProvider
 import com.eratart.baristashandbook.BuildConfig
 import com.eratart.baristashandbook.R
 import com.eratart.baristashandbook.core.constants.StringConstants
+import com.eratart.baristashandbook.tools.permissions.IPermissionsManager
+import com.eratart.baristashandbook.tools.permissions.PermissionsManager
 import java.io.File
+import java.io.FileOutputStream
 
 class ShareTool(private val activity: Activity) : IShareTool {
 
@@ -22,6 +27,8 @@ class ShareTool(private val activity: Activity) : IShareTool {
 
         private const val IMAGE_TMP = "image_tmp"
     }
+
+    private val permissionsManager: IPermissionsManager by lazy { PermissionsManager(activity) }
 
     override fun shareApp() {
         val textToShare = getAppUrlSuffix(false)
@@ -40,16 +47,36 @@ class ShareTool(private val activity: Activity) : IShareTool {
     }
 
     override fun shareImage(bitmap: Bitmap, text: String, title: String?) {
-        val textToShare = text.plus(getAppUrlSuffix(true))
-        val bitmapPath = MediaStore.Images.Media.insertImage(
-            activity.contentResolver, bitmap, IMAGE_TMP, null
-        )
-        val bitmapUri = Uri.parse(bitmapPath)
-        val sendIntent = Intent().apply {
-            putExtra(Intent.EXTRA_TEXT, textToShare)
-            putExtra(Intent.EXTRA_STREAM, bitmapUri)
+        if (isMoreThanQ() || permissionsManager.checkWritePermissions()) {
+            val textToShare = text.plus(getAppUrlSuffix(true))
+            val bitmapUri = Uri.parse(saveBitmap(bitmap))
+            val sendIntent = Intent().apply {
+                putExtra(Intent.EXTRA_TEXT, textToShare)
+                putExtra(Intent.EXTRA_STREAM, bitmapUri)
+            }
+            startActivity(sendIntent, TYPE_IMAGE, title)
         }
-        startActivity(sendIntent, TYPE_IMAGE, title)
+    }
+
+    private fun saveBitmap(bitmap: Bitmap): String {
+        return if (isMoreThanQ()) {
+            MediaStore.Images.Media.insertImage(
+                activity.contentResolver, bitmap, IMAGE_TMP, null
+            )
+        } else {
+            val imagesDir =
+                Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_PICTURES)
+            val image = File(imagesDir, System.currentTimeMillis().toString())
+
+            FileOutputStream(image).use {
+                bitmap.compress(Bitmap.CompressFormat.JPEG, 100, it)
+            }
+            image.absolutePath
+        }
+    }
+
+    private fun isMoreThanQ(): Boolean {
+        return Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q
     }
 
     override fun sharePdf(file: File, title: String?) {
