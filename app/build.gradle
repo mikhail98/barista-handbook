@@ -19,6 +19,7 @@ android {
         minSdkVersion sdk.minSdkVersion
         targetSdkVersion sdk.targetSdkVersion
         versionCode appVersion.versionCode
+
         versionName appVersion.versionName
 
         archivesBaseName = archives.archivesBaseName
