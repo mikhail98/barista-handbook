@@ -36,7 +36,6 @@ abstract class BaseFragment<VM : BaseViewModel, VB : ViewBinding> : Fragment(),
 
         viewModel.apply {
             observe(isLoading, ::renderLoader)
-            onCreate()
         }
         initView()
     }
