@@ -4,6 +4,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.eratart.baristashandbook.R
 import com.eratart.baristashandbook.baseui.activity.BaseActivity
 import com.eratart.baristashandbook.baseui.utils.PluralsUtil
+import com.eratart.baristashandbook.core.constants.IntConstants
 import com.eratart.baristashandbook.core.constants.StringConstants
 import com.eratart.baristashandbook.core.ext.*
 import com.eratart.baristashandbook.databinding.ActivityItemDetailsBinding
@@ -11,6 +12,7 @@ import com.eratart.baristashandbook.domain.firebase.AnalyticsEvents
 import com.eratart.baristashandbook.domain.model.Dish
 import com.eratart.baristashandbook.domain.model.Item
 import com.eratart.baristashandbook.domain.model.ItemCategory
+import com.eratart.baristashandbook.presentation.itemdetails.di.itemDetailsModule
 import com.eratart.baristashandbook.presentation.itemdetails.view.recycler.ingredients.IngredientAdapter
 import com.eratart.baristashandbook.presentation.itemdetails.view.recycler.instructions.InstructionAdapter
 import com.eratart.baristashandbook.presentation.itemdetails.view.recycler.instructions.InstructionViewHolder
@@ -32,6 +34,7 @@ class ItemDetailsActivity : BaseActivity<ItemDetailsViewModel, ActivityItemDetai
     private val shareUtil: IShareUtil by inject()
     override val viewModel: ItemDetailsViewModel by viewModel()
     override val binding by lazy { ActivityItemDetailsBinding.inflate(layoutInflater) }
+    override val koinModules = listOf(itemDetailsModule)
 
     private val appBar by lazy { binding.appBar }
     private val ivDrink by lazy { binding.ivDrink }
@@ -42,6 +45,8 @@ class ItemDetailsActivity : BaseActivity<ItemDetailsViewModel, ActivityItemDetai
     private val tvDish by lazy { binding.tvDish }
     private val rvIngredients by lazy { binding.rvIngredients }
     private val rvInstructions by lazy { binding.rvInstructions }
+
+    private var itemData: Triple<Boolean, Dish, List<ItemCategory>>? = null
 
     override fun initView() {
         appBar.init(this)
@@ -57,7 +62,7 @@ class ItemDetailsActivity : BaseActivity<ItemDetailsViewModel, ActivityItemDetai
         viewModel.fetchIsFavorite(item)
     }
 
-    private fun handleInitData(initData: Triple<Boolean, Dish, ItemCategory>) {
+    private fun handleInitData(initData: Triple<Boolean, Dish, List<ItemCategory>>) {
         item?.apply {
             initItem(this, initData)
         }
@@ -67,21 +72,31 @@ class ItemDetailsActivity : BaseActivity<ItemDetailsViewModel, ActivityItemDetai
         this.items.replaceAllWith(items)
     }
 
-    private fun initItem(item: Item, data: Triple<Boolean, Dish, ItemCategory>) {
+    private fun initItem(item: Item, data: Triple<Boolean, Dish, List<ItemCategory>>) {
+        this.itemData = data
         appBar.initShareBtn(AnalyticsEvents.click_item_details_share) {
-            shareUtil.shareItemAsText(item)
+            shareUtil.shareItemAsText(item, data.second)
         }
         if (item.photos.isNotEmpty()) {
             ivDrink.loadImageWithGlide(item.photos.first())
         } else {
-            ivDrink.loadImageWithGlide(R.drawable.ic_placeholder)
+            ivDrink.loadImageWithGlide(R.drawable.ic_drink_placeholder)
         }
         tvDrinkTitle.text = item.title
+        var categoriesTitle = StringConstants.EMPTY
+        data.third.forEachIndexed { index, category ->
+            if (index != IntConstants.ZERO) {
+                categoriesTitle += StringConstants.SPACE.plus(StringConstants.SLASH)
+                    .plus(StringConstants.SPACE)
+            }
+            categoriesTitle += category.title
+        }
+
         tvDrinkSubtitle.text = getString(R.string.main_menu_drinks)
             .plus(StringConstants.SPACE)
             .plus(StringConstants.BIG_DOT)
             .plus(StringConstants.SPACE)
-            .plus(data.third.title)
+            .plus(categoriesTitle)
 
         tvPortions.text = PluralsUtil.getQuantityString(
             context = this,
@@ -113,6 +128,14 @@ class ItemDetailsActivity : BaseActivity<ItemDetailsViewModel, ActivityItemDetai
             layoutManager = LinearLayoutManager(context)
             adapter = InstructionAdapter(item.instructions.toMutableList()).apply {
                 setLinkClickListener(this@ItemDetailsActivity)
+            }
+        }
+    }
+
+    override fun onWritePermissionsGranted() {
+        item?.run {
+            itemData?.second?.let { dish ->
+                shareUtil.shareItemAsText(this@run, dish)
             }
         }
     }

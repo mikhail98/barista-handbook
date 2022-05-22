@@ -7,8 +7,8 @@ import com.eratart.baristashandbook.tools.customtabs.ICustomTabTool
 import org.koin.dsl.module
 
 val mainMenuModule = module {
+    single { MainViewModel(get(), get(), get()) }
     scope<MainMenuActivity> {
-        scoped { MainViewModel(get(), get(), get()) }
         scoped<ICustomTabTool> { CustomTabTool(get()) }
     }
 }

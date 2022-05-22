@@ -8,7 +8,7 @@ fun <T> CoroutineScope.launchFlow(listener: suspend () -> Flow<T>) {
     this.launch { listener.invoke().launchIn(this) }
 }
 
-fun <T> Flow<T>.onNext(listener: Flow<T>.(T) -> Unit): Flow<T> {
+fun <T> Flow<T>.onNext(listener: suspend Flow<T>.(T) -> Unit): Flow<T> {
     return this.onEach { listener.invoke(this, it) }
 }
 

@@ -23,7 +23,7 @@ class ItemViewHolder(private val binding: ItemDrinkBinding) :
                 if (photos.isNotEmpty()) {
                     ivDrink.loadImageWithGlideCircle(item.photos.first())
                 } else {
-                    ivDrink.loadImageWithGlideCircle(R.drawable.ic_placeholder)
+                    ivDrink.loadImageWithGlideCircle(R.drawable.ic_drink_placeholder)
                 }
             }
 

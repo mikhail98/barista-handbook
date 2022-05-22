@@ -6,11 +6,12 @@ import com.eratart.baristashandbook.core.ext.observe
 import com.eratart.baristashandbook.core.ext.replaceAllWith
 import com.eratart.baristashandbook.domain.firebase.AnalyticsEvents
 import com.eratart.baristashandbook.domain.model.NewsBot
+import com.eratart.baristashandbook.presentation.news_list.di.newsListModule
 import com.eratart.baristashandbook.presentation.news_list.viewmodel.NewsListViewModel
 import com.eratart.baristashandbook.presentationbase.itemslistactivity.BaseItemsListActivity
 import com.eratart.baristashandbook.presentationbase.itemslistactivity.recycler.NewsViewHolder
 import com.eratart.baristashandbook.tools.share.IShareTool
-import com.eratart.baristashandbook.tools.share.ShareTool
+import org.koin.android.ext.android.inject
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class NewsListActivity : BaseItemsListActivity<NewsListViewModel>(), NewsViewHolder.INewsListener {
@@ -18,9 +19,13 @@ class NewsListActivity : BaseItemsListActivity<NewsListViewModel>(), NewsViewHol
     override val titleRes = R.string.main_menu_news
     override var swipeEnabled = false
     override val viewModel: NewsListViewModel by viewModel()
-    private val shareTool: IShareTool by lazy { ShareTool(this) }
+    private val shareTool: IShareTool by inject()
+
+    override val koinModules = listOf(newsListModule)
 
     override val searchAnalyticsEvent by lazy { AnalyticsEvents.click_news_list_search }
+
+    private var newsToShare: NewsBot? = null
 
     override fun initView() {
         itemAdapter.setNewsListener(this)
@@ -56,6 +61,11 @@ class NewsListActivity : BaseItemsListActivity<NewsListViewModel>(), NewsViewHol
 
     override fun onShareClick(news: NewsBot) {
         analyticsManager.logEvent(AnalyticsEvents.click_news_list_item_share)
+        newsToShare = news
+        shareNews(news)
+    }
+
+    private fun shareNews(news: NewsBot) {
         getBitmapFromUrl(news.photoUrl.orEmpty()) { bitmap ->
             val textToShare = news.getTextToShare()
             if (bitmap != null) {
@@ -63,6 +73,13 @@ class NewsListActivity : BaseItemsListActivity<NewsListViewModel>(), NewsViewHol
             } else {
                 shareTool.shareText(textToShare, news.title)
             }
+        }
+    }
+
+    override fun onWritePermissionsGranted() {
+        newsToShare?.run {
+            shareNews(this)
+            newsToShare = null
         }
     }
 }

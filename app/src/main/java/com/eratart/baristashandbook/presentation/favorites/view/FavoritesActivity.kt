@@ -5,7 +5,7 @@ import com.eratart.baristashandbook.core.ext.observe
 import com.eratart.baristashandbook.core.ext.replaceAllWith
 import com.eratart.baristashandbook.domain.firebase.AnalyticsEvents
 import com.eratart.baristashandbook.domain.model.Item
-import com.eratart.baristashandbook.domain.model.ItemCategory
+import com.eratart.baristashandbook.presentation.favorites.di.favoritesModule
 import com.eratart.baristashandbook.presentation.favorites.viewmodel.FavoritesViewModel
 import com.eratart.baristashandbook.presentationbase.itemslistactivity.BaseItemsListActivity
 import org.koin.androidx.viewmodel.ext.android.viewModel
@@ -15,25 +15,19 @@ class FavoritesActivity : BaseItemsListActivity<FavoritesViewModel>() {
     override val titleRes = R.string.main_menu_favorites
     override var swipeEnabled = true
     override val viewModel: FavoritesViewModel by viewModel()
+    override val koinModules = listOf(favoritesModule)
 
     override val searchAnalyticsEvent by lazy { AnalyticsEvents.click_favorites_search }
-
-    private val itemCategories by lazy { mutableListOf<ItemCategory>() }
 
     override fun initViewModel() {
         viewModel.apply {
             observe(favoritesList, ::handleFavorites)
-            observe(itemCategoriesFromCache, ::handleItemCategoriesFromCache)
         }
     }
 
     private fun handleFavorites(favorites: List<Item>) {
         sourceList.replaceAllWith(favorites.asReversed())
         showContent(favorites.asReversed(), false)
-    }
-
-    private fun handleItemCategoriesFromCache(itemCategories: List<ItemCategory>) {
-        this.itemCategories.replaceAllWith(itemCategories)
     }
 
     override fun onItemClick(item: Any, pos: Int) {
@@ -49,7 +43,7 @@ class FavoritesActivity : BaseItemsListActivity<FavoritesViewModel>() {
         analyticsManager.logEvent(AnalyticsEvents.action_favorites_remove_swipe)
         itemAdapter.removeAtPosition(pos)
         viewModel.removeFromFavorites(item)
-        showContent(mutableList, false)
+        showEmptyState()
     }
 
     override fun onResume() {

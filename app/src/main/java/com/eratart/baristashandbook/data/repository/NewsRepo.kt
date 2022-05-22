@@ -3,7 +3,6 @@ package com.eratart.baristashandbook.data.repository
 import com.eratart.baristashandbook.core.ext.printError
 import com.eratart.baristashandbook.data.mapper.repo.NewsFromBotMapper
 import com.eratart.baristashandbook.data.model.NewsBotResponse
-import com.eratart.baristashandbook.data.model.TelegramUpdatesResponse
 import com.eratart.baristashandbook.data.network.api.TgApi
 import com.eratart.baristashandbook.domain.exceptions.ThrowableTransformer
 import com.eratart.baristashandbook.domain.model.NewsBot
@@ -35,10 +34,10 @@ class NewsRepo(private val tgApi: TgApi) : INewsRepo {
                                 Gson().fromJson(message.text, NewsBotResponse::class.java)
                             news.add(NewsFromBotMapper(message).mapFrom(newsResponse))
                         } catch (e: Exception) {
-                            e.printError()
+                            //e.printError()
                         }
                     }
-                news
+                news.sortedBy { item -> item.date }.asReversed()
             }
             .catch { error ->
                 throw ThrowableTransformer.transform(error)

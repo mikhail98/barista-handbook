@@ -49,8 +49,8 @@ android {
             minifyEnabled true
             shrinkResources true
 
-            debuggable false
-            jniDebuggable false
+            debuggable true
+            jniDebuggable true
             zipAlignEnabled true
             crunchPngs false
 
@@ -89,6 +89,7 @@ dependencies {
     implementation platform(library.firebaseBom)
     implementation library.firebaseAnalyticsKtx
     implementation library.firebaseCrashlyticsKtx
+    implementation library.firebaseDatabese
 
     implementation library.dotsIndicator
     implementation library.splashScreen

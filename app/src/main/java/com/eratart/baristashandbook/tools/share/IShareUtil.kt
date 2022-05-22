@@ -7,5 +7,5 @@ interface IShareUtil {
 
     fun shareDishAsText(dish: Dish)
 
-    fun shareItemAsText(item: Item)
+    fun shareItemAsText(item: Item, dish: Dish)
 }

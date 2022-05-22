@@ -6,6 +6,7 @@ import android.graphics.drawable.Drawable
 import android.util.AttributeSet
 import android.widget.FrameLayout
 import android.widget.ImageView
+import androidx.annotation.StringRes
 import com.eratart.baristashandbook.R
 import com.google.android.material.textview.MaterialTextView
 
@@ -20,23 +21,29 @@ class MenuItem(context: Context, attributeSet: AttributeSet? = null) :
     private val attributes by lazy {
         context.theme.obtainStyledAttributes(attributeSet, R.styleable.MenuItem, 0, 0)
     }
-    var text: String? = null
-    var icon: Drawable? = null
+    var attrText: String? = null
+    var attrIcon: Drawable? = null
 
     init {
         try {
-            text = attributes.getString(R.styleable.MenuItem_text)
-            icon = attributes.getDrawable(R.styleable.MenuItem_icon)
+            attrText = attributes.getString(R.styleable.MenuItem_text)
+            attrIcon = attributes.getDrawable(R.styleable.MenuItem_icon)
         } finally {
             attributes.recycle()
         }
 
-        if (!text.isNullOrEmpty()) {
-            tvMenuItem.text = text
-        }
+        setText(attrText)
 
-        if (icon != null) {
-            ivMenuItem.setImageDrawable(icon)
+        if (attrIcon != null) {
+            ivMenuItem.setImageDrawable(attrIcon)
         }
+    }
+
+    fun setText(@StringRes res: Int) {
+        setText(context.getString(res))
+    }
+
+    fun setText(string: String?) {
+        tvMenuItem.text = string
     }
 }

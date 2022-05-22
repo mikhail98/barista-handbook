@@ -5,17 +5,20 @@ import androidx.constraintlayout.widget.ConstraintLayout
 import com.eratart.baristashandbook.R
 import com.eratart.baristashandbook.baseui.activity.BaseActivity
 import com.eratart.baristashandbook.baseui.utils.AlertUtil
+import com.eratart.baristashandbook.core.constants.StringConstants
 import com.eratart.baristashandbook.core.ext.*
 import com.eratart.baristashandbook.databinding.ActivityMainMenuBinding
 import com.eratart.baristashandbook.domain.firebase.AnalyticsEvents
 import com.eratart.baristashandbook.domain.model.Dish
 import com.eratart.baristashandbook.domain.model.ItemCategory
+import com.eratart.baristashandbook.presentation.mainmenu.di.mainMenuModule
 import com.eratart.baristashandbook.presentation.mainmenu.viewmodel.MainViewModel
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class MainMenuActivity : BaseActivity<MainViewModel, ActivityMainMenuBinding>() {
 
     override val viewModel: MainViewModel by viewModel()
+    override val koinModules = listOf(mainMenuModule)
 
     override val binding by lazy { ActivityMainMenuBinding.inflate(layoutInflater) }
     private val llMenu by lazy { binding.llMenu }
@@ -91,9 +94,19 @@ class MainMenuActivity : BaseActivity<MainViewModel, ActivityMainMenuBinding>() 
 
     override fun initViewModel() {
         viewModel.apply {
+            observe(newsAmount, ::handleNewsAmount)
             observe(dishesFromCache, ::handleDishesFromCache)
             observe(itemCategoriesFromCache, ::handleItemCategoriesFromCache)
         }
+    }
+
+    private fun handleNewsAmount(amount: Int) {
+        val text = getString(R.string.main_menu_news)
+            .plus(StringConstants.SPACE)
+            .plus(StringConstants.BRACE_OPEN)
+            .plus(amount.toString())
+            .plus(StringConstants.BRACE_CLOSE)
+        itemNews.setText(text)
     }
 
     private fun handleDishesFromCache(dishes: List<Dish>) {

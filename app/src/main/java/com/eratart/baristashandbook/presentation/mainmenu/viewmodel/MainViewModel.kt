@@ -19,6 +19,9 @@ class MainViewModel(
     appPreferences: IAppPreferences
 ) : BaseViewModel(resourceManager, appPreferences) {
 
+    private val _newsAmount = MutableLiveData<Int>()
+    val newsAmount: LiveData<Int> = _newsAmount
+
     private val _dishesFromCache = MutableLiveData<List<Dish>>()
     val dishesFromCache: LiveData<List<Dish>> = _dishesFromCache
 
@@ -26,12 +29,8 @@ class MainViewModel(
     val itemCategoriesFromCache: LiveData<List<ItemCategory>> = _itemCategoriesFromCache
 
     override fun onCreate() {
-        fetchDishes()
-    }
-
-    private fun fetchDishes() {
+        _newsAmount.postValue(appCacheInteractor.getNews().size)
         _dishesFromCache.postValue(appCacheInteractor.getDishes())
         _itemCategoriesFromCache.postValue(appCacheInteractor.getItemCategories())
     }
-
 }

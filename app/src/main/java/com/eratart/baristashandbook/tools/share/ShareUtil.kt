@@ -3,13 +3,14 @@ package com.eratart.baristashandbook.tools.share
 import android.content.Context
 import com.eratart.baristashandbook.R
 import com.eratart.baristashandbook.baseui.utils.PluralsUtil
+import com.eratart.baristashandbook.core.constants.IntConstants
 import com.eratart.baristashandbook.core.constants.StringConstants
 import com.eratart.baristashandbook.core.ext.getBitmapFromUrl
 import com.eratart.baristashandbook.core.util.markdown.MarkdownUtil.getWithoutMd
 import com.eratart.baristashandbook.domain.model.Dish
 import com.eratart.baristashandbook.domain.model.Item
 
-class ShareUtil(private val context: Context, private val shareTool: IShareTool): IShareUtil {
+class ShareUtil(private val context: Context, private val shareTool: IShareTool) : IShareUtil {
 
     override fun shareDishAsText(dish: Dish) {
         val text = dish.title
@@ -34,7 +35,7 @@ class ShareUtil(private val context: Context, private val shareTool: IShareTool)
         }
     }
 
-    override fun shareItemAsText(item: Item) {
+    override fun shareItemAsText(item: Item, dish: Dish) {
         val portionsText = PluralsUtil.getQuantityString(
             context = context,
             number = item.portionsAmount,
@@ -43,6 +44,12 @@ class ShareUtil(private val context: Context, private val shareTool: IShareTool)
             five = R.string.five_portions,
             zero = R.string.zero_portions
         )
+
+        val dishesText =
+            context.getString(R.string.main_menu_dishes)
+                .plus(StringConstants.SEMICOLON)
+                .plus(StringConstants.SPACE)
+                .plus(dish.title)
 
         var ingredientsText = context.getString(R.string.item_details_ingredients)
             .plus(StringConstants.SEMICOLON)
@@ -60,16 +67,18 @@ class ShareUtil(private val context: Context, private val shareTool: IShareTool)
             .plus(StringConstants.SEMICOLON)
             .plus(StringConstants.NEW_LINE)
         item.instructions.forEachIndexed { pos, instruction ->
-            val instructionText = pos.toString()
+            val instructionText = (pos + IntConstants.ONE).toString()
                 .plus(StringConstants.DOT)
                 .plus(StringConstants.SPACE)
-                .plus(instruction)
+                .plus(instruction.getWithoutMd())
                 .plus(StringConstants.NEW_LINE)
             instructionsText += instructionText
         }
         val text = item.title
             .plus(StringConstants.NEW_LINE)
             .plus(portionsText)
+            .plus(StringConstants.NEW_LINE)
+            .plus(dishesText)
             .plus(StringConstants.DOT)
             .plus(StringConstants.NEW_LINE)
             .plus(StringConstants.NEW_LINE)

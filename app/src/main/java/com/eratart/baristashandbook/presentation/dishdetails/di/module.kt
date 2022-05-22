@@ -9,8 +9,8 @@ import com.eratart.baristashandbook.tools.share.ShareUtil
 import org.koin.dsl.module
 
 val dishDetailsModule = module {
+    single { DishDetailsViewModel(get(), get(), get()) }
     scope<DishDetailsActivity> {
-        scoped { DishDetailsViewModel(get(), get(), get()) }
         scoped<IShareTool> { ShareTool(get()) }
         scoped<IShareUtil> { ShareUtil(get(), get()) }
     }

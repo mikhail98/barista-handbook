@@ -16,7 +16,6 @@ import com.eratart.baristashandbook.domain.model.NewsBot
 import com.eratart.baristashandbook.presentationbase.itemslistactivity.recycler.ItemsListAdapter
 import com.eratart.baristashandbook.presentationbase.itemslistactivity.recycler.swipe.SwipeController
 
-
 abstract class BaseItemsListActivity<VM : BaseViewModel> :
     BaseActivity<VM, ActivityItemsListBinding>() {
 
@@ -106,8 +105,14 @@ abstract class BaseItemsListActivity<VM : BaseViewModel> :
         itemAdapter.notifyDataSetChanged()
 
         if (list.isNotEmpty()) {
-            layoutNotFound.gone()
             rvItems.scheduleLayoutAnimation()
+        }
+        showEmptyState()
+    }
+
+    protected fun showEmptyState() {
+        if (mutableList.isNotEmpty()) {
+            layoutNotFound.gone()
         } else {
             layoutNotFound.visibleWithAlpha()
         }

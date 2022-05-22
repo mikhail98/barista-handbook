@@ -13,5 +13,5 @@ data class Item(
     val instructions: List<String>,
     val dishId: String,
     val portionsAmount: Int,
-    val categoryId: String
+    val categoryIdList: List<String>
 ) : Parcelable

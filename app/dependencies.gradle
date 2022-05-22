@@ -1,19 +1,19 @@
 ext.ver = [
         appCompatVersion         : "1.4.1",
-        materialComponentsVersion: "1.3.0",
-        koinVersion              : "3.1.5",
+        materialComponentsVersion: "1.6.0",
+        koinVersion              : "3.2.0",
         viewModelVersion         : "2.4.1",
         gsonVersion              : "2.9.0",
         encryptedPrefsVersion    : "1.1.0-alpha03",
-        csvVersion               : "4.6",
-        glideVersion             : "4.13.0",
-        firebaseBomVersion       : "29.2.1",
+        csvVersion               : "5.6",
+        glideVersion             : "4.13.2",
+        firebaseBomVersion       : "30.0.2",
         dotsIndicatorVersion     : "4.2",
-        splashScreenVersion      : "1.0.0-beta02",
-        coroutines               : "1.3.9",
-        kotlinCoreVersion        : "1.9.0-alpha02",
+        splashScreenVersion      : "1.0.0-rc01",
+        coroutines               : "1.6.1",
+        kotlinCoreVersion        : "1.9.0-alpha04",
         retrofitVersion          : "2.9.0",
-        okhttpVersion            : "5.0.0-alpha.6",
+        okhttpVersion            : "5.0.0-alpha.7",
         customTabVersion         : "1.4.0"
 ]
 
@@ -30,6 +30,7 @@ ext.library = [
         firebaseBom             : "com.google.firebase:firebase-bom:$ver.firebaseBomVersion",
         firebaseAnalyticsKtx    : "com.google.firebase:firebase-analytics-ktx",
         firebaseCrashlyticsKtx  : "com.google.firebase:firebase-crashlytics-ktx",
+        firebaseDatabese        : "com.google.firebase:firebase-database",
         dotsIndicator           : "com.tbuonomo:dotsindicator:$ver.dotsIndicatorVersion",
         splashScreen            : "androidx.core:core-splashscreen:$ver.splashScreenVersion",
         coroutines              : "org.jetbrains.kotlinx:kotlinx-coroutines-android:$ver.coroutines",
@@ -41,9 +42,10 @@ ext.library = [
 ]
 
 ext.sdk = [
-        majorVersion     : 0,
+        majorVersion     : 1,
         minorVersion     : 0,
-        patchVersion     : 1,
+        patchVersion     : 0,
+        buildVersion     : 2,
         minSdkVersion    : 27,
         compileSdkVersion: 32,
         targetSdkVersion : 32,

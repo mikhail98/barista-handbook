@@ -4,6 +4,12 @@ import com.eratart.baristashandbook.domain.cache.IAppCache
 import com.eratart.baristashandbook.domain.model.Dish
 import com.eratart.baristashandbook.domain.model.Item
 import com.eratart.baristashandbook.domain.model.ItemCategory
+import com.eratart.baristashandbook.domain.model.NewsBot
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.flowOn
+import kotlinx.coroutines.flow.launchIn
 
 class AppCacheInteractor(private val appCache: IAppCache) : IAppCacheInteractor {
 
@@ -19,8 +25,12 @@ class AppCacheInteractor(private val appCache: IAppCache) : IAppCacheInteractor 
         return appCache.getItems()
     }
 
-    override fun initCache() {
-        appCache.initCache()
+    override fun getNews(): List<NewsBot> {
+        return appCache.getNews()
+    }
+
+    override suspend fun initCache(): Flow<Boolean> {
+        return appCache.initCache().flowOn(Dispatchers.IO)
     }
 
     override fun clearCache() {

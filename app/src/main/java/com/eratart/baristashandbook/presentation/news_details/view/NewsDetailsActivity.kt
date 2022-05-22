@@ -6,9 +6,10 @@ import com.eratart.baristashandbook.core.ext.*
 import com.eratart.baristashandbook.databinding.ActivityNewsDetailsBinding
 import com.eratart.baristashandbook.domain.firebase.AnalyticsEvents
 import com.eratart.baristashandbook.domain.model.NewsBot
+import com.eratart.baristashandbook.presentation.news_details.di.newsDetailsModule
 import com.eratart.baristashandbook.presentation.news_details.viewmodel.NewsDetailsViewModel
 import com.eratart.baristashandbook.tools.share.IShareTool
-import com.eratart.baristashandbook.tools.share.ShareTool
+import org.koin.android.ext.android.inject
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class NewsDetailsActivity : BaseActivity<NewsDetailsViewModel, ActivityNewsDetailsBinding>() {
@@ -19,7 +20,10 @@ class NewsDetailsActivity : BaseActivity<NewsDetailsViewModel, ActivityNewsDetai
 
     private val news by lazy { intent.getParcelableExtra<NewsBot>(EXTRAS_NEWS) }
 
+    private val shareTool: IShareTool by inject()
     override val viewModel: NewsDetailsViewModel by viewModel()
+    override val koinModules = listOf(newsDetailsModule)
+
     override val binding by lazy { ActivityNewsDetailsBinding.inflate(layoutInflater) }
     private val appBar by lazy { binding.appBar }
     private val ivNews by lazy { binding.ivNews }
@@ -28,7 +32,7 @@ class NewsDetailsActivity : BaseActivity<NewsDetailsViewModel, ActivityNewsDetai
     private val tvNewsText by lazy { binding.tvNewsText }
     private val btnShowInBrowser by lazy { binding.btnShowInBrowser }
 
-    private val shareTool: IShareTool by lazy { ShareTool(this) }
+    private var newsToShare: NewsBot? = null
 
     override fun initView() {
         appBar.init(this)
@@ -37,16 +41,27 @@ class NewsDetailsActivity : BaseActivity<NewsDetailsViewModel, ActivityNewsDetai
 
         news?.run {
             appBar.initShareBtn(AnalyticsEvents.click_news_details_share) {
-                getBitmapFromUrl(photoUrl.orEmpty()) { bitmap ->
-                    val textToShare = getTextToShare()
-                    if (bitmap != null) {
-                        shareTool.shareImage(bitmap, textToShare, title)
-                    } else {
-                        shareTool.shareText(textToShare, title)
-                    }
-                }
+                shareNews(this)
             }
             initNews(this)
+        }
+    }
+
+    private fun shareNews(news: NewsBot) {
+        getBitmapFromUrl(news.photoUrl.orEmpty()) { bitmap ->
+            val textToShare = news.getTextToShare()
+            if (bitmap != null) {
+                shareTool.shareImage(bitmap, textToShare, news.title)
+            } else {
+                shareTool.shareText(textToShare, news.title)
+            }
+        }
+    }
+
+    override fun onWritePermissionsGranted() {
+        newsToShare?.run {
+            shareNews(this)
+            newsToShare = null
         }
     }
 

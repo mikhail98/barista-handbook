@@ -3,6 +3,8 @@ package com.eratart.baristashandbook.presentation.routing.viewmodel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.eratart.baristashandbook.baseui.viewmodel.BaseViewModel
+import com.eratart.baristashandbook.core.ext.launchFlow
+import com.eratart.baristashandbook.core.ext.onNext
 import com.eratart.baristashandbook.domain.interactor.cache.IAppCacheInteractor
 import com.eratart.baristashandbook.domain.preferences.IAppPreferences
 import com.eratart.baristashandbook.domain.preferences.IOnboardingPreferences
@@ -15,15 +17,19 @@ class RoutingViewModel(
     appPreferences: IAppPreferences
 ) : BaseViewModel(resourceManager, appPreferences) {
 
-    private val _showOnboarding = MutableLiveData<Boolean>()
-    val showOnboarding: LiveData<Boolean> = _showOnboarding
+    private val _data = MutableLiveData<Pair<Boolean, Boolean>>()
+    val data: LiveData<Pair<Boolean, Boolean>> = _data
 
     override fun onCreate() {
         loadDataToCache()
     }
 
     private fun loadDataToCache() {
-        appCacheInteractor.initCache()
-        _showOnboarding.postValue(onboardingPreferences.isStartupOnboardingShown())
+        launchFlow {
+            appCacheInteractor.initCache()
+                .onNext { data ->
+                    _data.postValue(Pair(onboardingPreferences.isStartupOnboardingShown(), data))
+                }
+        }
     }
 }

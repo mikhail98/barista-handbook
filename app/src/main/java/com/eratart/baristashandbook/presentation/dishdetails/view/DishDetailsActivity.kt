@@ -9,6 +9,7 @@ import com.eratart.baristashandbook.databinding.ActivityDishDetailsBinding
 import com.eratart.baristashandbook.domain.firebase.AnalyticsEvents
 import com.eratart.baristashandbook.domain.model.Dish
 import com.eratart.baristashandbook.domain.model.Item
+import com.eratart.baristashandbook.presentation.dishdetails.di.dishDetailsModule
 import com.eratart.baristashandbook.presentation.dishdetails.viewmodel.DishDetailsViewModel
 import com.eratart.baristashandbook.tools.share.IShareUtil
 import org.koin.android.ext.android.inject
@@ -26,6 +27,7 @@ class DishDetailsActivity : BaseActivity<DishDetailsViewModel, ActivityDishDetai
 
     override val viewModel: DishDetailsViewModel by viewModel()
     override val binding by lazy { ActivityDishDetailsBinding.inflate(layoutInflater) }
+    override val koinModules = listOf(dishDetailsModule)
 
     private val appBar by lazy { binding.appBar }
     private val ivDish by lazy { binding.ivDish }
@@ -45,7 +47,7 @@ class DishDetailsActivity : BaseActivity<DishDetailsViewModel, ActivityDishDetai
 
     private fun initDish(dish: Dish) {
         appBar.initShareBtn(AnalyticsEvents.click_dish_details_share) {
-            shareUtil.shareDishAsText(dish)
+            onWritePermissionsGranted()
         }
         if (dish.photos.isNotEmpty()) {
             ivDish.loadImageWithGlide(dish.photos.first())
@@ -60,6 +62,12 @@ class DishDetailsActivity : BaseActivity<DishDetailsViewModel, ActivityDishDetai
                 analyticsManager.logEvent(AnalyticsEvents.click_dish_details_hyperlink)
                 globalNavigator.startItemDetailsActivity(this@DishDetailsActivity, this)
             }
+        }
+    }
+
+    override fun onWritePermissionsGranted() {
+        dish?.run {
+            shareUtil.shareDishAsText(this)
         }
     }
 
