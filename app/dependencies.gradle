@@ -30,7 +30,7 @@ ext.library = [
         firebaseBom             : "com.google.firebase:firebase-bom:$ver.firebaseBomVersion",
         firebaseAnalyticsKtx    : "com.google.firebase:firebase-analytics-ktx",
         firebaseCrashlyticsKtx  : "com.google.firebase:firebase-crashlytics-ktx",
-        firebaseDatabese        : "com.google.firebase:firebase-database",
+        firebaseDatabase        : "com.google.firebase:firebase-database",
         dotsIndicator           : "com.tbuonomo:dotsindicator:$ver.dotsIndicatorVersion",
         splashScreen            : "androidx.core:core-splashscreen:$ver.splashScreenVersion",
         coroutines              : "org.jetbrains.kotlinx:kotlinx-coroutines-android:$ver.coroutines",

@@ -9,8 +9,8 @@ class ItemsCategoriesDBMapper : BaseFirebaseDBMapper<ItemCategory>() {
         if (inputList.isEmpty()) return emptyList()
         val newList = mutableListOf<ItemCategory>()
         inputList.forEach { itemCategory ->
-            val idParam = itemCategory["id"] ?: return@forEach
-            val titleParam = itemCategory["title"] ?: return@forEach
+            val idParam = itemCategory.getParam("id") ?: return@forEach
+            val titleParam = itemCategory.getParam("title") ?: return@forEach
             val category = ItemCategory(idParam, titleParam, listOf())
             newList.add(category)
         }

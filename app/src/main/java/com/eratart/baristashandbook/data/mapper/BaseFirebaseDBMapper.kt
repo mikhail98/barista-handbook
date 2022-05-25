@@ -4,6 +4,8 @@ import com.google.firebase.database.DataSnapshot
 
 abstract class BaseFirebaseDBMapper<T> : IFirebaseDBMapper<T> {
 
+    protected fun HashMap<String, String>.getParam(param: String) = this[param]?.trim()
+
     override fun mapFromDB(snapshot: DataSnapshot): List<T> {
         val inputList = mutableListOf<HashMap<String, String>>()
         snapshot.children.forEach { data ->

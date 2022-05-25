@@ -89,7 +89,7 @@ dependencies {
     implementation platform(library.firebaseBom)
     implementation library.firebaseAnalyticsKtx
     implementation library.firebaseCrashlyticsKtx
-    implementation library.firebaseDatabese
+    implementation library.firebaseDatabase
 
     implementation library.dotsIndicator
     implementation library.splashScreen

@@ -17,13 +17,13 @@ class ItemsFirebaseDBMapper : BaseFirebaseDBMapper<Item>() {
         if (inputList.isEmpty()) return emptyList()
         val newList = mutableListOf<Item>()
         inputList.forEach { drink ->
-            val idParam = drink["id"] ?: return@forEach
+            val idParam = drink.getParam("id") ?: return@forEach
 
-            val titleParam = drink["title"] ?: return@forEach
+            val titleParam = drink.getParam("title") ?: return@forEach
 
-            val descriptionParam = drink["description"] ?: return@forEach
+            val descriptionParam = drink.getParam("description") ?: return@forEach
 
-            val photosParam = drink["photos"] ?: return@forEach
+            val photosParam = drink.getParam("photos") ?: return@forEach
             val photos = if (photosParam.isNotEmpty()) {
                 photosParam.split(StringConstants.NEW_LINE).map { path ->
                     ImageUrlUtil.getImageUrl(ImageUrlUtil.DRINKS, idParam, path)
@@ -32,7 +32,7 @@ class ItemsFirebaseDBMapper : BaseFirebaseDBMapper<Item>() {
                 listOf()
             }
 
-            val ingredientsParam = drink["ingredients"] ?: return@forEach
+            val ingredientsParam = drink.getParam("ingredients") ?: return@forEach
             val ingredients = ingredientsParam.split(StringConstants.NEW_LINE).map { ingredient ->
                 val ingredientList = ingredient.split(INGREDIENTS_SPLITTER)
                 val title = ingredientList.first()
@@ -43,15 +43,15 @@ class ItemsFirebaseDBMapper : BaseFirebaseDBMapper<Item>() {
                 }
                 Ingredient(title, volume)
             }
-            val instructionsParam = drink["instructions"] ?: return@forEach
+            val instructionsParam = drink.getParam("instructions") ?: return@forEach
             val instructions = instructionsParam.split(StringConstants.NEW_LINE)
 
-            val dishParam = drink["dish_id"] ?: return@forEach
+            val dishParam = drink.getParam("dish_id") ?: return@forEach
 
-            val portionsParam = drink["portions"] ?: return@forEach
+            val portionsParam = drink.getParam("portions") ?: return@forEach
             val portionsAmount = portionsParam.toIntOrNull() ?: IntConstants.ONE
 
-            val categoriesParam = drink["category_id"] ?: return@forEach
+            val categoriesParam = drink.getParam("category_id") ?: return@forEach
             val categoriesIdList = categoriesParam.split(StringConstants.NEW_LINE)
 
             val item = Item(

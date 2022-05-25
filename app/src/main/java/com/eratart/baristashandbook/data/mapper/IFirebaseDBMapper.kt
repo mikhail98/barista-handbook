@@ -6,5 +6,4 @@ interface IFirebaseDBMapper<T> {
 
     fun mapFromDB(snapshot: DataSnapshot): List<T>
 
-
 }

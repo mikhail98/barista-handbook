@@ -11,11 +11,11 @@ class DishesDBMapper : BaseFirebaseDBMapper<Dish>() {
         if (inputList.isEmpty()) return emptyList()
         val newList = mutableListOf<Dish>()
         inputList.forEach { dish ->
-            val idParam = dish["id"] ?: return@forEach
-            val titleParam = dish["title"] ?: return@forEach
-            val descriptionParam = dish["description"] ?: return@forEach
+            val idParam = dish.getParam("id") ?: return@forEach
+            val titleParam = dish.getParam("title") ?: return@forEach
+            val descriptionParam = dish.getParam("description") ?: return@forEach
 
-            val photosParam = dish["photos"] ?: return@forEach
+            val photosParam = dish.getParam("photos") ?: return@forEach
             val photos = if (photosParam.isNotEmpty()) {
                 photosParam.split(StringConstants.NEW_LINE).map { path ->
                     ImageUrlUtil.getDishesImageUrl(ImageUrlUtil.DISHES, idParam, path)
@@ -23,7 +23,7 @@ class DishesDBMapper : BaseFirebaseDBMapper<Dish>() {
             } else {
                 listOf()
             }
-            val volumeParam = dish["volume"] ?: return@forEach
+            val volumeParam = dish.getParam("volume") ?: return@forEach
 
             val itemCategory = Dish(idParam, titleParam, descriptionParam, photos, volumeParam)
             newList.add(itemCategory)
