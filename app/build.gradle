@@ -49,8 +49,8 @@ android {
             minifyEnabled true
             shrinkResources true
 
-            debuggable true
-            jniDebuggable true
+            debuggable false
+            jniDebuggable false
             zipAlignEnabled true
             crunchPngs false
 
